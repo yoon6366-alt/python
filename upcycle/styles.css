@@ -1,0 +1,1001 @@
+/* ========================================
+   광명업사이클센터 교육신청 - 스타일시트
+   ======================================== */
+
+/* ===== 기본 스타일 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* 부드러운 스크롤 */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* 링크 기본 스타일 */
+a {
+    color: #2c5aa0;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* ===== 헤더 ===== */
+header {
+    background-color: #ffffff;
+    color: #333;
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    flex: 0 1 auto;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.tagline {
+    font-size: 0.9rem;
+    color: #666;
+    opacity: 0.8;
+}
+
+/* 네비게이션 메뉴 */
+.main-nav {
+    flex: 1 1 auto;
+    margin-left: 2rem;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.main-nav a {
+    color: #333;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 0;
+    transition: color 0.3s, border-bottom 0.3s;
+    border-bottom: 2px solid transparent;
+    font-weight: 500;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: #0066cc;
+    border-bottom-color: #0066cc;
+    text-decoration: none;
+}
+
+/* ===== 배너 ===== */
+.hero-banner {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.hero-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.banner-overlay h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.banner-overlay p {
+    font-size: 1.2rem;
+}
+
+/* ===== 메인 콘텐츠 ===== */
+.main-content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    min-height: 500px;
+}
+
+/* 페이지 제어 */
+.page {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 페이지 헤더 */
+.page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.page-header h2 {
+    font-size: 2rem;
+    color: #2c5aa0;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* 경로 표시 (Breadcrumb) */
+.breadcrumb {
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.breadcrumb a {
+    color: #2c5aa0;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* ===== 버튼 스타일 ===== */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #2c5aa0;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1e3f5a;
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    text-decoration: none;
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    width: 100%;
+}
+
+/* ===== 교육 소개 (페이지 1) ===== */
+.education-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-top: 3rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.section-image {
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #e9ecef;
+}
+
+.section-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.section-content h3 {
+    font-size: 1.6rem;
+    color: #2c5aa0;
+    margin-bottom: 1rem;
+}
+
+.section-content p {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.section-content .btn {
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+}
+
+/* 특별 워크숍은 이미지를 오른쪽에 배치 */
+.special-workshop {
+    grid-template-columns: 1fr 1fr;
+}
+
+.special-workshop .section-content {
+    order: -1;
+}
+
+/* 반응형 - 태블릿 이하 */
+@media (max-width: 1024px) {
+    .education-section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .section-image {
+        height: 300px;
+    }
+
+    .special-workshop .section-content {
+        order: 0;
+    }
+}
+
+/* ===== 교육 목록 (페이지 2) ===== */
+.education-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.education-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.education-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    width: 100%;
+    height: 400px;
+    /* 높이를 200px에서 400px로 변경 (2배) - 직접 수정 가능함! */
+    overflow: hidden;
+    background-color: #e9ecef;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.education-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.badge {
+    display: inline-block;
+    background-color: #6c757d;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-content h3 {
+    font-size: 1.2rem;
+    color: #2c5aa0;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.instructor,
+.schedule,
+.capacity {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.description {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
+
+/* ===== 교육 상세 (페이지 3) ===== */
+.detail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.detail-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-image {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detail-right {
+    padding-top: 0;
+}
+
+.detail-right .badge {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.detail-right h2 {
+    font-size: 1.8rem;
+    color: #2c5aa0;
+    margin-bottom: 1.5rem;
+}
+
+.info-section {
+    margin-bottom: 2rem;
+}
+
+.info-section h3 {
+    font-size: 1.1rem;
+    color: #2c5aa0;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.info-section p {
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+.info-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-section li {
+    color: #666;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+.info-section li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #2c5aa0;
+    font-weight: bold;
+}
+
+/* ===== 신청 양식 (페이지 4) ===== */
+.application-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+}
+
+.form-section h3 {
+    font-size: 1.3rem;
+    color: #2c5aa0;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #333;
+}
+
+.required {
+    color: #e74c3c;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2c5aa0;
+    box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* 라디오 버튼 그룹 */
+.radio-group {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+.radio-group input[type="radio"],
+.checkbox-group input[type="checkbox"] {
+    margin-right: 0.5rem;
+    width: auto;
+}
+
+/* 체크박스 그룹 */
+.checkbox-group {
+    margin-bottom: 1rem;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: flex-start;
+    font-weight: normal;
+    margin-bottom: 1rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 0.5rem;
+    margin-top: 0.25rem;
+    width: auto;
+}
+
+.terms-text {
+    flex: 1;
+}
+
+/* 약관 상세 */
+.terms-detail {
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+}
+
+.terms-detail summary {
+    cursor: pointer;
+    font-weight: 500;
+    color: #2c5aa0;
+}
+
+.terms-detail summary:hover {
+    text-decoration: underline;
+}
+
+.terms-content {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.8;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.terms-content p {
+    margin-bottom: 0.8rem;
+}
+
+/* 도움말 아이콘 */
+.help-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #2c5aa0;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    font-size: 0.9rem;
+    cursor: help;
+    margin-left: 0.5rem;
+    position: relative;
+}
+
+.help-icon:hover {
+    background-color: #1e3f5a;
+}
+
+.tooltip-text {
+    display: none;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip-text:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid transparent;
+    border-top-color: #333;
+}
+
+.help-icon:hover .tooltip-text {
+    display: block;
+}
+
+/* 버튼 그룹 */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.button-group .btn {
+    flex: 1;
+    max-width: 200px;
+}
+
+/* ===== 신청 완료 (페이지 5) ===== */
+.completion-container {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.completion-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #27ae60;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 0 auto 1.5rem;
+}
+
+.completion-container h2 {
+    font-size: 1.8rem;
+    color: #2c5aa0;
+    margin-bottom: 1rem;
+}
+
+.completion-message {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.completion-info,
+.next-steps {
+    text-align: left;
+    margin: 2rem 0;
+}
+
+.completion-info h3,
+.next-steps h3 {
+    font-size: 1.2rem;
+    color: #2c5aa0;
+    margin-bottom: 1rem;
+}
+
+.info-box {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 6px;
+    border-left: 4px solid #2c5aa0;
+}
+
+.info-box p {
+    margin-bottom: 0.75rem;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.info-box strong {
+    color: #333;
+}
+
+.next-steps ol {
+    margin-left: 1.5rem;
+    color: #666;
+    line-height: 1.8;
+}
+
+.next-steps li {
+    margin-bottom: 0.75rem;
+}
+
+.completion-container .button-group {
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+/* ===== 푸터 ===== */
+footer {
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 3rem 0 1rem;
+    margin-top: 3rem;
+    border-top: 1px solid #e9e9e9;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-content h4,
+.footer-links,
+.footer-sns {
+    flex: 1;
+}
+
+.footer-content h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.footer-content p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    opacity: 1;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    color: #666;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.footer-sns {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-sns a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #e9e9e9;
+    color: #333;
+    border-radius: 50%;
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-sns a:hover {
+    background-color: #0066cc;
+    color: white;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e9e9e9;
+    font-size: 0.85rem;
+    color: #999;
+    opacity: 1;
+}
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .main-nav {
+        margin-left: 0;
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .banner-overlay h2 {
+        font-size: 1.8rem;
+    }
+
+    .banner-overlay p {
+        font-size: 1rem;
+    }
+
+    .detail-container {
+        grid-template-columns: 1fr;
+    }
+
+    .education-list {
+        grid-template-columns: 1fr;
+    }
+
+    .education-intro {
+        grid-template-columns: 1fr;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .button-group .btn {
+        max-width: none;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+
+    .radio-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    label {
+        font-size: 0.95rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
+        font-size: 16px; /* 모바일에서 줌 방지 */
+    }
+}
+
+@media (max-width: 600px) {
+    .main-content {
+        padding: 0 0.5rem;
+    }
+
+    .page-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .application-form,
+    .detail-container,
+    .completion-container {
+        padding: 1rem;
+    }
+
+    .form-section h3,
+    .info-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .tooltip-text {
+        white-space: normal;
+        width: 150px;
+    }
+
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .btn-large {
+        padding: 0.75rem 1.5rem;
+    }
+}
+
+/* ===== 웹접근성 ===== */
+/* 포커스 스타일 - 키보드 네비게이션 */
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #2c5aa0;
+    outline-offset: 2px;
+}
+
+/* 스크린리더 전용 텍스트 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* 스킵 링크 */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #2c5aa0;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}

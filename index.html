@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강남구 홈페이지</title>
+    <!-- CSS 파일 연결 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 헤더 영역: 사이트명과 메인 메뉴 -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>강남구</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">종합민원</a></li>
+                    <li><a href="#">소통참여</a></li>
+                    <li><a href="#">행정정보</a></li>
+                    <li><a href="#">강남소식</a></li>
+                    <li><a href="#">강남소개</a></li>
+                    <li><a href="#">분야별정보</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="login-btn">로그인</button>
+            </div>
+            <!-- 검색창 추가 -->
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="검색어 입력">
+                <button onclick="performSearch()">검색</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 상단 배너 -->
+    <section class="hero-banner">
+        <div class="banner-content">
+            <h2>강남구의 새로운 소식을 만나보세요</h2>
+            <p>강남구청이 제공하는 다양한 서비스와 정보를 확인하세요.</p>
+            <button class="banner-btn">자세히 보기</button>
+        </div>
+        <div class="banner-image">
+            <img src="banner.jpg" alt="배너 이미지" width="400" height="300">
+        </div>
+    </section>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main>
+        <!-- 주요서비스 섹션 -->
+        <section id="main-services">
+            <h2>주요서비스</h2>
+            <div class="service-icons">
+                <div class="icon-item">
+                    <span class="icon">📅</span>
+                    <p>공공서비스예약</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">📢</span>
+                    <p>응답소(민원신고)</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">💼</span>
+                    <p>서울일자리</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🏠</span>
+                    <p>부동산정보</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">📚</span>
+                    <p>서울런</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">❤️</span>
+                    <p>서울복지포털</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🏡</span>
+                    <p>서울주거포털</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">👨‍🎓</span>
+                    <p>청년몽땅정보통</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">📱</span>
+                    <p>내 손안에 서울</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 생생현장 섹션 -->
+        <section id="live-scene">
+            <h2>생생현장</h2>
+            <div class="images">
+                <img src="placeholder1.jpg" alt="생생현장 이미지 1" width="300" height="200">
+                <img src="placeholder2.jpg" alt="생생현장 이미지 2" width="300" height="200">
+            </div>
+        </section>
+
+        <!-- 구청장 소개 섹션 -->
+        <section id="mayor-intro">
+            <h2>구청장 소개</h2>
+            <div class="mayor-info">
+                <img src="mayor.jpg" alt="구청장 사진" width="150" height="200">
+                <p>강남구청장 김철수입니다. 강남구의 발전을 위해 최선을 다하겠습니다.</p>
+            </div>
+        </section>
+
+        <!-- 자주찾는서비스 섹션 -->
+        <section id="frequent-services">
+            <h2>자주찾는서비스</h2>
+            <div class="service-cards">
+                <div class="card" onclick="alert('스마트번호표발급')">
+                    <img src="service1.jpg" alt="스마트번호표발급" width="100" height="100">
+                    <h3>스마트번호표발급</h3>
+                    <p>빠르고 간편하게 번호표를 발급하세요.</p>
+                </div>
+                <div class="card" onclick="alert('무인민원발급기')">
+                    <img src="service2.jpg" alt="무인민원발급기" width="100" height="100">
+                    <h3>무인민원발급기</h3>
+                    <p>24시간 이용 가능한 민원 발급기.</p>
+                </div>
+                <div class="card" onclick="alert('가족관계 등록시스템')">
+                    <img src="service3.jpg" alt="가족관계 등록시스템" width="100" height="100">
+                    <h3>가족관계 등록시스템</h3>
+                    <p>가족 관계 증명서를 온라인으로 발급.</p>
+                </div>
+                <div class="card" onclick="alert('서비스 4')">
+                    <img src="service4.jpg" alt="서비스 4" width="100" height="100">
+                    <h3>서비스 4</h3>
+                    <p>설명 텍스트.</p>
+                </div>
+                <div class="card" onclick="alert('서비스 5')">
+                    <img src="service5.jpg" alt="서비스 5" width="100" height="100">
+                    <h3>서비스 5</h3>
+                    <p>설명 텍스트.</p>
+                </div>
+                <div class="card" onclick="alert('서비스 6')">
+                    <img src="service6.jpg" alt="서비스 6" width="100" height="100">
+                    <h3>서비스 6</h3>
+                    <p>설명 텍스트.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 하단 영역: 공지사항과 알림판 -->
+    <footer>
+        <div class="footer-container">
+            <div class="notice">
+                <h3>공지사항</h3>
+                <ul>
+                    <li>공지사항 1</li>
+                    <li>공지사항 2</li>
+                    <li>공지사항 3</li>
+                </ul>
+            </div>
+            <div class="alert-board">
+                <h3>알림판</h3>
+                <ul>
+                    <li>알림 1</li>
+                    <li>알림 2</li>
+                    <li>알림 3</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript 파일 연결 -->
+    <script src="script.js"></script>
+</body>
+</html>

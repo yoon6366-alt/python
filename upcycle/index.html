@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>광명업사이클센터 - 교육신청</title>
+    <!-- CSS 파일 연결 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header>
+        <div class="header-container">
+            <!-- 로고 -->
+            <div class="logo">
+                <h1>광명 업사이클센터</h1>
+                <p class="tagline">지속가능한 미래를 만드는 공간</p>
+            </div>
+            <!-- 네비게이션 메뉴 -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" onclick="showPage('page1')">센터소개</a></li>
+                    <li><a href="#" onclick="showPage('page1')">전시행사</a></li>
+                    <li><a href="#" onclick="showPage('page1')" class="active">체험교육신청</a></li>
+                    <li><a href="#" onclick="showPage('page1')">공모사업신청</a></li>
+                    <li><a href="#" onclick="showPage('page1')">에코소재중개</a></li>
+                    <li><a href="#" onclick="showPage('page1')">에코가게</a></li>
+                    <li><a href="#" onclick="showPage('page1')">공지사항</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 상단 배너 -->
+    <section class="hero-banner">
+        <img src="images/banner.jpg" alt="광명업사이클센터 배너" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22300%22%3E%3Crect fill=%22%236b9bd1%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2248%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EThe Moment of Inspiration%3C/text%3E%3C/svg%3E'">
+        <div class="banner-overlay">
+            <h2>The Moment of Inspiration</h2>
+            <p>지속가능한 생활을 위한 업사이클 교육</p>
+        </div>
+    </section>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="main-content">
+        <!-- ===== 페이지 1: 체험교육 소개 메인페이지 ===== -->
+        <div id="page1" class="page active">
+            <div class="page-header">
+                <h2>체험교육신청</h2>
+                <p class="subtitle">다양한 체험교육 프로그램을 소개합니다</p>
+            </div>
+
+            <!-- 정규수업 섹션 -->
+            <div class="education-section regular-class">
+                <div class="section-image">
+                    <img src="images/regular-class.jpg" alt="정규수업" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect fill=%22%23ddd%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2232%22 text-anchor=%22middle%22 dy=%22.3em%22%3E정규수업%3C/text%3E%3C/svg%3E'">
+                </div>
+                <div class="section-content">
+                    <h3>📚 정규수업</h3>
+                    <p>주 1회 정기적인 업사이클 교육 프로그램으로 기초부터 심화까지 다양한 난이도로 구성되어 있습니다. 경험 많은 강사들과 함께 실용적인 기술을 배워보세요.</p>
+                    <p>매주 화요일, 수요일, 목요일, 금요일에 진행되며 정원은 10~15명입니다. 원하시는 요일과 시간을 선택하여 수강하실 수 있습니다.</p>
+                    <button class="btn btn-primary" onclick="showPage('page2')">정규수업 보기</button>
+                </div>
+            </div>
+
+            <!-- 특별 워크숍 섹션 -->
+            <div class="education-section special-workshop">
+                <div class="section-content">
+                    <h3>🎯 특별 워크숍</h3>
+                    <p>계절별 특별 프로그램과 게스트 강사 초청 워크숍으로 새로운 기법과 트렌드를 배우실 수 있습니다. 전문 디자이너와 업사이클 아티스트의 특별 강의를 만나보세요.</p>
+                    <p>한정된 정원으로 진행되어 소규모 집중 교육이 가능합니다. 계절마다 새로운 주제의 워크숍이 열리므로 정기적으로 확인해주세요.</p>
+                    <button class="btn btn-secondary" onclick="alert('준비 중입니다.')">특별 워크숍 보기</button>
+                </div>
+                <div class="section-image">
+                    <img src="images/workshop.jpg" alt="특별 워크숍" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect fill=%22%23ddd%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2232%22 text-anchor=%22middle%22 dy=%22.3em%22%3E특별워크숍%3C/text%3E%3C/svg%3E'">
+                </div>
+            </div>
+
+            <!-- 단체 프로그램 섹션 -->
+            <div class="education-section group-program">
+                <div class="section-image">
+                    <img src="images/group-program.jpg" alt="단체 프로그램" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect fill=%22%23ddd%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2232%22 text-anchor=%22middle%22 dy=%22.3em%22%3E단체프로그램%3C/text%3E%3C/svg%3E'">
+                </div>
+                <div class="section-content">
+                    <h3>👥 단체 프로그램</h3>
+                    <p>학교, 기업, 단체를 위한 맞춤형 교육 프로그램입니다. 단체 문의를 통해 별도로 진행 가능하며 참여 인원과 주제에 맞게 커스터마이징할 수 있습니다.</p>
+                    <p>환경 교육, 팀 빌딩, 사회공헌 활동 등 다양한 목적으로 활용 가능합니다. 최소 10명 이상의 단체에 한해 신청 가능하며 별도의 가격 협의가 가능합니다.</p>
+                    <button class="btn btn-secondary" onclick="alert('문의: 02-1234-5678')">문의하기</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 페이지 2: 정규수업 목록 ===== -->
+        <div id="page2" class="page">
+            <div class="breadcrumb">
+                <a href="#" onclick="showPage('page1')">체험교육신청</a> > 
+                <span>정규수업</span>
+            </div>
+
+            <div class="page-header">
+                <h2>정규수업</h2>
+                <p class="subtitle">정기적인 업사이클 교육 프로그램</p>
+            </div>
+
+            <!-- 교육 카드 목록 -->
+            <div class="education-list">
+                <!-- 교육 카드 1 -->
+                <div class="education-card" onclick="showPage('page3', 1)" role="button" tabindex="0" onkeypress="if(event.key==='Enter') showPage('page3', 1)">
+                    <div class="card-image">
+                        <img src="images/education1.jpg" alt="가방 만들기" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22250%22%3E%3Crect fill=%22%23ddd%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dy=%22.3em%22%3E교육 이미지%3C/text%3E%3C/svg%3E'">
+                    </div>
+                    <div class="card-content">
+                        <div class="badge">정규수업</div>
+                        <h3>폐기 가방에서 스타일링 가방으로</h3>
+                        <p class="instructor">강사: 홍길동</p>
+                        <p class="schedule">매주 화요일 10:00~12:00</p>
+                        <p class="capacity">정원: 15명</p>
+                        <p class="description">낡은 가방을 세련된 가방으로 리뉴얼하는 기초 기술을 배웁니다.</p>
+                    </div>
+                </div>
+
+                <!-- 교육 카드 2 -->
+                <div class="education-card" onclick="showPage('page3', 2)" role="button" tabindex="0" onkeypress="if(event.key==='Enter') showPage('page3', 2)">
+                    <div class="card-image">
+                        <img src="images/education2.jpg" alt="의류 재활용" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22250%22%3E%3Crect fill=%22%23ddd%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dy=%22.3em%22%3E교육 이미지%3C/text%3E%3C/svg%3E'">
+                    </div>
+                    <div class="card-content">
+                        <div class="badge">정규수업</div>
+                        <h3>낡은 옷에서 새로운 디자인으로</h3>
+                        <p class="instructor">강사: 김영희</p>
+                        <p class="schedule">매주 목요일 14:00~16:00</p>
+                        <p class="capacity">정원: 12명</p>
+                        <p class="description">헌 옷을 새로운 의류나 액세서리로 변신시키는 방법을 배웁니다.</p>
+                    </div>
+                </div>
+
+                <!-- 교육 카드 3 -->
+                <div class="education-card" onclick="showPage('page3', 3)" role="button" tabindex="0" onkeypress="if(event.key==='Enter') showPage('page3', 3)">
+                    <div class="card-image">
+                        <img src="images/education3.jpg" alt="목공 리사이클링" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22250%22%3E%3Crect fill=%22%23ddd%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dy=%22.3em%22%3E교육 이미지%3C/text%3E%3C/svg%3E'">
+                    </div>
+                    <div class="card-content">
+                        <div class="badge">정규수업</div>
+                        <h3>폐목재로 만드는 생활용품</h3>
+                        <p class="instructor">강사: 박준호</p>
+                        <p class="schedule">매주 수요일 15:00~17:00</p>
+                        <p class="capacity">정원: 10명</p>
+                        <p class="description">폐기되는 목재를 활용하여 실용적인 생활용품을 만드는 기술을 습득합니다.</p>
+                    </div>
+                </div>
+
+                <!-- 교육 카드 4 -->
+                <div class="education-card" onclick="showPage('page3', 4)" role="button" tabindex="0" onkeypress="if(event.key==='Enter') showPage('page3', 4)">
+                    <div class="card-image">
+                        <img src="images/education4.jpg" alt="플라스틱 공예" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22250%22%3E%3Crect fill=%22%23ddd%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dy=%22.3em%22%3E교육 이미지%3C/text%3E%3C/svg%3E'">
+                    </div>
+                    <div class="card-content">
+                        <div class="badge">정규수업</div>
+                        <h3>플라스틱 재활용 공예</h3>
+                        <p class="instructor">강사: 이지은</p>
+                        <p class="schedule">매주 금요일 10:00~12:00</p>
+                        <p class="capacity">정원: 15명</p>
+                        <p class="description">버려지는 플라스틱을 활용하여 새로운 작품을 창작합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 페이지 3: 교육 상세페이지 ===== -->
+        <div id="page3" class="page">
+            <div class="breadcrumb">
+                <a href="#" onclick="showPage('page1')">체험교육신청</a> > 
+                <a href="#" onclick="showPage('page2')">정규수업</a> > 
+                <span id="detail-title">교육 상세</span>
+            </div>
+
+            <div class="detail-container">
+                <!-- 왼쪽: 상세 정보 -->
+                <div class="detail-left">
+                    <!-- 교육 이미지 -->
+                    <div class="detail-image">
+                        <img id="detail-img" src="images/education1.jpg" alt="교육 이미지" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22400%22%3E%3Crect fill=%22%23ddd%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2232%22 text-anchor=%22middle%22 dy=%22.3em%22%3E교육 상세 이미지%3C/text%3E%3C/svg%3E'">
+                    </div>
+
+                    <!-- 신청하기 버튼 -->
+                    <button class="btn btn-primary btn-large" onclick="showPage('page4')">신청하기</button>
+                </div>
+
+                <!-- 오른쪽: 상세 정보 -->
+                <div class="detail-right">
+                    <div class="badge">정규수업</div>
+                    <h2 id="detail-title-h2">교육 제목</h2>
+
+                    <div class="info-section">
+                        <h3>📋 강사</h3>
+                        <p id="detail-instructor">강사명</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>⏰ 일정</h3>
+                        <p id="detail-schedule">요일 및 시간</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>👥 정원</h3>
+                        <p id="detail-capacity">정원 정보</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>💰 수강료</h3>
+                        <p id="detail-price">수강료</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>📝 교육 소개</h3>
+                        <p id="detail-description">교육 설명</p>
+                        <p>업사이클은 단순한 재활용을 넘어 새로운 가치를 창출하는 활동입니다. 우리 센터의 정규수업은 기초부터 전문가 수준까지 다양한 난이도로 구성되어 있어 모든 참가자가 자신의 수준에 맞춰 학습할 수 있습니다. 전문 강사와 함께 환경을 생각하는 마음으로 창의성을 발휘해 보세요.</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>🎯 기대효과</h3>
+                        <ul>
+                            <li>환경에 대한 인식 제고</li>
+                            <li>창의적 사고력 개발</li>
+                            <li>실용적 기술 습득</li>
+                            <li>지속가능한 생활방식 체험</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>📦 준비물</h3>
+                        <p>필요한 준비물은 첫 수업 시 안내해 드리며, 대부분의 도구와 재료는 센터에서 제공합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 페이지 4: 신청 양식 ===== -->
+        <div id="page4" class="page">
+            <div class="breadcrumb">
+                <a href="#" onclick="showPage('page1')">체험교육신청</a> > 
+                <span>신청하기</span>
+            </div>
+
+            <div class="page-header">
+                <h2>수업 신청 양식</h2>
+                <p class="subtitle">아래 정보를 입력하고 신청해주세요</p>
+            </div>
+
+            <form id="applicationForm" class="application-form">
+                <div class="form-section">
+                    <h3>신청자 정보</h3>
+
+                    <!-- 이름 -->
+                    <div class="form-group">
+                        <label for="name">이름 <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required aria-required="true">
+                    </div>
+
+                    <!-- 성별 -->
+                    <div class="form-group">
+                        <label>성별 <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="male" required> 남</label>
+                            <label><input type="radio" name="gender" value="female" required> 여</label>
+                        </div>
+                    </div>
+
+                    <!-- 생년월일 -->
+                    <div class="form-group">
+                        <label for="birthdate">생년월일 <span class="required">*</span></label>
+                        <input type="date" id="birthdate" name="birthdate" required aria-required="true">
+                    </div>
+
+                    <!-- 휴대폰 번호 -->
+                    <div class="form-group">
+                        <label for="phone">휴대폰 번호 <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="010-1234-5678" required aria-required="true" pattern="[0-9\-]{10,}">
+                    </div>
+
+                    <!-- 거주 지역 -->
+                    <div class="form-group">
+                        <label for="residence">거주 지역 <span class="required">*</span></label>
+                        <select id="residence" name="residence" required aria-required="true">
+                            <option value="">선택하세요</option>
+                            <option value="gwangmyeong">광명시</option>
+                            <option value="seoul">서울시</option>
+                            <option value="incheon">인천시</option>
+                            <option value="gyeonggi">경기도</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </div>
+
+                    <!-- 이메일 -->
+                    <div class="form-group">
+                        <label for="email">이메일 <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="example@email.com" required aria-required="true">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>교육 정보</h3>
+
+                    <!-- 교육 선택 -->
+                    <div class="form-group">
+                        <label for="education">선택한 교육 <span class="required">*</span></label>
+                        <input type="text" id="education" name="education" placeholder="교육명" readonly>
+                    </div>
+
+                    <!-- 수강 기간 -->
+                    <div class="form-group">
+                        <label for="period">수강 기간 <span class="required">*</span></label>
+                        <select id="period" name="period" required aria-required="true">
+                            <option value="">선택하세요</option>
+                            <option value="4weeks">4주 (1개월)</option>
+                            <option value="8weeks">8주 (2개월)</option>
+                            <option value="12weeks">12주 (3개월)</option>
+                            <option value="ongoing">정기 수강</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>이용 정보</h3>
+
+                    <!-- 주차 여부 -->
+                    <div class="form-group">
+                        <label>주차 이용 <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="parking" value="yes" onchange="showParkingInfo()" required> 예</label>
+                            <label><input type="radio" name="parking" value="no" onchange="hideParkingInfo()" required> 아니오</label>
+                        </div>
+                    </div>
+
+                    <!-- 주차비 안내 (호버 시 정보 표시) -->
+                    <div class="form-group">
+                        <label>주차비
+                            <span class="help-icon" title="주차비 안내 정보">?</span>
+                            <span class="tooltip-text">1회당 2,000원 (월정액 가능: 50,000원)</span>
+                        </label>
+                        <p id="parkingInfo" style="display:none; color: #666; font-size: 0.9rem; margin-top: 5px;">
+                            1회당 2,000원이 부과됩니다. 월정액 이용 시 50,000원입니다.
+                        </p>
+                    </div>
+
+                    <!-- 기타 요청사항 -->
+                    <div class="form-group">
+                        <label for="message">기타 요청사항</label>
+                        <textarea id="message" name="message" placeholder="특별한 요청사항이 있으시면 입력해주세요" rows="4"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>약관 동의</h3>
+
+                    <!-- 약관 동의 -->
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="terms" name="terms" required aria-required="true">
+                            <span class="terms-text">교육 약관에 동의합니다 <span class="required">*</span></span>
+                        </label>
+                        <details class="terms-detail">
+                            <summary>약관 보기</summary>
+                            <div class="terms-content">
+                                <p>1. 신청자는 본 약관에 동의함으로써 교육 신청이 완료됩니다.</p>
+                                <p>2. 수업 취소는 수업 시작 3일 전까지 가능합니다.</p>
+                                <p>3. 센터에서 제공한 도구나 재료의 손실 시 배상 책임이 있습니다.</p>
+                                <p>4. 센터의 안전 규정을 준수해야 합니다.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- 개인정보 처리방침 동의 -->
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="privacy" name="privacy" required aria-required="true">
+                            <span class="terms-text">개인정보 처리방침에 동의합니다 <span class="required">*</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 버튼 영역 -->
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="showPage('page3')">이전</button>
+                    <button type="submit" class="btn btn-primary">신청하기</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ===== 페이지 5: 신청 완료 ===== -->
+        <div id="page5" class="page">
+            <div class="completion-container">
+                <div class="completion-icon">✓</div>
+                <h2>신청이 완료되었습니다!</h2>
+                <p class="completion-message">귀중한 신청 감사합니다.<br>검토 후 연락드리겠습니다.</p>
+
+                <div class="completion-info">
+                    <h3>신청 정보</h3>
+                    <div class="info-box">
+                        <p><strong>신청자:</strong> <span id="completion-name">-</span></p>
+                        <p><strong>연락처:</strong> <span id="completion-phone">-</span></p>
+                        <p><strong>이메일:</strong> <span id="completion-email">-</span></p>
+                        <p><strong>교육:</strong> <span id="completion-education">-</span></p>
+                        <p><strong>신청 일시:</strong> <span id="completion-date">-</span></p>
+                    </div>
+                </div>
+
+                <div class="next-steps">
+                    <h3>다음 단계</h3>
+                    <ol>
+                        <li>1-2 영업일 내에 담당자가 연락드립니다.</li>
+                        <li>교육 정보 및 수강료 안내를 받으세요.</li>
+                        <li>첫 수업에 참여하세요.</li>
+                    </ol>
+                </div>
+
+                <!-- 버튼 영역 -->
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="showPage('page1')">홈으로 돌아가기</button>
+                    <button class="btn btn-secondary" onclick="showPage('page2')">다른 교육 보기</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <h4>광명 업사이클센터</h4>
+                <p>주소: 경기도 광명시 중앙로 111</p>
+                <p>전화: 02-1234-5678</p>
+                <p>이메일: info@upcycle.com</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">개인정보처리방침</a>
+                <a href="#">이용약관</a>
+                <a href="#">고객문의</a>
+            </div>
+            <div class="footer-sns">
+                <a href="#" title="페이스북">F</a>
+                <a href="#" title="인스타그램">I</a>
+                <a href="#" title="유튜브">Y</a>
+            </div>
+        </div>
+        <p class="copyright">Copyright © 2024 광명업사이클센터. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript 파일 연결 -->
+    <script src="script.js"></script>
+</body>
+</html>
