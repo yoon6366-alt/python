@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 
 // 강남구 페이지
 import GangnamHome from './pages/gangnam/Home'
+import YouthHome from './pages/youth/Home'
 
 // 업사이클센터 페이지
 import UpcycleHome from './pages/upcycle/Home'
@@ -22,6 +23,7 @@ function App() {
       <Route path="/upcycle/detail/:id" element={<UpcycleDetail />} />
       <Route path="/upcycle/apply/:id" element={<UpcycleApply />} />
       <Route path="/upcycle/complete" element={<UpcycleComplete />} />
+      <Route path="/youth" element={<YouthHome />} />
     </Routes>
   )
 }

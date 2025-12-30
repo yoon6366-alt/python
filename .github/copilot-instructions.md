@@ -1,87 +1,74 @@
 # Copilot Instructions
 
 ## 프로젝트 개요
-한국어 정부/공공기관 스타일 웹사이트 컬렉션 (React + Tailwind CSS)
-- **`/`**: 강남구 홈페이지 포털
-- **`/upcycle/*`**: 광명 업사이클센터 교육신청 시스템
+한국어 정부/공공기관 스타일 웹사이트. **주요 개발은 `react-app/` 폴더에서 진행**.
+- `gangnam/`, `upcycle/`: 레거시 HTML 버전 (참고용)
+- `react-app/`: **메인 React 앱** - 두 프로젝트 통합
 
-## 기술 스택
-- **프레임워크**: React 18 + Vite
-- **스타일링**: Tailwind CSS
-- **라우팅**: React Router v6
-- **상태 관리**: useState, localStorage
+## 아키텍처 (React 앱)
 
-## 프로젝트 구조
+### 라우트 구조 (`App.jsx`)
+| 경로 | 페이지 | 설명 |
+|------|--------|------|
+| `/` | `pages/gangnam/Home` | 강남구 메인 |
+| `/upcycle/*` | `pages/upcycle/*` | 업사이클센터 (Home → Classes → Detail/:id → Apply/:id → Complete) |
+
+### 컴포넌트 구조
 ```
-react-app/
-├── src/
-│   ├── components/          # 재사용 컴포넌트
-│   │   ├── gangnam/         # 강남구 전용 (Header.jsx)
-│   │   ├── upcycle/         # 업사이클 전용 (Header, Banner, EducationCard)
-│   │   └── common/          # 공통 (Breadcrumb)
-│   ├── pages/               # 페이지 컴포넌트
-│   │   ├── gangnam/Home.jsx
-│   │   └── upcycle/         # Home, Classes, Detail, Apply, Complete
-│   ├── data/                # 정적 데이터
-│   │   └── educationData.js
-│   ├── App.jsx              # 라우트 정의
-│   └── index.css            # Tailwind + 커스텀 클래스
-└── tailwind.config.js       # 커스텀 색상 정의
+src/components/
+├── gangnam/Header.jsx    # gangnam-primary 색상 사용
+├── upcycle/              # upcycle-primary 색상 사용
+│   ├── Header.jsx
+│   ├── Banner.jsx
+│   └── EducationCard.jsx
+└── common/Breadcrumb.jsx # 공용 (도메인 색상 주의)
 ```
 
-## Tailwind 컨벤션
+## 핵심 컨벤션
 
-### 커스텀 색상 (`tailwind.config.js`)
-```javascript
-colors: {
-  gangnam: { primary: '#0064FF', secondary: '#0052CC' },  // 토스 스타일
-  upcycle: { primary: '#0066cc', secondary: '#2c5aa0' },
-}
+### 1. 도메인별 색상 사용 (필수)
+```jsx
+// 강남구 컴포넌트
+className="text-gangnam-primary bg-gangnam-secondary"
+
+// 업사이클 컴포넌트
+className="text-upcycle-primary bg-upcycle-secondary"
 ```
 
-### 커스텀 컴포넌트 클래스 (`index.css`)
-```css
-@layer components {
-  .btn-primary { @apply bg-gangnam-primary text-white px-6 py-3 rounded-lg... }
-  .card { @apply bg-white rounded-xl shadow-md hover:shadow-lg... }
-  .input-field { @apply w-full px-4 py-3 border border-gray-300 rounded-lg... }
-  .container-main { @apply max-w-container mx-auto px-4; }
-}
+### 2. 커스텀 CSS 클래스 (`index.css`)
+```jsx
+// 버튼: btn-primary, btn-secondary
+// 카드: card (rounded-xl + shadow + hover)
+// 입력: input-field (focus:ring-gangnam-primary)
+// 레이아웃: container-main (max-w-1200px + mx-auto)
 ```
 
-## 코드 패턴
-
-### 이미지 Fallback
+### 3. 이미지 Fallback 필수
 ```jsx
 <img
-  src={education.image}
+  src={data.image}
   onError={(e) => { e.target.src = fallbackSvg }}
 />
 ```
 
-### 폼 검증
+### 4. 폼 검증 패턴 (`Apply.jsx` 참고)
 ```javascript
-const validateForm = () => {
-  const phonePattern = /^[0-9\-]{10,}$/
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  // errors 상태로 에러 메시지 관리
-}
+const [errors, setErrors] = useState({})
+// 검증: /^[0-9\-]{10,}$/ (전화), /^[^\s@]+@[^\s@]+\.[^\s@]+$/ (이메일)
+// 에러 클리어: handleChange 시 해당 필드 에러 제거
 ```
 
-### 데이터 관리
-- 정적 데이터: `src/data/educationData.js`
-- 클라이언트 저장: `localStorage.setItem('applicationData', JSON.stringify(data))`
+### 5. 데이터 흐름
+- 정적 데이터: `src/data/educationData.js` (ID 기반 객체)
+- 페이지 간 전달: `localStorage` → `Complete.jsx`에서 조회
 
-## 개발 워크플로우
+## 개발 명령어
 ```bash
-cd react-app
-npm install          # 의존성 설치
-npm run dev          # 개발 서버 (http://localhost:5173)
-npm run build        # 프로덕션 빌드
+cd react-app && npm run dev  # http://localhost:5173
 ```
 
-## 새 기능 추가
-1. **새 페이지**: `src/pages/`에 컴포넌트 생성 → `App.jsx`에 Route 추가
-2. **새 컴포넌트**: `src/components/[도메인]/`에 생성
-3. **새 데이터**: `src/data/educationData.js`에 추가
-4. **새 스타일**: Tailwind 유틸리티 또는 `index.css`의 `@layer components`
+## 새 기능 추가 체크리스트
+1. **페이지**: `src/pages/[도메인]/` + `App.jsx` Route 추가
+2. **컴포넌트**: `src/components/[도메인]/` (공용은 `common/`)
+3. **데이터**: `src/data/educationData.js` 확장
+4. **스타일**: Tailwind 유틸리티 우선, 반복 패턴은 `@layer components`
