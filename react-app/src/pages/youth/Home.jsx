@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../../components/youth/Header";
 import MainBanner from "../../components/youth/MainBanner";
 import SlideNav from "../../components/youth/SlideNav";
+import CategoryMenu from "../../components/youth/CategoryMenu";
 import InfoCards from "../../components/youth/InfoCards";
 import CustomSearch from "../../components/youth/CustomSearch";
 import SupportInfo from "../../components/youth/SupportInfo";
@@ -18,11 +19,14 @@ export default function Home() {
       <Header />
 
       <div className="container-main">
-        {/* 메인 배너 (glassmorphism + 아이콘 메뉴) */}
+        {/* 메인 배너 */}
         <MainBanner />
 
         {/* 슬라이드 버튼 영역 */}
         <SlideNav />
+
+        {/* 카테고리 아이콘 메뉴 (배너 아래 별도 영역) */}
+        <CategoryMenu />
 
         {/* 맞춤형 정보 */}
         <InfoCards />
