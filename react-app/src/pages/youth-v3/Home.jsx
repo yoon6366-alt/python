@@ -18,9 +18,6 @@ export default function Home() {
       {/* 헤더 */}
       <Header />
 
-      {/* 맞춤형 정책검색 (최상단) */}
-      <CustomSearch />
-
       <div className="container-main">
         {/* 메인 배너 */}
         <MainBanner />
@@ -30,6 +27,9 @@ export default function Home() {
 
         {/* 맞춤형 정보 */}
         <InfoCards />
+
+        {/* 맞춤형 정책검색 */}
+        <CustomSearch />
 
         {/* 청년지원정보 */}
         <SupportInfo />

@@ -35,7 +35,7 @@ export default function AgencyCards() {
         {agencies.map((agency, idx) => (
           <div
             key={idx}
-            className="bg-white/70 backdrop-blur-md rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-white/30"
+            className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-gray-100"
           >
             <div className="text-4xl mb-4">{agency.icon}</div>
             <h4 className="text-lg font-bold text-gray-900 mb-3">{agency.title}</h4>

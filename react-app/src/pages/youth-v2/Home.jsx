@@ -18,18 +18,21 @@ export default function Home() {
       {/* 헤더 */}
       <Header />
 
-      {/* 맞춤형 정책검색 (최상단) */}
-      <CustomSearch />
-
       <div className="container-main">
         {/* 메인 배너 */}
         <MainBanner />
 
-        {/* 카테고리 아이콘 메뉴 */}
+        {/* 슬라이드 버튼 영역 */}
+        <SlideNav />
+
+        {/* 카테고리 아이콘 메뉴 (배너 아래 별도 영역) */}
         <CategoryMenu />
 
         {/* 맞춤형 정보 */}
         <InfoCards />
+
+        {/* 맞춤형 정책검색 */}
+        <CustomSearch />
 
         {/* 청년지원정보 */}
         <SupportInfo />

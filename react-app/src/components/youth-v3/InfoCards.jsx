@@ -43,7 +43,7 @@ export default function InfoCards() {
         {cards.map((card, idx) => (
           <div
             key={idx}
-            className="bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-white/30"
+            className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-gray-100"
           >
             {/* 이미지 영역 */}
             <div className={`h-48 ${card.fallbackBg} relative overflow-hidden`}>
@@ -59,8 +59,8 @@ export default function InfoCards() {
             </div>
             
             {/* 텍스트 영역 */}
-            <div className="p-5 bg-white/60 backdrop-blur-sm">
-              <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-700 rounded-full text-xs font-semibold mb-3 backdrop-blur-sm">
+            <div className="p-5">
+              <span className="inline-block px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-semibold mb-3">
                 {card.badge}
               </span>
               <h4 className="text-base font-bold text-gray-900 mb-2 leading-tight">{card.title}</h4>

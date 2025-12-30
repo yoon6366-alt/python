@@ -17,8 +17,8 @@ export default function MainBanner() {
         }}
       />
       
-      {/* 배경 이미지 오버레이 (그라데이션 + Glassmorphism) */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 via-purple-600/35 to-blue-700/40 backdrop-blur-sm rounded-2xl" />
+      {/* 배경 이미지 오버레이 (그라데이션) */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/40 via-blue-700/45 to-blue-800/50 rounded-2xl" />
       
       {/* 배경 패턴 */}
       <div className="absolute inset-0 opacity-10">
