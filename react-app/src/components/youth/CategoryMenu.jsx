@@ -2,34 +2,29 @@ import React from "react";
 
 export default function CategoryMenu() {
   const categories = [
-    { icon: "🏢", label: "공간장" },
-    { icon: "💼", label: "일자" },
-    { icon: "💡", label: "창업" },
-    { icon: "🏠", label: "주거" },
-    { icon: "❤️", label: "건강" },
-    { icon: "🎓", label: "교육" },
-    { icon: "✏️", label: "정책교안" },
-    { icon: "💕", label: "심리상담" },
-    { icon: "🎨", label: "생활지원" },
-    { icon: "📝", label: "문의사항" },
-    { icon: "📄", label: "정책자료" }
+    { icon: "📁", label: "공간장", color: "text-blue-500" },
+    { icon: "✱", label: "주거", color: "text-blue-500" },
+    { icon: "📋", label: "교육", color: "text-blue-500" },
+    { icon: "🎯", label: "동호교양", color: "text-purple-500" },
+    { icon: "☀", label: "건강", color: "text-orange-500" },
+    { icon: "💼", label: "심리상담", color: "text-teal-500" },
+    { icon: "🎤", label: "생활지원", color: "text-green-500" },
+    { icon: "📂", label: "문의사항", color: "text-yellow-600" }
   ];
 
   return (
-    <section className="my-6">
-      <div className="bg-white rounded-2xl p-4 md:p-6 shadow-lg border border-gray-100">
-        <div className="grid grid-cols-4 md:grid-cols-11 gap-3 md:gap-4">
-          {categories.map((cat, idx) => (
-            <button
-              key={idx}
-              className="flex flex-col items-center justify-center p-3 rounded-xl transition hover:bg-blue-50"
-              aria-label={cat.label}
-            >
-              <span className="text-2xl md:text-3xl mb-2">{cat.icon}</span>
-              <span className="text-xs md:text-sm text-gray-700 font-medium">{cat.label}</span>
-            </button>
-          ))}
-        </div>
+    <section className="my-8">
+      <div className="flex justify-center items-center gap-8 md:gap-12">
+        {categories.map((cat, idx) => (
+          <button
+            key={idx}
+            className="flex flex-col items-center justify-center transition hover:opacity-70"
+            aria-label={cat.label}
+          >
+            <span className={`text-3xl md:text-4xl mb-2 ${cat.color}`}>{cat.icon}</span>
+            <span className="text-xs md:text-sm text-gray-700 font-medium">{cat.label}</span>
+          </button>
+        ))}
       </div>
     </section>
   );

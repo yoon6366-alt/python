@@ -22,10 +22,7 @@ export default function Home() {
         {/* 메인 배너 */}
         <MainBanner />
 
-        {/* 슬라이드 버튼 영역 */}
-        <SlideNav />
-
-        {/* 카테고리 아이콘 메뉴 (배너 아래 별도 영역) */}
+        {/* 카테고리 아이콘 메뉴 */}
         <CategoryMenu />
 
         {/* 맞춤형 정보 */}

@@ -26,7 +26,7 @@ export default function MainBanner() {
         <div className="absolute bottom-10 left-10 w-80 h-80 bg-blue-300 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative z-10 flex items-center h-full">
+      <div className="relative z-10 flex flex-col justify-between h-full">
         {/* 메인 타이틀 */}
         <div className="flex items-center justify-between w-full">
           <div className="flex-1">
@@ -40,6 +40,28 @@ export default function MainBanner() {
             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
             </svg>
+          </button>
+        </div>
+
+        {/* 슬라이드 네비게이션 (배너 하단) */}
+        <div className="flex justify-center items-center gap-3 mt-8">
+          <button
+            aria-label="이전"
+            className="w-10 h-10 rounded-full bg-white/30 hover:bg-white/40 backdrop-blur-sm shadow-md text-white text-xl flex items-center justify-center transition hover:shadow-lg"
+          >
+            &#8592;
+          </button>
+          <div className="flex gap-2">
+            <span className="w-2 h-2 rounded-full bg-white"></span>
+            <span className="w-2 h-2 rounded-full bg-white/40"></span>
+            <span className="w-2 h-2 rounded-full bg-white/40"></span>
+            <span className="w-2 h-2 rounded-full bg-white/40"></span>
+          </div>
+          <button
+            aria-label="다음"
+            className="w-10 h-10 rounded-full bg-white/30 hover:bg-white/40 backdrop-blur-sm shadow-md text-white text-xl flex items-center justify-center transition hover:shadow-lg"
+          >
+            &#8594;
           </button>
         </div>
       </div>
