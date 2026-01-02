@@ -479,7 +479,7 @@
             background: #fff;
             border-radius: 8px;
             width: 90%;
-            max-width: 600px;
+            max-width: 900px;
             max-height: 90vh;
             overflow-y: auto;
         }
@@ -784,7 +784,8 @@
             }
 
             .modal {
-                width: 95%;
+                width: 98%;
+                max-width: 95vw;
                 margin: 10px;
             }
 
@@ -2478,11 +2479,15 @@
                     </div>
                     <div class="form-group">
                         <label>회차 시간 <span class="required">*</span> <span style="color:#666;font-size:12px;">?</span></label>
-                        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-                            <select class="form-select"><option>10</option></select>:<select class="form-select"><option>00</option></select>
-                            <span>~</span>
-                            <select class="form-select"><option>11</option></select>:<select class="form-select"><option>00</option></select>
-                            <button type="button" class="btn btn-primary" onclick="addSession()">추가</button>
+                        <div style="display:flex;gap:5px;align-items:center;flex-wrap:nowrap;">
+                            <select class="form-select" style="width:70px;min-width:70px;"><option>10</option></select>
+                            <span>:</span>
+                            <select class="form-select" style="width:70px;min-width:70px;"><option>00</option></select>
+                            <span style="margin:0 5px;">~</span>
+                            <select class="form-select" style="width:70px;min-width:70px;"><option>11</option></select>
+                            <span>:</span>
+                            <select class="form-select" style="width:70px;min-width:70px;"><option>00</option></select>
+                            <button type="button" class="btn btn-primary" style="margin-left:10px;" onclick="addSession()">추가</button>
                         </div>
                         <div id="sessionList" style="margin-top:10px;">
                             <span class="btn btn-dark" style="margin:2px;">10:00~11:00 <button type="button" onclick="this.parentElement.remove()" style="color:#fff;background:none;border:none;cursor:pointer;">×</button></span>
