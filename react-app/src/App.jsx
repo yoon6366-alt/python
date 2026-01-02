@@ -6,6 +6,8 @@ import YouthHome from './pages/youth/Home'
 import YouthHomeV1 from './pages/youth-v1/Home'
 import YouthHomeV2 from './pages/youth-v2/Home'
 import YouthHomeV3 from './pages/youth-v3/Home'
+import YouthHomeV4 from './pages/youth-v4/Home'
+import YouthSupportHome from './pages/youth-support/Home'
 
 // 업사이클센터 페이지
 import UpcycleHome from './pages/upcycle/Home'
@@ -32,6 +34,9 @@ function App() {
       <Route path="/youth-v1" element={<YouthHomeV1 />} />
       <Route path="/youth-v2" element={<YouthHomeV2 />} />
       <Route path="/youth-v3" element={<YouthHomeV3 />} />
+      <Route path="/youth-v4" element={<YouthHomeV4 />} />
+      {/* 청년지원정보 새 페이지 */}
+      <Route path="/youth-support" element={<YouthSupportHome />} />
     </Routes>
   )
 }

@@ -1,0 +1,3553 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS 관리자</title>
+    <style>
+        /* ========== Reset & Base ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            font-size: 14px;
+            color: #333;
+            background-color: #f5f5f5;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        input, select, textarea {
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        /* ========== Layout ========== */
+        .wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== Header ========== */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .header-right span {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .header-right a {
+            color: #666;
+        }
+
+        .header-right a:hover {
+            color: #333;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            padding: 5px;
+        }
+
+        /* ========== Main Navigation ========== */
+        .main-nav {
+            background: #fff;
+            border-bottom: 2px solid #2c3e50;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item > a {
+            display: block;
+            padding: 15px 25px;
+            font-size: 15px;
+            color: #333;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-item > a:hover,
+        .nav-item.active > a {
+            color: #c0392b;
+            border-bottom-color: #c0392b;
+        }
+
+        .nav-item.active > a {
+            font-weight: bold;
+        }
+
+        /* ========== Sub Navigation ========== */
+        .sub-nav {
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 0 20px;
+        }
+
+        .sub-nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .sub-nav-list {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+        }
+
+        .sub-nav-item a {
+            display: block;
+            padding: 12px 15px;
+            font-size: 13px;
+            color: #666;
+            border: 1px solid transparent;
+            border-bottom: none;
+            transition: all 0.2s;
+        }
+
+        .sub-nav-item a:hover {
+            background: #f8f8f8;
+        }
+
+        .sub-nav-item.active a {
+            background: #fff;
+            border-color: #ddd;
+            border-bottom: 1px solid #fff;
+            margin-bottom: -1px;
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        /* ========== Content Area ========== */
+        .content {
+            flex: 1;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ========== Page Header ========== */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .breadcrumb span {
+            margin: 0 5px;
+        }
+
+        /* ========== Search Box ========== */
+        .search-box {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .search-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+
+        .search-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .search-label {
+            width: 80px;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #e74c3c;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .search-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .form-select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fff;
+            min-width: 120px;
+        }
+
+        .form-input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-dark {
+            background: #333;
+            color: #fff;
+        }
+
+        .btn-dark:hover {
+            background: #555;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-outline {
+            background: #fff;
+            border: 1px solid #ddd;
+            color: #666;
+        }
+
+        .btn-outline:hover {
+            background: #f8f8f8;
+        }
+
+        .btn-outline.active {
+            background: #333;
+            color: #fff;
+            border-color: #333;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #219a52;
+        }
+
+        .date-range {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .date-input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 140px;
+        }
+
+        .period-btns {
+            display: flex;
+            gap: 5px;
+            margin-left: 15px;
+        }
+
+        /* ========== Table Controls ========== */
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .table-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* ========== Data Table ========== */
+        .data-table-wrapper {
+            background: #fff;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background: #f8f8f8;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            white-space: nowrap;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f9f9f9;
+        }
+
+        .data-table .checkbox {
+            width: 40px;
+        }
+
+        .data-table input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #333;
+            transition: all 0.2s;
+        }
+
+        .link-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .status-exposed {
+            color: #333;
+        }
+
+        .status-hidden {
+            color: #e74c3c;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* ========== Pagination ========== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            min-width: 35px;
+            height: 35px;
+            border: 1px solid #ddd;
+            background: #fff;
+            color: #666;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .pagination button:hover {
+            background: #f0f0f0;
+        }
+
+        .pagination button.active {
+            background: #333;
+            color: #fff;
+            border-color: #333;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ========== Modal ========== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: #fff;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+            background: #333;
+            color: #fff;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .modal-close {
+            font-size: 24px;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group label .required {
+            color: #e74c3c;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-radio {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-radio label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: normal;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            background: #f8f8f8;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .modal-footer .btn {
+            min-width: 100px;
+        }
+
+        /* ========== Alert Modal ========== */
+        .alert-modal .modal {
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .alert-modal .modal-body {
+            padding: 40px 30px;
+        }
+
+        .alert-modal .alert-message {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+        
+        .alert-modal .alert-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .alert-modal .alert-icon.success { color: #27ae60; }
+        .alert-modal .alert-icon.warning { color: #f39c12; }
+        .alert-modal .alert-icon.error { color: #e74c3c; }
+        .alert-modal .alert-icon.info { color: #3498db; }
+        
+        .alert-modal .modal-header.success { background: #27ae60; }
+        .alert-modal .modal-header.warning { background: #f39c12; }
+        .alert-modal .modal-header.error { background: #e74c3c; }
+        .alert-modal .modal-header.info { background: #3498db; }
+
+        /* ========== Detail Page Styles ========== */
+        .detail-section {
+            background: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8f8f8;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .section-number {
+            width: 28px;
+            height: 28px;
+            background: #e74c3c;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .section-body {
+            padding: 20px;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-table th,
+        .info-table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .info-table th {
+            background: #f8f8f8;
+            font-weight: bold;
+            width: 150px;
+            color: #333;
+        }
+
+        .info-table td {
+            background: #fff;
+        }
+
+        .info-table td.readonly {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 1024px) {
+            .nav-item > a {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+
+            .search-row {
+                flex-wrap: wrap;
+            }
+
+            .search-label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+
+            .period-btns {
+                margin-left: 0;
+                margin-top: 10px;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .main-nav.show {
+                display: block;
+            }
+
+            .nav-list {
+                flex-direction: column;
+            }
+
+            .nav-item > a {
+                border-bottom: 1px solid #eee;
+            }
+
+            .sub-nav {
+                overflow-x: auto;
+            }
+
+            .sub-nav-list {
+                padding-bottom: 5px;
+            }
+
+            .sub-nav-item a {
+                white-space: nowrap;
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            .header-right {
+                gap: 10px;
+                font-size: 12px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .table-controls {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .date-range {
+                flex-wrap: wrap;
+            }
+
+            .content {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 10px 15px;
+            }
+
+            .header-logo {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .search-box {
+                padding: 15px;
+            }
+
+            .modal {
+                width: 95%;
+                margin: 10px;
+            }
+
+            .modal-body {
+                padding: 20px 15px;
+            }
+        }
+
+        /* ========== Utility ========== */
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        .text-red { color: #e74c3c; }
+        .text-blue { color: #3498db; }
+        .mt-10 { margin-top: 10px; }
+        .mt-20 { margin-top: 20px; }
+        .mb-10 { margin-bottom: 10px; }
+        .mb-20 { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+                <div class="header-logo">CMS 관리자</div>
+            </div>
+            <div class="header-right">
+                <div>남은시간 : <span id="remainTime">0 : 19 : 05</span></div>
+                <a href="#">회원정보수정</a>
+                <a href="#">로그아웃</a>
+            </div>
+        </header>
+
+        <!-- Main Navigation -->
+        <nav class="main-nav" id="mainNav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#">메인관리</a></li>
+                <li class="nav-item"><a href="#">시스템관리</a></li>
+                <li class="nav-item"><a href="#">회원관리</a></li>
+                <li class="nav-item"><a href="#">에코가게관리</a></li>
+                <li class="nav-item"><a href="#">에코소재중개관리</a></li>
+                <li class="nav-item active"><a href="#">참여신청관리</a></li>
+                <li class="nav-item"><a href="#">설문조사관리</a></li>
+                <li class="nav-item"><a href="#">게시물관리</a></li>
+                <li class="nav-item"><a href="#">통계관리</a></li>
+            </ul>
+        </nav>
+
+        <!-- Sub Navigation -->
+        <nav class="sub-nav">
+            <div class="sub-nav-inner">
+                <ul class="sub-nav-list">
+                    <li class="sub-nav-item" id="tab-space"><a href="javascript:void(0)" onclick="changeTab('space', this)">공간대관</a></li>
+                    <li class="sub-nav-item" id="tab-exhibition"><a href="javascript:void(0)" onclick="changeTab('exhibition', this)">전시행사</a></li>
+                    <li class="sub-nav-item active" id="tab-regular"><a href="javascript:void(0)" onclick="changeTab('regular', this)">정규수업</a></li>
+                    <li class="sub-nav-item" id="tab-group"><a href="javascript:void(0)" onclick="changeTab('group', this)">단체수업</a></li>
+                    <li class="sub-nav-item" id="tab-youth"><a href="javascript:void(0)" onclick="changeTab('youth', this)">청소년 특별수업</a></li>
+                    <li class="sub-nav-item" id="tab-contest"><a href="javascript:void(0)" onclick="changeTab('contest', this)">공모사업</a></li>
+                    <li class="sub-nav-item" id="tab-carbon"><a href="javascript:void(0)" onclick="changeTab('carbon', this)">탄소중립활동</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Content -->
+        <main class="content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">정규수업</h1>
+                <div class="breadcrumb">
+                    참여신청관리 <span>></span> 정규수업
+                </div>
+            </div>
+
+            <!-- Search Box -->
+            <div class="search-box">
+                <div class="search-row">
+                    <div class="search-label">검색조건</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchYear">
+                            <option value="">개설연도</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                        </select>
+                        <select class="form-select" id="searchExposure">
+                            <option value="">노출여부</option>
+                            <option value="Y">노출</option>
+                            <option value="N">미노출</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">키워드</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchType">
+                            <option value="all">전체</option>
+                            <option value="title">프로그램명</option>
+                        </select>
+                        <input type="text" class="form-input" id="searchKeyword" placeholder="검색어입력">
+                        <button class="btn btn-dark" onclick="searchData()">검색</button>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">등록일</div>
+                    <div class="search-input">
+                        <div class="date-range">
+                            <input type="date" class="date-input" id="startDate">
+                            <span>~</span>
+                            <input type="date" class="date-input" id="endDate">
+                        </div>
+                        <div class="period-btns">
+                            <button class="btn btn-outline active" onclick="setPeriod('all')">전체</button>
+                            <button class="btn btn-outline" onclick="setPeriod(7)">7일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(15)">15일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(30)">1개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(90)">3개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(180)">6개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(365)">1년</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Controls -->
+            <div class="table-controls">
+                <div class="table-info">
+                    <span>총<strong id="totalCount">10</strong>건</span>
+                    <span>PAGE <strong id="currentPage">1</strong>/<strong id="totalPages">1</strong></span>
+                    <select class="form-select" id="pageSize" onchange="changePageSize()">
+                        <option value="10">10개</option>
+                        <option value="20">20개</option>
+                        <option value="50">50개</option>
+                    </select>
+                </div>
+                <div class="table-actions">
+                    <button class="btn btn-primary" onclick="openModal('add')">등록</button>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="data-table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th class="checkbox"><input type="checkbox" id="checkAll" onclick="toggleCheckAll()"></th>
+                            <th>No</th>
+                            <th>개설연도</th>
+                            <th>프로그램명</th>
+                            <th>신청기간</th>
+                            <th>신청 목록</th>
+                            <th>신청인원/모집정원</th>
+                            <th>설문통계</th>
+                            <th>조회수</th>
+                            <th>노출여부</th>
+                            <th>등록일시</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Data will be rendered here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be rendered here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal-overlay" id="formModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">정규수업 등록</h3>
+                <button class="modal-close" onclick="closeModal('formModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="programForm">
+                    <input type="hidden" id="programId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>노출여부 <span class="required">*</span></label>
+                            <div class="form-radio">
+                                <label><input type="radio" name="exposure" value="Y" checked> 노출</label>
+                                <label><input type="radio" name="exposure" value="N"> 미노출</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>평일/주말 <span class="required">*</span></label>
+                            <div class="form-radio">
+                                <label><input type="radio" name="dayType" value="weekday" checked> 평일수업</label>
+                                <label><input type="radio" name="dayType" value="weekend"> 주말수업</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>개설연도 <span class="required">*</span></label>
+                            <select id="formYear" required>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>모집인원 <span class="required">*</span></label>
+                            <input type="number" id="formCapacity" placeholder="모집인원" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>프로그램명 <span class="required">*</span></label>
+                        <input type="text" id="formTitle" placeholder="제목 입력" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>신청기간 <span class="required">*</span></label>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <input type="date" id="formApplyStart" required>
+                                <span>~</span>
+                                <input type="date" id="formApplyEnd" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>수업기간 <span class="required">*</span></label>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <input type="date" id="formClassStart" required>
+                                <span>~</span>
+                                <input type="date" id="formClassEnd" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>썸네일 <span class="required">*</span></label>
+                        <div style="display:flex;gap:10px;align-items:center;">
+                            <button type="button" class="btn btn-outline">파일 선택</button>
+                            <span style="color:#888;">선택된 파일 없음</span>
+                            <input type="text" id="formThumbnailAlt" placeholder="이미지 대체 텍스트" style="flex:1;">
+                        </div>
+                        <p style="color:#888;font-size:12px;margin-top:5px;">* 이미지 권장 비율은 A4, 권장 용량은 10MB 입니다.</p>
+                    </div>
+                    <div class="form-group">
+                        <label>수업 기본정보 <span class="required">*</span></label>
+                        <table class="info-table" style="margin-top:10px;">
+                            <tr><th style="width:120px;">수업일정</th><td><input type="text" id="formSchedule" style="width:100%;border:1px solid #ddd;padding:8px;" placeholder="예: 매주 화요일 10:00~12:00"></td></tr>
+                            <tr><th>수업대상</th><td><input type="text" id="formTarget" style="width:100%;border:1px solid #ddd;padding:8px;" placeholder="예: 성인 누구나"></td></tr>
+                            <tr><th>수강인원</th><td><input type="text" id="formStudents" style="width:100%;border:1px solid #ddd;padding:8px;" placeholder="예: 20명"></td></tr>
+                            <tr><th>재료비</th><td><input type="text" id="formMaterialFee" style="width:100%;border:1px solid #ddd;padding:8px;" placeholder="예: 무료 / 10,000원"></td></tr>
+                            <tr><th>수업장소</th><td><input type="text" id="formLocation" style="width:100%;border:1px solid #ddd;padding:8px;" placeholder="예: 업사이클아트센터 3층 커뮤니티실"></td></tr>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <label>수업 소개글</label>
+                        <textarea id="formDescription" placeholder="수업 소개글을 입력하세요" style="min-height:150px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>유의사항</label>
+                        <input type="text" id="formNotice" placeholder="유의사항 입력">
+                    </div>
+                    <div class="form-group">
+                        <label>설문조사</label>
+                        <input type="text" id="formSurveyUrl" placeholder="복사한 설문조사 URL을 붙여넣으세요." style="width:100%;">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="saveProgram()">저장</button>
+                <button class="btn btn-outline" onclick="resetForm()">초기화</button>
+                <button class="btn btn-dark" onclick="closeModal('formModal')">목록</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Modal -->
+    <div class="modal-overlay alert-modal" id="alertModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">ALERT</h3>
+                <button class="modal-close" onclick="closeModal('alertModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="alert-message" id="alertMessage">메시지</p>
+                <button class="btn btn-dark" onclick="closeModal('alertModal')">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="modal-overlay alert-modal" id="confirmModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirm</h3>
+                <button class="modal-close" onclick="closeModal('confirmModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="alert-message" id="confirmMessage">확인하시겠습니까?</p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button class="btn btn-dark" id="confirmYes">확인</button>
+                    <button class="btn btn-outline" onclick="closeModal('confirmModal')">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3 class="modal-title">신청 목록</h3>
+                <button class="modal-close" onclick="closeModal('detailModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="detailContent">
+                <!-- Detail content will be rendered here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-dark" onclick="closeModal('detailModal')">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Reason Modal -->
+    <div class="modal-overlay" id="downloadModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">개인정보 다운로드 사유</h3>
+                <button class="modal-close" onclick="closeModal('downloadModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" id="downloadReason" placeholder="개인정보 다운로드 사유 입력">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="downloadExcel()">저장</button>
+                <button class="btn btn-outline" onclick="closeModal('downloadModal')">닫기</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirm Modal -->
+    <div class="modal-overlay alert-modal" id="deleteModal">
+        <div class="modal">
+            <div class="modal-header error">
+                <h3 class="modal-title">삭제 확인</h3>
+                <button class="modal-close" onclick="closeModal('deleteModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert-icon error">⚠️</div>
+                <p class="alert-message" id="deleteMessage">삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.</p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button class="btn btn-primary" style="background:#e74c3c;" id="deleteYes">삭제</button>
+                    <button class="btn btn-outline" onclick="closeModal('deleteModal')">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cancel Reason Modal -->
+    <div class="modal-overlay" id="cancelReasonModal">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header" style="background:#f39c12;">
+                <h3 class="modal-title">취소 사유 입력</h3>
+                <button class="modal-close" onclick="closeModal('cancelReasonModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>취소 사유 <span class="required">*</span></label>
+                    <textarea id="cancelReasonText" placeholder="취소 사유를 작성해 주세요.&#10;사용자 비고란에 출력됩니다." style="min-height:100px;"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="cancelReasonYes">확인</button>
+                <button class="btn btn-outline" onclick="closeModal('cancelReasonModal')">닫기</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Status Change Modal -->
+    <div class="modal-overlay" id="statusChangeModal">
+        <div class="modal" style="max-width: 450px;">
+            <div class="modal-header info">
+                <h3 class="modal-title">상태 변경</h3>
+                <button class="modal-close" onclick="closeModal('statusChangeModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>변경할 상태 <span class="required">*</span></label>
+                    <select id="statusChangeSelect" class="form-select">
+                        <option value="">상태 선택</option>
+                        <option value="신청">신청</option>
+                        <option value="확정">확정</option>
+                        <option value="승인">승인</option>
+                        <option value="취소">취소</option>
+                    </select>
+                </div>
+                <p style="color:#666; font-size:13px;">선택한 항목의 상태가 일괄 변경됩니다.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="statusChangeYes">변경</button>
+                <button class="btn btn-outline" onclick="closeModal('statusChangeModal')">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== Sample Data ==========
+        let programs = [
+            { id: 1, year: 2024, title: '에코건축학교', applyStart: '2023-01-22', applyEnd: '2024-01-24', applicants: 25, capacity: 20, views: 100, exposure: 'Y', regDate: '2024-01-10 09:00:00' },
+            { id: 2, year: 2023, title: '업사이클 패션 디자인', applyStart: '2023-01-22', applyEnd: '2024-01-24', applicants: 8, capacity: 10, views: 52, exposure: 'Y', regDate: '2023-12-10 09:00:00' },
+            { id: 3, year: 2023, title: '친환경 가구 만들기', applyStart: '2023-01-22', applyEnd: '2024-01-24', applicants: 14, capacity: 10, views: 23, exposure: 'N', regDate: '2023-12-01 09:31:05' },
+            { id: 4, year: 2024, title: '재활용 아트 워크샵', applyStart: '2024-02-01', applyEnd: '2024-02-28', applicants: 12, capacity: 15, views: 87, exposure: 'Y', regDate: '2024-01-15 10:30:00' },
+            { id: 5, year: 2024, title: '제로웨이스트 생활', applyStart: '2024-03-01', applyEnd: '2024-03-31', applicants: 20, capacity: 20, views: 156, exposure: 'Y', regDate: '2024-02-20 14:00:00' },
+            { id: 6, year: 2023, title: '플라스틱 프리 챌린지', applyStart: '2023-06-01', applyEnd: '2023-06-30', applicants: 30, capacity: 25, views: 234, exposure: 'Y', regDate: '2023-05-15 11:00:00' },
+            { id: 7, year: 2024, title: '텃밭 가꾸기 교실', applyStart: '2024-04-01', applyEnd: '2024-04-30', applicants: 15, capacity: 20, views: 67, exposure: 'Y', regDate: '2024-03-10 09:00:00' },
+            { id: 8, year: 2023, title: '에코 드로잉 클래스', applyStart: '2023-09-01', applyEnd: '2023-09-30', applicants: 10, capacity: 12, views: 45, exposure: 'N', regDate: '2023-08-20 16:30:00' },
+            { id: 9, year: 2024, title: '자연물 공예 교실', applyStart: '2024-05-01', applyEnd: '2024-05-31', applicants: 18, capacity: 15, views: 112, exposure: 'Y', regDate: '2024-04-15 13:00:00' },
+            { id: 10, year: 2024, title: '환경 다큐 시청회', applyStart: '2024-06-01', applyEnd: '2024-06-15', applicants: 35, capacity: 40, views: 89, exposure: 'Y', regDate: '2024-05-20 10:00:00' }
+        ];
+
+        // 공간대관 샘플 데이터
+        let spaceRentals = [
+            { id: 1, location: '커뮤니티실(3층)', orgName: '에코문화협회', applicant: '김철수', status: '신청', permitIssued: false, applyDate: '2024-01-10 09:00:00', approveDate: '', cancelDate: '' },
+            { id: 2, location: '공유오피스(3층)', orgName: '그린스타트업', applicant: '이영희', status: '취소', permitIssued: false, applyDate: '2024-01-10 09:00:00', approveDate: '2024-01-10 09:00:00', cancelDate: '2024-01-10 09:00:00' },
+            { id: 3, location: '공유오피스(4층)', orgName: '업사이클연구소', applicant: '박민수', status: '승인', permitIssued: true, applyDate: '2023-12-10 09:00:00', approveDate: '2024-01-10 09:00:00', cancelDate: '' },
+            { id: 4, location: '공연장(4층)', orgName: '환경예술단', applicant: '최지연', status: '승인', permitIssued: true, applyDate: '2023-12-01 09:31:05', approveDate: '2024-01-10 09:00:00', cancelDate: '' }
+        ];
+
+        // 전시행사 샘플 데이터
+        let exhibitions = [
+            { id: 1, type: '업사이클 예술전시', year: 2024, title: '업사이클 예술전시', viewDate: '2023.01.22~2024.01.24', capacity: 20, applicants: 3, views: 100, exposure: 'Y', regDate: '2024-01-10 09:00:00' },
+            { id: 2, type: '업사이클 문화행사', year: 2023, title: '업사이클 문화행사', viewDate: '2023.01.22~2024.01.24', capacity: 30, applicants: 5, views: 52, exposure: 'Y', regDate: '2023-12-10 09:00:00' },
+            { id: 3, type: '업사이클 예술전시', year: 2023, title: '환경 사진전', viewDate: '2023.01.22~2024.01.24', capacity: 15, applicants: 0, views: 23, exposure: 'N', regDate: '2023-12-01 09:31:05' }
+        ];
+
+        // 전시행사 신청자 샘플 데이터
+        let exhibitionApplicants = [
+            { id: 1, exhibitionId: 1, name: '신청자명', orgName: '단체명', phone: '010-1234-5678', visitors: 10, visitDate: '2024-01-22', status: '신청', session: '1회차(00:00~00:00)', applyDate: '2024-01-10 09:00:00', approveDate: '', cancelDate: '' },
+            { id: 2, exhibitionId: 1, name: '신청자명', orgName: '단체명', phone: '010-1234-5678', visitors: 5, visitDate: '2024-01-25', status: '확정', session: '2회차(00:00~00:00)', applyDate: '2023-12-10 09:00:00', approveDate: '2024-01-10 09:00:00', cancelDate: '' },
+            { id: 3, exhibitionId: 1, name: '신청자명', orgName: '단체명', phone: '010-1234-5678', visitors: 2, visitDate: '2024-01-22', status: '확정', session: '3회차(00:00~00:00)', applyDate: '2023-12-01 09:31:05', approveDate: '2024-01-10 09:00:00', cancelDate: '' }
+        ];
+
+        let currentExhibitionId = null;
+
+        // 단체수업 샘플 데이터
+        let groupClasses = [
+            { id: 1, year: 2024, title: '단체 업사이클 공예 체험', applyPeriod: '2024.01.01~2024.12.31', applicants: 15, capacity: 50, views: 120, exposure: 'Y', regDate: '2024-01-15 09:00:00' },
+            { id: 2, year: 2024, title: '단체 환경교육 프로그램', applyPeriod: '2024.02.01~2024.11.30', applicants: 8, capacity: 30, views: 85, exposure: 'Y', regDate: '2024-01-20 09:00:00' },
+            { id: 3, year: 2023, title: '어린이집 환경체험 수업', applyPeriod: '2023.03.01~2023.12.31', applicants: 25, capacity: 40, views: 200, exposure: 'N', regDate: '2023-02-28 09:00:00' }
+        ];
+        let filteredGroupClasses = [...groupClasses];
+
+        // 청소년 특별수업 샘플 데이터
+        let youthClasses = [
+            { id: 1, year: 2024, title: '청소년 업사이클 창작 교실', applyPeriod: '2024.01.15~2024.06.30', applicants: 12, capacity: 20, views: 95, exposure: 'Y', regDate: '2024-01-10 09:00:00' },
+            { id: 2, year: 2024, title: '청소년 환경 리더십 캠프', applyPeriod: '2024.07.01~2024.08.31', applicants: 5, capacity: 30, views: 60, exposure: 'Y', regDate: '2024-01-25 09:00:00' },
+            { id: 3, year: 2023, title: '청소년 진로체험 프로그램', applyPeriod: '2023.03.01~2023.11.30', applicants: 18, capacity: 25, views: 150, exposure: 'N', regDate: '2023-02-15 09:00:00' }
+        ];
+        let filteredYouthClasses = [...youthClasses];
+
+        // 공모사업 샘플 데이터
+        let contests = [
+            { id: 1, year: 2024, title: '업사이클 아이디어 공모전', applyPeriod: '2024.03.01~2024.05.31', applicants: 45, capacity: 100, views: 520, exposure: 'Y', regDate: '2024-02-15 09:00:00' },
+            { id: 2, year: 2024, title: '환경 포스터 공모전', applyPeriod: '2024.04.01~2024.06.30', applicants: 32, capacity: 50, views: 380, exposure: 'Y', regDate: '2024-03-01 09:00:00' },
+            { id: 3, year: 2023, title: '재활용 패션쇼 공모', applyPeriod: '2023.05.01~2023.07.31', applicants: 28, capacity: 30, views: 450, exposure: 'N', regDate: '2023-04-15 09:00:00' }
+        ];
+        let filteredContests = [...contests];
+
+        // 탄소중립활동 샘플 데이터
+        let carbonActivities = [
+            { id: 1, year: 2024, title: '탄소중립 실천 챌린지', applyPeriod: '2024.01.01~2024.12.31', applicants: 120, capacity: 500, views: 850, exposure: 'Y', regDate: '2024-01-05 09:00:00' },
+            { id: 2, year: 2024, title: '에코마일리지 적립 활동', applyPeriod: '2024.02.01~2024.12.31', applicants: 85, capacity: 200, views: 620, exposure: 'Y', regDate: '2024-01-20 09:00:00' },
+            { id: 3, year: 2023, title: '저탄소 생활 캠페인', applyPeriod: '2023.03.01~2023.12.31', applicants: 200, capacity: 300, views: 980, exposure: 'N', regDate: '2023-02-28 09:00:00' }
+        ];
+        let filteredCarbonActivities = [...carbonActivities];
+
+        // 정규수업 신청자 샘플 데이터
+        let programApplicants = [
+            { id: 1, programId: 1, name: '신청자명', phone: '010-1234-5678', status: '신청', waitNo: 2, carbonIssued: false, applyDate: '2024-01-20 09:00:00', confirmDate: '', cancelDate: '' },
+            { id: 2, programId: 1, name: '신청자명', phone: '010-1234-5678', status: '신청', waitNo: 1, carbonIssued: false, applyDate: '2024-01-20 09:00:00', confirmDate: '', cancelDate: '' },
+            { id: 3, programId: 1, name: '신청자명', phone: '010-1234-5678', status: '확정', waitNo: 0, carbonIssued: true, applyDate: '2024-01-10 09:00:00', confirmDate: '2024-01-20 09:00:00', cancelDate: '' },
+            { id: 4, programId: 1, name: '신청자명', phone: '010-1234-5678', status: '신청', waitNo: 0, carbonIssued: false, applyDate: '2023-12-10 09:00:00', confirmDate: '', cancelDate: '' },
+            { id: 5, programId: 1, name: '신청자명', phone: '010-1234-5678', status: '취소', waitNo: 0, carbonIssued: false, applyDate: '2023-12-10 09:00:00', confirmDate: '', cancelDate: '2024-01-20 09:00:00' }
+        ];
+
+        let currentProgramId = null;
+        let filteredData = [...programs];
+        let currentPage = 1;
+        let pageSize = 10;
+
+        // ========== Initialize ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTable();
+            startTimer();
+        });
+
+        // ========== Timer ==========
+        function startTimer() {
+            let time = 19 * 60 + 5; // 19:05
+            setInterval(() => {
+                const hours = Math.floor(time / 3600);
+                const minutes = Math.floor((time % 3600) / 60);
+                const seconds = time % 60;
+                document.getElementById('remainTime').textContent = 
+                    `${hours} : ${String(minutes).padStart(2, '0')} : ${String(seconds).padStart(2, '0')}`;
+                if (time > 0) time--;
+            }, 1000);
+        }
+
+        // ========== Mobile Menu ==========
+        function toggleMobileMenu() {
+            document.getElementById('mainNav').classList.toggle('show');
+        }
+
+        // ========== Tab Change ==========
+        let currentTab = 'regular';
+        
+        function changeTab(tab, element) {
+            document.querySelectorAll('.sub-nav-item').forEach(item => item.classList.remove('active'));
+            element.parentElement.classList.add('active');
+            currentTab = tab;
+            currentPage = 1;
+            
+            if (tab === 'space') {
+                showSpaceRentalPage();
+            } else if (tab === 'exhibition') {
+                showExhibitionPage();
+            } else if (tab === 'regular') {
+                showRegularClassPage();
+            } else if (tab === 'group') {
+                showGroupClassPage();
+            } else if (tab === 'youth') {
+                showYouthClassPage();
+            } else if (tab === 'contest') {
+                showContestPage();
+            } else if (tab === 'carbon') {
+                showCarbonActivityPage();
+            } else {
+                showAlert('해당 메뉴는 준비 중입니다.', 'info');
+            }
+        }
+        
+        function showRegularClassPage() {
+            document.querySelector('.page-title').textContent = '정규수업';
+            document.querySelector('.breadcrumb').innerHTML = '참여신청관리 <span>></span> 정규수업';
+            currentProgramId = null;
+            filteredData = [...programs];
+            
+            // 검색 박스 복원
+            document.querySelector('.search-box').innerHTML = `
+                <div class="search-row">
+                    <div class="search-label">검색조건</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchYear">
+                            <option value="">개설연도</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <select class="form-select" id="searchExposure">
+                            <option value="">노출여부</option>
+                            <option value="Y">노출</option>
+                            <option value="N">미노출</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">키워드</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchType"><option value="all">전체</option></select>
+                        <input type="text" class="form-input" id="searchKeyword" placeholder="검색어입력">
+                        <button class="btn btn-dark" onclick="searchData()">검색</button>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">등록일</div>
+                    <div class="search-input">
+                        <div class="date-range">
+                            <input type="date" class="date-input" id="startDate"><span>~</span><input type="date" class="date-input" id="endDate">
+                        </div>
+                        <div class="period-btns">
+                            <button class="btn btn-outline active" onclick="setPeriod('all')">전체</button>
+                            <button class="btn btn-outline" onclick="setPeriod(7)">7일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(15)">15일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(30)">1개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(90)">3개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(180)">6개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(365)">1년</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 버튼 영역 복원
+            document.querySelector('.table-actions').innerHTML = `<button class="btn btn-primary" onclick="openModal('add')">등록</button>`;
+            
+            document.getElementById('tableBody').closest('.data-table').querySelector('thead').innerHTML = `
+                <tr>
+                    <th class="checkbox"><input type="checkbox" id="checkAll" onclick="toggleCheckAll()"></th>
+                    <th>No</th>
+                    <th>개설연도</th>
+                    <th>프로그램명</th>
+                    <th>신청기간</th>
+                    <th>신청 목록</th>
+                    <th>신청인원/모집정원</th>
+                    <th>설문통계</th>
+                    <th>조회수</th>
+                    <th>노출여부</th>
+                    <th>등록일시</th>
+                </tr>
+            `;
+            renderTable();
+        }
+        
+        function showSpaceRentalPage() {
+            document.querySelector('.page-title').textContent = '공간대관 신청';
+            document.querySelector('.breadcrumb').innerHTML = '참여신청관리 <span>></span> 공간대관';
+            filteredSpaceRentals = [...spaceRentals];
+            
+            // 검색 박스 업데이트
+            document.querySelector('.search-box').innerHTML = `
+                <div class="search-row">
+                    <div class="search-label">검색조건</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchLocation">
+                            <option value="">대관장소</option>
+                            <option value="커뮤니티실(3층)">커뮤니티실(3층)</option>
+                            <option value="공유오피스(3층)">공유오피스(3층)</option>
+                            <option value="공유오피스(4층)">공유오피스(4층)</option>
+                            <option value="공연장(4층)">공연장(4층)</option>
+                        </select>
+                        <select class="form-select" id="searchStatus">
+                            <option value="">대관상태</option>
+                            <option value="신청">신청</option>
+                            <option value="승인">승인</option>
+                            <option value="취소">취소</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">키워드</div>
+                    <div class="search-input">
+                        <select class="form-select"><option value="all">전체</option><option value="applicant">신청자명</option><option value="org">단체명</option></select>
+                        <input type="text" class="form-input" id="searchKeyword" placeholder="검색어입력">
+                        <button class="btn btn-dark" onclick="searchSpaceRentals()">검색</button>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">신청일시</div>
+                    <div class="search-input">
+                        <div class="date-range">
+                            <input type="date" class="date-input" id="startDate"><span>~</span><input type="date" class="date-input" id="endDate">
+                        </div>
+                        <div class="period-btns">
+                            <button class="btn btn-outline active" onclick="setPeriod('all')">전체</button>
+                            <button class="btn btn-outline" onclick="setPeriod(7)">7일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(15)">15일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(30)">1개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(90)">3개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(180)">6개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(365)">1년</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 버튼 영역
+            document.querySelector('.table-actions').innerHTML = `
+                <button class="btn btn-dark" onclick="approveSpaceRentals()">승인</button>
+                <button class="btn btn-primary" onclick="openDownloadModal()">엑셀 다운로드</button>
+            `;
+            
+            document.getElementById('tableBody').closest('.data-table').querySelector('thead').innerHTML = `
+                <tr>
+                    <th class="checkbox"><input type="checkbox" id="checkAll" onclick="toggleCheckAll()"></th>
+                    <th>No</th>
+                    <th>대관장소</th>
+                    <th>단체명</th>
+                    <th>신청자명</th>
+                    <th>신청상태</th>
+                    <th>대관허가서 발급</th>
+                    <th>신청일시</th>
+                    <th>승인일시</th>
+                    <th>취소일시</th>
+                </tr>
+            `;
+            renderSpaceTable();
+        }
+        
+        function showExhibitionPage() {
+            document.querySelector('.page-title').textContent = '전시행사';
+            document.querySelector('.breadcrumb').innerHTML = '참여신청관리 <span>></span> 전시행사';
+            filteredExhibitions = [...exhibitions];
+            currentExhibitionId = null;
+            
+            // 검색 박스 업데이트
+            document.querySelector('.search-box').innerHTML = `
+                <div class="search-row">
+                    <div class="search-label">검색조건</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchYear">
+                            <option value="">개설연도</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <select class="form-select" id="searchExposure">
+                            <option value="">노출여부</option>
+                            <option value="Y">노출</option>
+                            <option value="N">미노출</option>
+                        </select>
+                        <select class="form-select" id="searchType">
+                            <option value="">구분</option>
+                            <option value="업사이클 예술전시">업사이클 예술전시</option>
+                            <option value="업사이클 문화행사">업사이클 문화행사</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">키워드</div>
+                    <div class="search-input">
+                        <select class="form-select"><option value="all">전체</option><option value="title">전시행사명</option></select>
+                        <input type="text" class="form-input" id="searchKeyword" placeholder="검색어입력">
+                        <button class="btn btn-dark" onclick="searchExhibitions()">검색</button>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">등록일</div>
+                    <div class="search-input">
+                        <div class="date-range">
+                            <input type="date" class="date-input" id="startDate"><span>~</span><input type="date" class="date-input" id="endDate">
+                        </div>
+                        <div class="period-btns">
+                            <button class="btn btn-outline active" onclick="setPeriod('all')">전체</button>
+                            <button class="btn btn-outline" onclick="setPeriod(7)">7일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(15)">15일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(30)">1개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(90)">3개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(180)">6개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(365)">1년</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 버튼 영역
+            document.querySelector('.table-actions').innerHTML = `<button class="btn btn-primary" onclick="addExhibition()">등록</button>`;
+            
+            document.getElementById('tableBody').closest('.data-table').querySelector('thead').innerHTML = `
+                <tr>
+                    <th class="checkbox"><input type="checkbox" id="checkAll" onclick="toggleCheckAll()"></th>
+                    <th>No</th>
+                    <th>구분</th>
+                    <th>개설연도</th>
+                    <th>전시행사명</th>
+                    <th>관람일자</th>
+                    <th>단체관람신청 목록</th>
+                    <th>조회수</th>
+                    <th>노출여부</th>
+                    <th>등록일시</th>
+                </tr>
+            `;
+            renderExhibitionTable();
+        }
+
+        // ========== Search & Filter ==========
+        let filteredApplicants = [];
+        let filteredSpaceRentals = [];
+        let filteredExhibitions = [];
+        let filteredExhApplicants = [];
+        
+        function searchData() {
+            const year = document.getElementById('searchYear')?.value || '';
+            const exposure = document.getElementById('searchExposure')?.value || '';
+            const keyword = (document.getElementById('searchKeyword')?.value || '').toLowerCase();
+            const startDate = document.getElementById('startDate')?.value || '';
+            const endDate = document.getElementById('endDate')?.value || '';
+
+            filteredData = programs.filter(item => {
+                if (year && item.year != year) return false;
+                if (exposure && item.exposure !== exposure) return false;
+                if (keyword && !item.title.toLowerCase().includes(keyword)) return false;
+                if (startDate && item.regDate < startDate) return false;
+                if (endDate && item.regDate > endDate + ' 23:59:59') return false;
+                return true;
+            });
+
+            currentPage = 1;
+            renderTable();
+        }
+        
+        // 정규수업 신청자 검색
+        function searchApplicants() {
+            const status = document.getElementById('searchStatus')?.value || '';
+            const keyword = (document.getElementById('searchKeyword')?.value || '').toLowerCase();
+            const startDate = document.getElementById('startDate')?.value || '';
+            const endDate = document.getElementById('endDate')?.value || '';
+            
+            const baseApplicants = programApplicants.filter(a => a.programId === currentProgramId);
+            
+            filteredApplicants = baseApplicants.filter(item => {
+                if (status && item.status !== status) return false;
+                if (keyword && !item.name.toLowerCase().includes(keyword) && !item.phone.includes(keyword)) return false;
+                if (startDate && item.applyDate < startDate) return false;
+                if (endDate && item.applyDate > endDate + ' 23:59:59') return false;
+                return true;
+            });
+            
+            currentPage = 1;
+            renderApplicantsTableFiltered();
+        }
+        
+        // 공간대관 검색
+        function searchSpaceRentals() {
+            const location = document.getElementById('searchLocation')?.value || '';
+            const status = document.getElementById('searchStatus')?.value || '';
+            const keyword = (document.getElementById('searchKeyword')?.value || '').toLowerCase();
+            const startDate = document.getElementById('startDate')?.value || '';
+            const endDate = document.getElementById('endDate')?.value || '';
+            
+            filteredSpaceRentals = spaceRentals.filter(item => {
+                if (location && item.location !== location) return false;
+                if (status && item.status !== status) return false;
+                if (keyword && !item.applicant.toLowerCase().includes(keyword) && !item.orgName.toLowerCase().includes(keyword)) return false;
+                if (startDate && item.applyDate < startDate) return false;
+                if (endDate && item.applyDate > endDate + ' 23:59:59') return false;
+                return true;
+            });
+            
+            currentPage = 1;
+            renderSpaceTableFiltered();
+        }
+        
+        // 전시행사 검색
+        function searchExhibitions() {
+            const year = document.getElementById('searchYear')?.value || '';
+            const exposure = document.getElementById('searchExposure')?.value || '';
+            const type = document.getElementById('searchType')?.value || '';
+            const keyword = (document.getElementById('searchKeyword')?.value || '').toLowerCase();
+            const startDate = document.getElementById('startDate')?.value || '';
+            const endDate = document.getElementById('endDate')?.value || '';
+            
+            filteredExhibitions = exhibitions.filter(item => {
+                if (year && item.year != year) return false;
+                if (exposure && item.exposure !== exposure) return false;
+                if (type && type !== 'all' && item.type !== type) return false;
+                if (keyword && !item.title.toLowerCase().includes(keyword)) return false;
+                if (startDate && item.regDate < startDate) return false;
+                if (endDate && item.regDate > endDate + ' 23:59:59') return false;
+                return true;
+            });
+            
+            currentPage = 1;
+            renderExhibitionTableFiltered();
+        }
+        
+        // 전시행사 신청자 검색
+        function searchExhApplicants() {
+            const status = document.getElementById('searchStatus')?.value || '';
+            const keyword = (document.getElementById('searchKeyword')?.value || '').toLowerCase();
+            const startDate = document.getElementById('startDate')?.value || '';
+            const endDate = document.getElementById('endDate')?.value || '';
+            
+            const baseApplicants = exhibitionApplicants.filter(a => a.exhibitionId === currentExhibitionId);
+            
+            filteredExhApplicants = baseApplicants.filter(item => {
+                if (status && item.status !== status) return false;
+                if (keyword && !item.name.toLowerCase().includes(keyword) && !item.orgName.toLowerCase().includes(keyword)) return false;
+                if (startDate && item.applyDate < startDate) return false;
+                if (endDate && item.applyDate > endDate + ' 23:59:59') return false;
+                return true;
+            });
+            
+            currentPage = 1;
+            renderExhApplicantsTableFiltered();
+        }
+
+        function setPeriod(days) {
+            document.querySelectorAll('.period-btns .btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (days === 'all') {
+                document.getElementById('startDate').value = '';
+                document.getElementById('endDate').value = '';
+            } else {
+                const end = new Date();
+                const start = new Date();
+                start.setDate(start.getDate() - days);
+                document.getElementById('startDate').value = start.toISOString().split('T')[0];
+                document.getElementById('endDate').value = end.toISOString().split('T')[0];
+            }
+        }
+
+        function changePageSize() {
+            pageSize = parseInt(document.getElementById('pageSize').value);
+            currentPage = 1;
+            renderTable();
+        }
+
+        // ========== Render Table ==========
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = filteredData.slice(start, end);
+
+            tbody.innerHTML = pageData.map((item, index) => `
+                <tr>
+                    <td class="checkbox"><input type="checkbox" class="row-check" value="${item.id}"></td>
+                    <td><a href="#" onclick="openModal('edit', ${item.id})" style="color: #3498db; text-decoration: underline;">${filteredData.length - start - index}</a></td>
+                    <td>${item.year}</td>
+                    <td class="text-left">${item.title}</td>
+                    <td>${item.applyStart}~${item.applyEnd}</td>
+                    <td><button class="link-btn" onclick="showDetail(${item.id})">상세보기</button></td>
+                    <td>${item.applicants}/${item.capacity}</td>
+                    <td><button class="link-btn" onclick="showSurvey(${item.id})">상세보기</button></td>
+                    <td>${item.views}</td>
+                    <td class="${item.exposure === 'N' ? 'status-hidden' : 'status-exposed'}">${item.exposure === 'Y' ? '노출' : '미노출'}</td>
+                    <td>${item.regDate}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('totalCount').textContent = filteredData.length;
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('totalPages').textContent = Math.ceil(filteredData.length / pageSize) || 1;
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredData.length / pageSize) || 1;
+            const pagination = document.getElementById('pagination');
+            
+            let html = `
+                <button onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>«</button>
+                <button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹</button>
+            `;
+
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, startPage + 4);
+
+            for (let i = startPage; i <= endPage; i++) {
+                html += `<button onclick="goToPage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`;
+            }
+
+            html += `
+                <button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>›</button>
+                <button onclick="goToPage(${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>»</button>
+            `;
+
+            pagination.innerHTML = html;
+        }
+
+        function goToPage(page) {
+            const totalPages = Math.ceil(filteredData.length / pageSize) || 1;
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderTable();
+        }
+
+        // ========== Checkbox ==========
+        function toggleCheckAll() {
+            const checkAll = document.getElementById('checkAll').checked;
+            document.querySelectorAll('.row-check').forEach(cb => cb.checked = checkAll);
+        }
+
+        function getCheckedIds() {
+            return Array.from(document.querySelectorAll('.row-check:checked')).map(cb => parseInt(cb.value));
+        }
+
+        // ========== Modal ==========
+        function openModal(mode, id = null) {
+            const modal = document.getElementById('formModal');
+            const title = document.getElementById('modalTitle');
+            
+            if (mode === 'add') {
+                title.textContent = '정규수업 등록';
+                resetForm();
+            } else if (mode === 'edit' && id) {
+                title.textContent = '정규수업 수정';
+                const item = programs.find(p => p.id === id);
+                if (item) {
+                    document.getElementById('programId').value = item.id;
+                    document.getElementById('formYear').value = item.year;
+                    document.getElementById('formTitle').value = item.title;
+                    document.getElementById('formCapacity').value = item.capacity;
+                    document.getElementById('formApplyStart').value = item.applyStart;
+                    document.getElementById('formApplyEnd').value = item.applyEnd;
+                    document.querySelector(`input[name="exposure"][value="${item.exposure}"]`).checked = true;
+                }
+            }
+            
+            modal.classList.add('show');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+
+        function resetForm() {
+            document.getElementById('programForm').reset();
+            document.getElementById('programId').value = '';
+        }
+
+        // type: 'success' | 'warning' | 'error' | 'info'
+        function showAlert(message, type = 'info') {
+            const icons = {
+                success: '✅',
+                warning: '⚠️',
+                error: '❌',
+                info: 'ℹ️'
+            };
+            const modal = document.getElementById('alertModal');
+            const header = modal.querySelector('.modal-header');
+            const body = modal.querySelector('.modal-body');
+            
+            header.className = 'modal-header ' + type;
+            body.innerHTML = `
+                <div class="alert-icon ${type}">${icons[type] || 'ℹ️'}</div>
+                <p class="alert-message">${message}</p>
+                <button class="btn btn-dark" onclick="closeModal('alertModal')">확인</button>
+            `;
+            modal.classList.add('show');
+        }
+        
+        function showSuccess(message) {
+            showAlert(message, 'success');
+        }
+        
+        function showWarning(message) {
+            showAlert(message, 'warning');
+        }
+        
+        function showError(message) {
+            showAlert(message, 'error');
+        }
+
+        function showConfirm(message, callback) {
+            document.getElementById('confirmMessage').textContent = message;
+            document.getElementById('confirmYes').onclick = () => {
+                closeModal('confirmModal');
+                callback();
+            };
+            document.getElementById('confirmModal').classList.add('show');
+        }
+        
+        function showDelete(message, callback) {
+            document.getElementById('deleteMessage').innerHTML = message || '삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.';
+            document.getElementById('deleteYes').onclick = () => {
+                closeModal('deleteModal');
+                callback();
+            };
+            document.getElementById('deleteModal').classList.add('show');
+        }
+        
+        function showCancelReason(callback) {
+            document.getElementById('cancelReasonText').value = '';
+            document.getElementById('cancelReasonYes').onclick = () => {
+                const reason = document.getElementById('cancelReasonText').value;
+                if (!reason.trim()) {
+                    showWarning('취소 사유를 입력해주세요.');
+                    return;
+                }
+                closeModal('cancelReasonModal');
+                callback(reason);
+            };
+            document.getElementById('cancelReasonModal').classList.add('show');
+        }
+        
+        function showStatusChange(callback) {
+            document.getElementById('statusChangeSelect').value = '';
+            document.getElementById('statusChangeYes').onclick = () => {
+                const status = document.getElementById('statusChangeSelect').value;
+                if (!status) {
+                    showWarning('변경할 상태를 선택해주세요.');
+                    return;
+                }
+                closeModal('statusChangeModal');
+                callback(status);
+            };
+            document.getElementById('statusChangeModal').classList.add('show');
+        }
+
+        // ========== CRUD Operations ==========
+        function saveProgram() {
+            const id = document.getElementById('programId').value;
+            const data = {
+                year: parseInt(document.getElementById('formYear').value),
+                title: document.getElementById('formTitle').value,
+                capacity: parseInt(document.getElementById('formCapacity').value),
+                applyStart: document.getElementById('formApplyStart').value,
+                applyEnd: document.getElementById('formApplyEnd').value,
+                exposure: document.querySelector('input[name="exposure"]:checked').value,
+            };
+
+            if (!data.title || !data.capacity || !data.applyStart || !data.applyEnd) {
+                showWarning('필수 항목을 입력해주세요.');
+                return;
+            }
+
+            if (id) {
+                // Update
+                const index = programs.findIndex(p => p.id === parseInt(id));
+                if (index !== -1) {
+                    programs[index] = { ...programs[index], ...data };
+                }
+                showSuccess('수정되었습니다.');
+            } else {
+                // Create
+                const newId = Math.max(...programs.map(p => p.id)) + 1;
+                programs.unshift({
+                    id: newId,
+                    ...data,
+                    applicants: 0,
+                    views: 0,
+                    regDate: new Date().toISOString().replace('T', ' ').substring(0, 19)
+                });
+                showSuccess('등록되었습니다.');
+            }
+
+            filteredData = [...programs];
+            renderTable();
+            closeModal('formModal');
+        }
+
+        function deleteProgram(id) {
+            showDelete('선택한 프로그램을 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.', () => {
+                programs = programs.filter(p => p.id !== id);
+                filteredData = [...programs];
+                renderTable();
+                showSuccess('삭제되었습니다.');
+            });
+        }
+
+        // ========== Detail View ==========
+        function showDetail(id) {
+            const item = programs.find(p => p.id === id);
+            if (!item) return;
+            currentProgramId = id;
+            showProgramApplicantsPage(item);
+        }
+        
+        function showProgramApplicantsPage(program) {
+            document.querySelector('.page-title').textContent = '정규수업 신청';
+            document.querySelector('.breadcrumb').innerHTML = '참여신청관리 <span>></span> 정규수업';
+            
+            // 상단 프로그램 정보 표시
+            const searchBox = document.querySelector('.search-box');
+            searchBox.innerHTML = `
+                <div style="margin-bottom: 20px; padding: 15px; background: #f8f8f8; border-radius: 5px;">
+                    <table class="info-table" style="margin-bottom: 0;">
+                        <tr>
+                            <th>개설연도</th><td>${program.year}</td>
+                            <th>프로그램명</th><td>${program.title}</td>
+                        </tr>
+                        <tr>
+                            <th>수업기간</th><td>${program.applyStart}~${program.applyEnd}</td>
+                            <th>모집정원</th><td>${program.capacity}</td>
+                        </tr>
+                        <tr>
+                            <th>모집정원 내 신청자 수</th><td>${Math.min(program.applicants, program.capacity)}</td>
+                            <th>대기자수</th><td>${Math.max(0, program.applicants - program.capacity)}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">검색조건</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchStatus">
+                            <option value="">신청상태</option>
+                            <option value="신청">신청</option>
+                            <option value="확정">확정</option>
+                            <option value="취소">취소</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">키워드</div>
+                    <div class="search-input">
+                        <select class="form-select">
+                            <option value="all">전체</option>
+                        </select>
+                        <input type="text" class="form-input" id="searchKeyword" placeholder="검색어입력">
+                        <button class="btn btn-dark" onclick="searchApplicants()">검색</button>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">신청일시</div>
+                    <div class="search-input">
+                        <div class="date-range">
+                            <input type="date" class="date-input" id="startDate">
+                            <span>~</span>
+                            <input type="date" class="date-input" id="endDate">
+                        </div>
+                        <div class="period-btns">
+                            <button class="btn btn-outline active" onclick="setPeriod('all')">전체</button>
+                            <button class="btn btn-outline" onclick="setPeriod(7)">7일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(15)">15일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(30)">1개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(90)">3개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(180)">6개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(365)">1년</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 버튼 영역 업데이트
+            document.querySelector('.table-actions').innerHTML = `
+                <button class="btn btn-dark" onclick="confirmApplicants()">확정</button>
+                <button class="btn btn-dark" onclick="issueCarbonCert()">탄소중립활동</button>
+                <button class="btn btn-primary" onclick="openDownloadModal()">엑셀 다운로드</button>
+            `;
+            
+            // 테이블 헤더 변경
+            document.getElementById('tableBody').closest('.data-table').querySelector('thead').innerHTML = `
+                <tr>
+                    <th class="checkbox"><input type="checkbox" id="checkAll" onclick="toggleCheckAll()"></th>
+                    <th>No</th>
+                    <th>신청자명</th>
+                    <th>핸드폰 번호</th>
+                    <th>신청상태</th>
+                    <th>대기순서</th>
+                    <th>탄소중립활동 확인서 발급 여부</th>
+                    <th>신청일시</th>
+                    <th>확정일시</th>
+                    <th>취소일시</th>
+                </tr>
+            `;
+            
+            renderApplicantsTable();
+        }
+        
+        function renderApplicantsTable() {
+            filteredApplicants = programApplicants.filter(a => a.programId === currentProgramId);
+            renderApplicantsTableFiltered();
+        }
+        
+        function renderApplicantsTableFiltered() {
+            const tbody = document.getElementById('tableBody');
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = filteredApplicants.slice(start, end);
+
+            tbody.innerHTML = pageData.map((item, index) => `
+                <tr>
+                    <td class="checkbox"><input type="checkbox" class="row-check" value="${item.id}"></td>
+                    <td>${filteredApplicants.length - start - index}</td>
+                    <td><a href="#" onclick="showApplicantDetail(${item.id})" style="color: #3498db; text-decoration: underline;">${item.name}</a></td>
+                    <td>${item.phone}</td>
+                    <td class="${item.status === '취소' ? 'text-red' : ''}">${item.status}</td>
+                    <td>${item.waitNo > 0 ? item.waitNo : '-'}</td>
+                    <td>${item.carbonIssued ? '발급완료' : '-'}</td>
+                    <td>${item.applyDate}</td>
+                    <td>${item.confirmDate || '-'}</td>
+                    <td>${item.cancelDate || '-'}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('totalCount').textContent = filteredApplicants.length;
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('totalPages').textContent = Math.ceil(filteredApplicants.length / pageSize) || 1;
+            renderPagination();
+        }
+        
+        function confirmApplicants() {
+            const checked = getCheckedIds();
+            if (checked.length === 0) {
+                showWarning('확정할 대상이 없습니다.');
+                return;
+            }
+            showConfirm(`선택하신 ${checked.length} 건을 확정 하시겠습니까?`, () => {
+                checked.forEach(id => {
+                    const item = programApplicants.find(a => a.id === id);
+                    if (item && item.status === '신청') {
+                        item.status = '확정';
+                        item.confirmDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                    }
+                });
+                renderApplicantsTable();
+                showSuccess('확정 처리되었습니다.');
+            });
+        }
+        
+        function issueCarbonCert() {
+            const checked = getCheckedIds();
+            if (checked.length === 0) {
+                showWarning('발급할 대상이 없습니다.');
+                return;
+            }
+            showConfirm(`선택하신 ${checked.length} 건을 발급 하시겠습니까?`, () => {
+                checked.forEach(id => {
+                    const item = programApplicants.find(a => a.id === id);
+                    if (item) item.carbonIssued = true;
+                });
+                renderApplicantsTable();
+                showSuccess('선택한 신청자를 발급 처리 하였습니다.');
+            });
+        }
+        
+        function openDownloadModal() {
+            document.getElementById('downloadModal').classList.add('show');
+        }
+        
+        function showApplicantDetail(id) {
+            const item = programApplicants.find(a => a.id === id);
+            if (!item) return;
+
+            const content = document.getElementById('detailContent');
+            content.innerHTML = `
+                <div class="detail-section" style="margin-bottom: 15px;">
+                    <div class="section-header"><span class="section-number">1</span><span class="section-title">신청자 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>신청자명</th><td><u>김길동</u></td><th>핸드폰번호</th><td>${item.phone}</td><th>이메일</th><td>user10@email.com</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section" style="margin-bottom: 15px;">
+                    <div class="section-header"><span class="section-number">2</span><span class="section-title">신청 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>수업명</th><td>수업명 자동출력</td><th>평일/주말</th><td>평일수업</td></tr>
+                            <tr><th>신청자명</th><td>${item.name}</td><th>성별</th><td>남성</td></tr>
+                            <tr><th>생년월일</th><td>20031216</td><th>신청자 핸드폰 번호</th><td>${item.phone}</td></tr>
+                            <tr><th>이메일</th><td>user01@gmail.com</td><th>거주지역</th><td>서울특별시 강남구</td></tr>
+                            <tr><th>기타의견</th><td colspan="3">기타의견 출력</td></tr>
+                            <tr><th>주차비 발생 내용 확인</th><td>확인</td><th>개인정보 수집동의</th><td>동의</td></tr>
+                            <tr><th>신청일시</th><td colspan="3">${item.applyDate}</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section" style="margin-bottom: 15px;">
+                    <div class="section-header"><span class="section-number">3</span><span class="section-title">신청상태 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>신청상태 *</th><td>
+                                <select class="form-select" id="detailStatus">
+                                    <option ${item.status==='신청'?'selected':''}>신청</option>
+                                    <option ${item.status==='확정'?'selected':''}>확정</option>
+                                    <option ${item.status==='취소'?'selected':''}>취소</option>
+                                </select>
+                            </td></tr>
+                            <tr><th>승인일시 / 승인자</th><td>${item.confirmDate || '-'} / 홍길동</td></tr>
+                            <tr><th>취소사유 *</th><td><textarea class="form-input" style="width:100%;min-height:60px;" placeholder="취소사유를 작성해 주세요.&#10;사용자 비고란에 출력됩니다."></textarea></td></tr>
+                            <tr><th>취소일시 / 취소자</th><td>${item.cancelDate || '-'}</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">4</span><span class="section-title">메모</span></div>
+                    <div class="section-body">
+                        <p style="color:#666;margin-bottom:10px;">2024-01-10 09:00:00 신청자에게 관람 인원수 변경 있다고 문의 받아 수정함 / 관리자명</p>
+                        <textarea class="form-input" style="width:100%;min-height:80px;" placeholder="메모를 작성해 주세요."></textarea>
+                    </div>
+                </div>
+            `;
+            document.getElementById('detailModal').querySelector('.modal-title').textContent = '정규수업 신청 상세';
+            document.getElementById('detailModal').querySelector('.modal-footer').innerHTML = `
+                <button class="btn btn-primary" onclick="saveApplicantDetail(${item.id})">저장</button>
+                <button class="btn btn-dark" onclick="closeModal('detailModal')">목록</button>
+            `;
+            document.getElementById('detailModal').classList.add('show');
+        }
+        
+        function saveApplicantDetail(id) {
+            const item = programApplicants.find(a => a.id === id);
+            if (item) {
+                item.status = document.getElementById('detailStatus').value;
+                if (item.status === '확정' && !item.confirmDate) {
+                    item.confirmDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                }
+            }
+            closeModal('detailModal');
+            renderApplicantsTable();
+            showSuccess('저장되었습니다.');
+        }
+
+        function showSurvey(id) {
+            showAlert('설문조사 통계 페이지로 이동합니다.', 'info');
+        }
+
+        function downloadExcel() {
+            const reason = document.getElementById('downloadReason').value;
+            if (!reason) {
+                showWarning('다운로드 사유를 입력해주세요.');
+                return;
+            }
+            closeModal('downloadModal');
+            showSuccess('엑셀 파일이 다운로드됩니다.');
+        }
+        
+        // ========== Space Rental Functions ==========
+        function renderSpaceTable() {
+            filteredSpaceRentals = [...spaceRentals];
+            renderSpaceTableFiltered();
+        }
+        
+        function renderSpaceTableFiltered() {
+            const tbody = document.getElementById('tableBody');
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = filteredSpaceRentals.slice(start, end);
+
+            tbody.innerHTML = pageData.map((item, index) => `
+                <tr>
+                    <td class="checkbox"><input type="checkbox" class="row-check" value="${item.id}"></td>
+                    <td>${filteredSpaceRentals.length - start - index}</td>
+                    <td>${item.location}</td>
+                    <td>${item.orgName}</td>
+                    <td><a href="#" onclick="showSpaceDetail(${item.id})" style="color: #3498db; text-decoration: underline;">${item.applicant}</a></td>
+                    <td class="${item.status === '취소' ? 'text-red' : ''}">${item.status}</td>
+                    <td>${item.status === '승인' ? '<button class="link-btn" onclick="showPermit(' + item.id + ')">완료</button>' : '-'}</td>
+                    <td>${item.applyDate}</td>
+                    <td>${item.approveDate || '-'}</td>
+                    <td>${item.cancelDate || '-'}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('totalCount').textContent = filteredSpaceRentals.length;
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('totalPages').textContent = Math.ceil(filteredSpaceRentals.length / pageSize) || 1;
+            renderPagination();
+        }
+        
+        function approveSpaceRentals() {
+            const checked = getCheckedIds();
+            if (checked.length === 0) {
+                showAlert('승인할 대상이 없습니다.');
+                return;
+            }
+            showConfirm(`선택하신 ${checked.length} 건을 승인 하시겠습니까?`, () => {
+                checked.forEach(id => {
+                    const item = spaceRentals.find(s => s.id === id);
+                    if (item && item.status === '신청') {
+                        item.status = '승인';
+                        item.approveDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                    }
+                });
+                renderSpaceTable();
+                showAlert('승인 처리되었습니다.');
+            });
+        }
+        
+        function showSpaceDetail(id) {
+            const item = spaceRentals.find(s => s.id === id);
+            if (!item) return;
+
+            const content = document.getElementById('detailContent');
+            content.innerHTML = `
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">1</span><span class="section-title">신청자 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>이름</th><td><u>${item.applicant}</u></td><th>핸드폰번호</th><td>010-1234-5678</td><th>이메일</th><td>user@email.com</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">2</span><span class="section-title">신청 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>신청자명</th><td class="readonly">${item.applicant}</td><th>단체명</th><td class="readonly">${item.orgName}</td></tr>
+                            <tr><th>핸드폰 번호</th><td class="readonly">010-1234-5678</td><th>이메일</th><td class="readonly">org@email.com</td></tr>
+                            <tr><th>대표자명</th><td class="readonly">홍길동</td><th>사업자등록증 주소</th><td class="readonly" colspan="3">12345 경기도 광명시 ...</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">3</span><span class="section-title">대관 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>행사명</th><td>환경문화행사</td><th>대관장소</th><td>${item.location}</td></tr>
+                            <tr><th>사용목적</th><td>문화행사 진행</td><th>예상인원</th><td>20 명</td></tr>
+                            <tr><th>대관일정</th><td>2024-01-20 ~ 2024-01-20</td><th>대관시간</th><td>10:00 ~ 18:00</td></tr>
+                            <tr><th>행사계획서</th><td><a href="#" style="color:#3498db;text-decoration:underline;">행사계획서.pdf</a> <button class="btn btn-outline" style="padding:2px 8px;font-size:12px;">다운로드</button></td><th>사업자등록증</th><td><a href="#" style="color:#3498db;text-decoration:underline;">사업자등록증.pdf</a> <button class="btn btn-outline" style="padding:2px 8px;font-size:12px;">다운로드</button></td></tr>
+                            <tr><th>주차비 발생 내용 확인</th><td>확인</td><th>개인정보 수집동의</th><td>동의</td></tr>
+                            <tr><th>신청일시</th><td colspan="3">${item.applyDate}</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">4</span><span class="section-title">신청상태 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>신청상태 *</th><td>
+                                <select class="form-select" id="spaceDetailStatus">
+                                    <option ${item.status==='신청'?'selected':''}>신청</option>
+                                    <option ${item.status==='승인'?'selected':''}>승인</option>
+                                    <option ${item.status==='취소'?'selected':''}>취소</option>
+                                </select>
+                            </td></tr>
+                            <tr><th>승인일시 / 승인자</th><td>${item.approveDate || '-'} / 관리자명</td></tr>
+                            <tr><th>취소사유 *</th><td><textarea class="form-input" id="spaceCancelReason" style="width:100%;min-height:60px;" placeholder="취소사유를 작성해 주세요.&#10;사용자 비고란에 출력됩니다."></textarea></td></tr>
+                            <tr><th>취소일시 / 취소자</th><td>${item.cancelDate || '-'}</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">5</span><span class="section-title">메모</span></div>
+                    <div class="section-body">
+                        <p style="color:#666;margin-bottom:10px;">2024-01-10 09:00:00 담당자에게 대관 일정 변경 요청 문의 받음 / 관리자명</p>
+                        <textarea class="form-input" id="spaceMemo" style="width:100%;min-height:80px;" placeholder="메모를 작성해 주세요."></textarea>
+                    </div>
+                </div>
+            `;
+            document.getElementById('detailModal').querySelector('.modal-title').textContent = '공간대관 신청 상세';
+            document.getElementById('detailModal').querySelector('.modal-footer').innerHTML = `
+                <button class="btn btn-primary" onclick="saveSpaceDetail(${item.id})">저장</button>
+                <button class="btn btn-dark" onclick="closeModal('detailModal')">목록</button>
+            `;
+            document.getElementById('detailModal').classList.add('show');
+        }
+        
+        function saveSpaceDetail(id) {
+            const item = spaceRentals.find(s => s.id === id);
+            if (item) {
+                const newStatus = document.getElementById('spaceDetailStatus').value;
+                if (newStatus === '승인' && item.status !== '승인') {
+                    item.approveDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                }
+                if (newStatus === '취소' && item.status !== '취소') {
+                    const reason = document.getElementById('spaceCancelReason').value;
+                    if (!reason.trim()) {
+                        showWarning('취소 사유를 입력해주세요.');
+                        return;
+                    }
+                    item.cancelDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                }
+                item.status = newStatus;
+            }
+            closeModal('detailModal');
+            renderSpaceTable();
+            showSuccess('저장되었습니다.');
+        }
+        
+        function showPermit(id) {
+            const item = spaceRentals.find(s => s.id === id);
+            if (!item) return;
+            
+            const content = document.getElementById('detailContent');
+            content.innerHTML = `
+                <div style="border: 2px solid #333; padding: 30px; background:#fff;">
+                    <h2 style="text-align:center; margin-bottom: 30px; font-size:24px; border-bottom:2px solid #333; padding-bottom:15px;">대관허가서</h2>
+                    
+                    <table class="info-table" style="margin-bottom: 20px;">
+                        <tr><th colspan="2" style="text-align:center; background:#f0f0f0; font-weight:bold;">사용자</th></tr>
+                        <tr><th style="width:120px;">단체명</th><td>${item.orgName}</td></tr>
+                        <tr><th>주소</th><td>12345 경기도 광명시 광명동 123-45</td></tr>
+                        <tr><th>대표자명</th><td>홍길동</td></tr>
+                    </table>
+                    
+                    <table class="info-table" style="margin-bottom: 20px;">
+                        <tr><th colspan="2" style="text-align:center; background:#f0f0f0; font-weight:bold;">대관사항</th></tr>
+                        <tr><th style="width:120px;">공연(행사)명</th><td>환경문화행사</td></tr>
+                        <tr><th>사용목적</th><td>문화행사 진행</td></tr>
+                        <tr><th>대관장소</th><td>${item.location}</td></tr>
+                        <tr><th>대관일시</th><td>2024년 01월 20일 10시 ~ 18시</td></tr>
+                        <tr><th>참여인원</th><td>20명</td></tr>
+                    </table>
+                    
+                    <div style="margin: 25px 0; padding:15px; background:#f9f9f9; border:1px solid #ddd;">
+                        <p style="font-weight:bold; margin-bottom:10px;">허가조건</p>
+                        <ol style="margin-left:20px; font-size:13px; line-height:1.8; color:#555;">
+                            <li>「광명업사이클아트센터」 설치 및 운영 조례를 준수해야 합니다.</li>
+                            <li>시설물을 훼손하거나 멸실한 때에는 원상회복 또는 변상해야 합니다.</li>
+                            <li>허가된 목적 외에 사용할 수 없으며, 제3자에게 양도 또는 전대할 수 없습니다.</li>
+                            <li>사용 종료 후 원상복구하여 인계해야 합니다.</li>
+                            <li>안전사고 및 화재 예방에 유의해야 합니다.</li>
+                            <li>주차장 이용 시 주차요금이 발생할 수 있습니다.</li>
+                            <li>소음, 진동 등으로 다른 이용자에게 불편을 주어서는 안 됩니다.</li>
+                            <li>기타 관리자의 지시사항을 준수해야 합니다.</li>
+                        </ol>
+                    </div>
+                    
+                    <p style="margin: 20px 0; font-size: 14px; text-align: center; line-height:1.8;">
+                        위와 같이 업사이클아트센터 시설에 대하여<br>
+                        「광명업사이클아트센터」 설치 및 운영 조례 제13조에 따라 사용 허가합니다.
+                    </p>
+                    
+                    <p style="text-align:center; margin:30px 0 10px; font-size:14px;">
+                        ${new Date().getFullYear()}년 ${String(new Date().getMonth()+1).padStart(2,'0')}월 ${String(new Date().getDate()).padStart(2,'0')}일
+                    </p>
+                    <p style="text-align:center; font-size:18px; font-weight:bold;">
+                        광명시장(수탁자) <span style="color:#c00;">⑭</span>
+                    </p>
+                </div>
+                <div style="margin-top:20px; text-align:center;">
+                    <button class="btn btn-primary" onclick="window.print()">인쇄하기</button>
+                </div>
+            `;
+            document.getElementById('detailModal').querySelector('.modal-title').textContent = '대관허가서 발급';
+            document.getElementById('detailModal').classList.add('show');
+        }
+        
+        // ========== Exhibition Functions ==========
+        function renderExhibitionTable() {
+            filteredExhibitions = [...exhibitions];
+            renderExhibitionTableFiltered();
+        }
+        
+        function renderExhibitionTableFiltered() {
+            const tbody = document.getElementById('tableBody');
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = filteredExhibitions.slice(start, end);
+
+            tbody.innerHTML = pageData.map((item, index) => `
+                <tr>
+                    <td class="checkbox"><input type="checkbox" class="row-check" value="${item.id}"></td>
+                    <td><a href="#" onclick="showExhibitionDetail(${item.id})" style="color: #3498db; text-decoration: underline;">${filteredExhibitions.length - start - index}</a></td>
+                    <td>${item.type}</td>
+                    <td>${item.year}</td>
+                    <td class="text-left">${item.title}</td>
+                    <td>${item.viewDate}</td>
+                    <td><button class="link-btn" onclick="showExhibitionApplicants(${item.id})">상세보기</button></td>
+                    <td>${item.views}</td>
+                    <td class="${item.exposure === 'N' ? 'status-hidden' : 'status-exposed'}">${item.exposure === 'Y' ? '노출' : '미노출'}</td>
+                    <td>${item.regDate}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('totalCount').textContent = filteredExhibitions.length;
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('totalPages').textContent = Math.ceil(filteredExhibitions.length / pageSize) || 1;
+            renderPagination();
+        }
+        
+        function addExhibition() {
+            const newId = exhibitions.length > 0 ? Math.max(...exhibitions.map(e => e.id)) + 1 : 1;
+            const newExh = {
+                id: newId,
+                type: '업사이클 예술전시',
+                year: 2024,
+                title: '새 전시행사',
+                viewDate: '2024.01.01~2024.12.31',
+                capacity: 20,
+                applicants: 0,
+                views: 0,
+                exposure: 'Y',
+                regDate: new Date().toISOString().replace('T', ' ').substring(0, 19)
+            };
+            exhibitions.unshift(newExh);
+            showExhibitionDetail(newId);
+        }
+        
+        function showExhibitionDetail(id) {
+            const item = exhibitions.find(e => e.id === id);
+            if (!item) return;
+            
+            const content = document.getElementById('detailContent');
+            content.innerHTML = `
+                <form id="exhibitionForm">
+                    <input type="hidden" id="exhId" value="${item.id}">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>개설연도 <span class="required">*</span></label>
+                            <select id="exhYear"><option value="2024" ${item.year===2024?'selected':''}>2024</option><option value="2023" ${item.year===2023?'selected':''}>2023</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label>노출여부 <span class="required">*</span></label>
+                            <div class="form-radio">
+                                <label><input type="radio" name="exhExposure" value="Y" ${item.exposure==='Y'?'checked':''}> 노출</label>
+                                <label><input type="radio" name="exhExposure" value="N" ${item.exposure==='N'?'checked':''}> 미노출</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>구분 <span class="required">*</span></label>
+                        <div class="form-radio">
+                            <label><input type="radio" name="exhType" value="업사이클 예술전시" ${item.type==='업사이클 예술전시'?'checked':''}> 업사이클 예술전시</label>
+                            <label><input type="radio" name="exhType" value="업사이클 문화행사" ${item.type==='업사이클 문화행사'?'checked':''}> 업사이클 문화행사</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>전시행사명 <span class="required">*</span></label>
+                            <input type="text" id="exhTitle" value="${item.title}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>단체관람 정원 <span class="required">*</span></label>
+                            <input type="number" id="exhCapacity" value="${item.capacity || 20}" required> 명
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>전시기간 <span class="required">*</span></label>
+                        <div style="display:flex;gap:10px;align-items:center;">
+                            <input type="date" id="exhStartDate" value="2023-01-22">
+                            <span>~</span>
+                            <input type="date" id="exhEndDate" value="2024-01-24">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>회차 시간 <span class="required">*</span> <span style="color:#666;font-size:12px;">?</span></label>
+                        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+                            <select class="form-select"><option>10</option></select>:<select class="form-select"><option>00</option></select>
+                            <span>~</span>
+                            <select class="form-select"><option>11</option></select>:<select class="form-select"><option>00</option></select>
+                            <button type="button" class="btn btn-primary" onclick="addSession()">추가</button>
+                        </div>
+                        <div id="sessionList" style="margin-top:10px;">
+                            <span class="btn btn-dark" style="margin:2px;">10:00~11:00 <button type="button" onclick="this.parentElement.remove()" style="color:#fff;background:none;border:none;cursor:pointer;">×</button></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>포스터 <span class="required">*</span></label>
+                        <div style="display:flex;gap:10px;">
+                            <button type="button" class="btn btn-outline">파일 선택</button>
+                            <span style="color:#888;">선택된 파일 없음</span>
+                            <input type="text" placeholder="이미지 대체 텍스트" style="flex:1;">
+                        </div>
+                        <p style="color:#888;font-size:12px;margin-top:5px;">* 이미지 권장 비율은 A4, 권장 용량은 10MB 입니다.</p>
+                    </div>
+                    <div class="form-group">
+                        <label>소개글</label>
+                        <textarea style="width:100%;min-height:100px;" placeholder="에디터 영역"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>대표 이미지 <span class="required">*</span></label>
+                        <div id="mainImageList">
+                            <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
+                                <button type="button" class="btn btn-outline">파일 선택</button>
+                                <span style="color:#888;">선택된 파일 없음</span>
+                                <input type="text" placeholder="이미지 대체 텍스트" style="flex:1;">
+                                <button type="button" class="btn btn-outline" onclick="addMainImage()">추가</button>
+                            </div>
+                        </div>
+                        <p style="color:#888;font-size:12px;margin-top:5px;">* 이미지 권장 사이즈는 1300*650, 권장 용량은 10MB 입니다.</p>
+                    </div>
+                    <div class="form-group">
+                        <label>작품/행사 이미지</label>
+                        <div id="artworkImageList">
+                            <div class="artwork-item" style="border:1px solid #ddd;padding:15px;margin-bottom:10px;border-radius:5px;">
+                                <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
+                                    <button type="button" class="btn btn-outline">파일 선택</button>
+                                    <span style="color:#888;">선택된 파일 없음</span>
+                                    <input type="text" placeholder="이미지 대체 텍스트" style="flex:1;">
+                                </div>
+                                <div style="display:flex;gap:10px;margin-bottom:10px;">
+                                    <input type="text" placeholder="제목 입력" style="flex:1;">
+                                </div>
+                                <div style="display:flex;gap:10px;align-items:center;">
+                                    <textarea placeholder="설명글 입력" style="flex:1;min-height:60px;"></textarea>
+                                    <button type="button" class="btn btn-outline" onclick="this.closest('.artwork-item').remove()">삭제</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="addArtworkImage()" style="margin-top:10px;">작품/행사 이미지 추가</button>
+                        <p style="color:#888;font-size:12px;margin-top:10px;">* 이미지 권장 비율은 5:4, 권장 용량은 10MB 입니다.</p>
+                    </div>
+                    <div class="form-group">
+                        <label>설문조사</label>
+                        <input type="text" placeholder="복사한 설문조사 URL을 붙여넣으세요." style="width:100%;">
+                    </div>
+                    <div style="color:#888;font-size:13px;margin-top:20px;">
+                        <p>등록일시/등록자: ${item.regDate} / 관리자명</p>
+                        <p>수정일시/수정자: ${item.regDate} / 관리자명</p>
+                    </div>
+                </form>
+            `;
+            document.getElementById('detailModal').querySelector('.modal-title').textContent = '전시행사 등록';
+            document.getElementById('detailModal').querySelector('.modal-footer').innerHTML = `
+                <button class="btn btn-primary" onclick="saveExhibition()">저장</button>
+                <button class="btn btn-outline" onclick="resetExhibitionForm()">초기화</button>
+                <button class="btn btn-dark" onclick="closeModal('detailModal')">목록</button>
+            `;
+            document.getElementById('detailModal').classList.add('show');
+        }
+        
+        function addSession() {
+            const list = document.getElementById('sessionList');
+            list.innerHTML += `<span class="btn btn-dark" style="margin:2px;">10:00~11:00 <button type="button" onclick="this.parentElement.remove()" style="color:#fff;background:none;border:none;cursor:pointer;">×</button></span>`;
+        }
+        
+        function saveExhibition() {
+            const id = document.getElementById('exhId').value;
+            const item = exhibitions.find(e => e.id === parseInt(id));
+            if (item) {
+                item.year = parseInt(document.getElementById('exhYear').value);
+                item.title = document.getElementById('exhTitle').value;
+                item.exposure = document.querySelector('input[name="exhExposure"]:checked').value;
+                item.type = document.querySelector('input[name="exhType"]:checked').value;
+            }
+            closeModal('detailModal');
+            showExhibitionPage();
+            showSuccess('저장되었습니다.');
+        }
+        
+        function resetExhibitionForm() {
+            showConfirm('입력한 내용을 초기화하시겠습니까?', () => {
+                document.getElementById('exhibitionForm').reset();
+            });
+        }
+        
+        function addMainImage() {
+            const list = document.getElementById('mainImageList');
+            const newItem = document.createElement('div');
+            newItem.style.cssText = 'display:flex;gap:10px;align-items:center;margin-bottom:10px;';
+            newItem.innerHTML = `
+                <button type="button" class="btn btn-outline">파일 선택</button>
+                <span style="color:#888;">선택된 파일 없음</span>
+                <input type="text" placeholder="이미지 대체 텍스트" style="flex:1;">
+                <button type="button" class="btn btn-outline" onclick="this.parentElement.remove()">삭제</button>
+            `;
+            list.appendChild(newItem);
+        }
+        
+        function addArtworkImage() {
+            const list = document.getElementById('artworkImageList');
+            const newItem = document.createElement('div');
+            newItem.className = 'artwork-item';
+            newItem.style.cssText = 'border:1px solid #ddd;padding:15px;margin-bottom:10px;border-radius:5px;';
+            newItem.innerHTML = `
+                <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
+                    <button type="button" class="btn btn-outline">파일 선택</button>
+                    <span style="color:#888;">선택된 파일 없음</span>
+                    <input type="text" placeholder="이미지 대체 텍스트" style="flex:1;">
+                </div>
+                <div style="display:flex;gap:10px;margin-bottom:10px;">
+                    <input type="text" placeholder="제목 입력" style="flex:1;">
+                </div>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <textarea placeholder="설명글 입력" style="flex:1;min-height:60px;"></textarea>
+                    <button type="button" class="btn btn-outline" onclick="this.closest('.artwork-item').remove()">삭제</button>
+                </div>
+            `;
+            list.appendChild(newItem);
+        }
+        
+        function showExhibitionApplicants(id) {
+            const item = exhibitions.find(e => e.id === id);
+            if (!item) return;
+            currentExhibitionId = id;
+            
+            document.querySelector('.page-title').textContent = '전시행사 신청';
+            document.querySelector('.breadcrumb').innerHTML = '참여신청관리 <span>></span> 전시행사';
+            
+            const searchBox = document.querySelector('.search-box');
+            searchBox.innerHTML = `
+                <div style="margin-bottom:20px;padding:15px;background:#f8f8f8;border-radius:5px;">
+                    <table class="info-table" style="margin-bottom:0;">
+                        <tr><th>구분</th><td>${item.type}</td><th>전시행사명</th><td>${item.title}</td></tr>
+                        <tr><th>관람일자</th><td>${item.viewDate}</td><th>총 신청건수</th><td>${item.applicants}</td></tr>
+                    </table>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">검색조건</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchStatus"><option value="">신청상태</option><option>신청</option><option>확정</option><option>취소</option></select>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">키워드</div>
+                    <div class="search-input">
+                        <select class="form-select"><option>전체</option></select>
+                        <input type="text" class="form-input" id="searchKeyword" placeholder="검색어입력">
+                        <button class="btn btn-dark" onclick="searchExhApplicants()">검색</button>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">신청일시</div>
+                    <div class="search-input">
+                        <div class="date-range"><input type="date" class="date-input" id="startDate"><span>~</span><input type="date" class="date-input" id="endDate"></div>
+                        <div class="period-btns">
+                            <button class="btn btn-outline active" onclick="setPeriod('all')">전체</button>
+                            <button class="btn btn-outline" onclick="setPeriod(7)">7일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(15)">15일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(30)">1개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(90)">3개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(180)">6개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(365)">1년</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.querySelector('.table-actions').innerHTML = `
+                <button class="btn btn-dark" onclick="approveExhApplicants()">승인</button>
+                <button class="btn btn-primary" onclick="openDownloadModal()">엑셀 다운로드</button>
+            `;
+            
+            document.getElementById('tableBody').closest('.data-table').querySelector('thead').innerHTML = `
+                <tr>
+                    <th class="checkbox"><input type="checkbox" onclick="toggleCheckAll()"></th>
+                    <th>No</th>
+                    <th>신청자명</th>
+                    <th>단체명</th>
+                    <th>핸드폰 번호</th>
+                    <th>관람인원수</th>
+                    <th>관람일</th>
+                    <th>신청상태</th>
+                    <th>회차</th>
+                    <th>신청일시</th>
+                    <th>승인일시</th>
+                    <th>취소일시</th>
+                </tr>
+            `;
+            renderExhibitionApplicantsTable();
+        }
+        
+        function renderExhibitionApplicantsTable() {
+            filteredExhApplicants = exhibitionApplicants.filter(a => a.exhibitionId === currentExhibitionId);
+            renderExhApplicantsTableFiltered();
+        }
+        
+        function renderExhApplicantsTableFiltered() {
+            const tbody = document.getElementById('tableBody');
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = filteredExhApplicants.slice(start, end);
+            
+            tbody.innerHTML = pageData.map((item, index) => `
+                <tr>
+                    <td class="checkbox"><input type="checkbox" class="row-check" value="${item.id}"></td>
+                    <td>${filteredExhApplicants.length - start - index}</td>
+                    <td><a href="#" onclick="showExhApplicantDetail(${item.id})" style="color:#3498db;text-decoration:underline;">${item.name}</a></td>
+                    <td>${item.orgName}</td>
+                    <td>${item.phone}</td>
+                    <td>${item.visitors}</td>
+                    <td>${item.visitDate}</td>
+                    <td class="${item.status==='취소'?'text-red':''}">${item.status}</td>
+                    <td>${item.session}</td>
+                    <td>${item.applyDate}</td>
+                    <td>${item.approveDate || '-'}</td>
+                    <td>${item.cancelDate || '-'}</td>
+                </tr>
+            `).join('');
+            
+            document.getElementById('totalCount').textContent = filteredExhApplicants.length;
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('totalPages').textContent = Math.ceil(filteredExhApplicants.length / pageSize) || 1;
+            renderPagination();
+        }
+        
+        function approveExhApplicants() {
+            const checked = getCheckedIds();
+            if (checked.length === 0) {
+                showWarning('승인할 대상이 없습니다.');
+                return;
+            }
+            showConfirm(`선택하신 ${checked.length} 건을 승인 하시겠습니까?`, () => {
+                checked.forEach(id => {
+                    const item = exhibitionApplicants.find(a => a.id === id);
+                    if (item && item.status === '신청') {
+                        item.status = '확정';
+                        item.approveDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                    }
+                });
+                renderExhibitionApplicantsTable();
+                showSuccess('승인 처리되었습니다.');
+            });
+        }
+        
+        function showExhApplicantDetail(id) {
+            const item = exhibitionApplicants.find(a => a.id === id);
+            if (!item) return;
+
+            const content = document.getElementById('detailContent');
+            content.innerHTML = `
+                <div class="detail-section" style="margin-bottom:15px;">
+                    <div class="section-header"><span class="section-number">1</span><span class="section-title">신청자 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>신청자명</th><td><u>김길동</u></td><th>핸드폰번호</th><td>${item.phone}</td><th>이메일</th><td>user10@email.com</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section" style="margin-bottom:15px;">
+                    <div class="section-header"><span class="section-number">2</span><span class="section-title">신청 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>단체명 *</th><td class="readonly">${item.orgName}</td><th>인솔자 인원수 *</th><td>1</td></tr>
+                            <tr><th>관람 인원수 *</th><td class="readonly">${item.visitors}</td><th>관람 시간 *</th><td>${item.session.split('(')[1]?.replace(')','')||'10:00~11:00'}</td></tr>
+                            <tr><th>관람일자 *</th><td>${item.visitDate}</td><th>담당자 핸드폰 번호 *</th><td>${item.phone}</td></tr>
+                            <tr><th>담당자명 *</th><td>담당자명</td><th></th><td></td></tr>
+                            <tr><th>방문 대상 *</th><td colspan="3">
+                                <span>영·유아(5~7세): 2</span> | 
+                                <span>초등(1~2학년): 3</span> | 
+                                <span>초등(3~4학년): 0</span> | 
+                                <span>초등(5~6학년): 0</span> | 
+                                <span>중학생: 0</span> | 
+                                <span>고등학생: 0</span> | 
+                                <span>성인: 5</span>
+                            </td></tr>
+                            <tr><th>주차비 발생 내용 확인</th><td>확인</td><th>개인정보 수집동의</th><td>동의</td></tr>
+                            <tr><th>신청일시</th><td colspan="3">${item.applyDate}</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section" style="margin-bottom:15px;">
+                    <div class="section-header"><span class="section-number">3</span><span class="section-title">신청상태 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>신청상태 *</th><td>
+                                <select class="form-select" id="exhDetailStatus">
+                                    <option ${item.status==='신청'?'selected':''}>신청</option>
+                                    <option ${item.status==='확정'?'selected':''}>확정</option>
+                                    <option ${item.status==='취소'?'selected':''}>취소</option>
+                                </select>
+                            </td></tr>
+                            <tr><th>승인일시 / 승인자</th><td>${item.approveDate || '-'} / 홍길동</td></tr>
+                            <tr><th>취소사유 *</th><td><textarea class="form-input" style="width:100%;min-height:60px;" placeholder="취소사유를 작성해 주세요.&#10;사용자 비고란에 출력됩니다."></textarea></td></tr>
+                            <tr><th>취소일시 / 취소자</th><td>${item.cancelDate || '-'}</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">4</span><span class="section-title">메모</span></div>
+                    <div class="section-body">
+                        <p style="color:#666;margin-bottom:10px;">2024-01-10 09:00:00 신청자에게 관람 인원수 변경 있다고 문의 받아 수정함 / 관리자명</p>
+                        <textarea class="form-input" style="width:100%;min-height:80px;" placeholder="메모를 작성해 주세요."></textarea>
+                    </div>
+                </div>
+            `;
+            document.getElementById('detailModal').querySelector('.modal-title').textContent = '전시행사 신청 상세';
+            document.getElementById('detailModal').querySelector('.modal-footer').innerHTML = `
+                <button class="btn btn-primary" onclick="saveExhApplicantDetail(${item.id})">저장</button>
+                <button class="btn btn-dark" onclick="closeModal('detailModal')">목록</button>
+            `;
+            document.getElementById('detailModal').classList.add('show');
+        }
+        
+        // ========== 단체수업 페이지 ==========
+        function showGroupClassPage() {
+            document.querySelector('.page-title').textContent = '단체수업';
+            document.querySelector('.breadcrumb').innerHTML = '참여신청관리 <span>></span> 단체수업';
+            filteredGroupClasses = [...groupClasses];
+            
+            document.querySelector('.search-box').innerHTML = `
+                <div class="search-row">
+                    <div class="search-label">검색조건</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchYear" onchange="searchGroupClasses()">
+                            <option value="">개설연도</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <select class="form-select" id="searchExposure" onchange="searchGroupClasses()">
+                            <option value="">노출여부</option>
+                            <option value="Y">노출</option>
+                            <option value="N">미노출</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">키워드</div>
+                    <div class="search-input">
+                        <select class="form-select"><option value="all">전체</option></select>
+                        <input type="text" class="form-input" id="searchKeyword" placeholder="검색어입력">
+                        <button class="btn btn-dark" onclick="searchGroupClasses()">검색</button>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">등록일</div>
+                    <div class="search-input">
+                        <div class="date-range">
+                            <input type="date" class="date-input" id="startDate"><span>~</span><input type="date" class="date-input" id="endDate">
+                        </div>
+                        <div class="period-btns">
+                            <button class="btn btn-outline active" onclick="setPeriod('all')">전체</button>
+                            <button class="btn btn-outline" onclick="setPeriod(7)">7일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(15)">15일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(30)">1개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(90)">3개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(180)">6개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(365)">1년</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.querySelector('.table-actions').innerHTML = `<button class="btn btn-primary" onclick="openGroupClassModal('add')">등록</button>`;
+            
+            document.getElementById('tableBody').closest('.data-table').querySelector('thead').innerHTML = `
+                <tr>
+                    <th class="checkbox"><input type="checkbox" id="checkAll" onclick="toggleCheckAll()"></th>
+                    <th>No</th>
+                    <th>개설연도</th>
+                    <th>프로그램명</th>
+                    <th>신청기간</th>
+                    <th>신청 목록</th>
+                    <th>신청인원/모집정원</th>
+                    <th>조회수</th>
+                    <th>노출여부</th>
+                    <th>등록일시</th>
+                </tr>
+            `;
+            renderGroupClassTable();
+        }
+        
+        function renderGroupClassTable() {
+            const tbody = document.getElementById('tableBody');
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = filteredGroupClasses.slice(start, end);
+            
+            tbody.innerHTML = pageData.map((item, idx) => `
+                <tr>
+                    <td class="checkbox"><input type="checkbox" class="row-check" value="${item.id}"></td>
+                    <td>${filteredGroupClasses.length - start - idx}</td>
+                    <td>${item.year}</td>
+                    <td><a href="#" onclick="openGroupClassModal('edit', ${item.id})">${item.title}</a></td>
+                    <td>${item.applyPeriod}</td>
+                    <td><button class="btn btn-outline btn-sm" onclick="showGroupClassApplicants(${item.id})">목록</button></td>
+                    <td>${item.applicants}/${item.capacity}</td>
+                    <td>${item.views}</td>
+                    <td><span class="badge ${item.exposure === 'Y' ? 'badge-success' : 'badge-secondary'}">${item.exposure === 'Y' ? '노출' : '미노출'}</span></td>
+                    <td>${item.regDate}</td>
+                </tr>
+            `).join('');
+            
+            renderPaginationFor(filteredGroupClasses.length, 'group');
+        }
+        
+        function searchGroupClasses() {
+            const year = document.getElementById('searchYear')?.value;
+            const exposure = document.getElementById('searchExposure')?.value;
+            const keyword = document.getElementById('searchKeyword')?.value?.toLowerCase();
+            
+            filteredGroupClasses = groupClasses.filter(item => {
+                if (year && item.year != year) return false;
+                if (exposure && item.exposure !== exposure) return false;
+                if (keyword && !item.title.toLowerCase().includes(keyword)) return false;
+                return true;
+            });
+            currentPage = 1;
+            renderGroupClassTable();
+        }
+        
+        function openGroupClassModal(mode, id) {
+            const isEdit = mode === 'edit';
+            const item = isEdit ? groupClasses.find(g => g.id === id) : null;
+            
+            document.getElementById('modalTitle').textContent = isEdit ? '단체수업 수정' : '단체수업 등록';
+            document.getElementById('modalBody').innerHTML = `
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">1</span><span class="section-title">기본 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>개설연도 *</th><td><select class="form-select" id="gcYear"><option value="2024" ${item?.year===2024?'selected':''}>2024</option><option value="2023" ${item?.year===2023?'selected':''}>2023</option></select></td></tr>
+                            <tr><th>프로그램명 *</th><td><input type="text" class="form-input" id="gcTitle" value="${item?.title||''}"></td></tr>
+                            <tr><th>신청기간 *</th><td><input type="text" class="form-input" id="gcPeriod" value="${item?.applyPeriod||''}" placeholder="2024.01.01~2024.12.31"></td></tr>
+                            <tr><th>모집정원 *</th><td><input type="number" class="form-input" id="gcCapacity" value="${item?.capacity||''}"></td></tr>
+                            <tr><th>노출여부 *</th><td><select class="form-select" id="gcExposure"><option value="Y" ${item?.exposure==='Y'?'selected':''}>노출</option><option value="N" ${item?.exposure==='N'?'selected':''}>미노출</option></select></td></tr>
+                        </table>
+                    </div>
+                </div>
+            `;
+            document.getElementById('addModal').querySelector('.modal-footer').innerHTML = `
+                <button class="btn btn-primary" onclick="saveGroupClass(${isEdit ? item.id : 'null'})">${isEdit ? '수정' : '등록'}</button>
+                <button class="btn btn-dark" onclick="closeModal('addModal')">취소</button>
+            `;
+            document.getElementById('addModal').classList.add('show');
+        }
+        
+        function saveGroupClass(id) {
+            const data = {
+                year: parseInt(document.getElementById('gcYear').value),
+                title: document.getElementById('gcTitle').value,
+                applyPeriod: document.getElementById('gcPeriod').value,
+                capacity: parseInt(document.getElementById('gcCapacity').value),
+                exposure: document.getElementById('gcExposure').value
+            };
+            
+            if (!data.title || !data.applyPeriod || !data.capacity) {
+                showWarning('필수 항목을 모두 입력해주세요.');
+                return;
+            }
+            
+            if (id) {
+                const idx = groupClasses.findIndex(g => g.id === id);
+                if (idx > -1) groupClasses[idx] = { ...groupClasses[idx], ...data };
+                showSuccess('수정되었습니다.');
+            } else {
+                groupClasses.unshift({
+                    id: groupClasses.length + 1,
+                    ...data,
+                    applicants: 0,
+                    views: 0,
+                    regDate: new Date().toISOString().replace('T', ' ').substring(0, 19)
+                });
+                showSuccess('등록되었습니다.');
+            }
+            closeModal('addModal');
+            filteredGroupClasses = [...groupClasses];
+            renderGroupClassTable();
+        }
+        
+        function showGroupClassApplicants(id) {
+            showAlert('단체수업 신청자 목록 기능은 추후 업데이트 예정입니다.', 'info');
+        }
+        
+        // ========== 청소년 특별수업 페이지 ==========
+        function showYouthClassPage() {
+            document.querySelector('.page-title').textContent = '청소년 특별수업';
+            document.querySelector('.breadcrumb').innerHTML = '참여신청관리 <span>></span> 청소년 특별수업';
+            filteredYouthClasses = [...youthClasses];
+            
+            document.querySelector('.search-box').innerHTML = `
+                <div class="search-row">
+                    <div class="search-label">검색조건</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchYear" onchange="searchYouthClasses()">
+                            <option value="">개설연도</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <select class="form-select" id="searchExposure" onchange="searchYouthClasses()">
+                            <option value="">노출여부</option>
+                            <option value="Y">노출</option>
+                            <option value="N">미노출</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">키워드</div>
+                    <div class="search-input">
+                        <select class="form-select"><option value="all">전체</option></select>
+                        <input type="text" class="form-input" id="searchKeyword" placeholder="검색어입력">
+                        <button class="btn btn-dark" onclick="searchYouthClasses()">검색</button>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">등록일</div>
+                    <div class="search-input">
+                        <div class="date-range">
+                            <input type="date" class="date-input" id="startDate"><span>~</span><input type="date" class="date-input" id="endDate">
+                        </div>
+                        <div class="period-btns">
+                            <button class="btn btn-outline active" onclick="setPeriod('all')">전체</button>
+                            <button class="btn btn-outline" onclick="setPeriod(7)">7일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(15)">15일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(30)">1개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(90)">3개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(180)">6개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(365)">1년</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.querySelector('.table-actions').innerHTML = `<button class="btn btn-primary" onclick="openYouthClassModal('add')">등록</button>`;
+            
+            document.getElementById('tableBody').closest('.data-table').querySelector('thead').innerHTML = `
+                <tr>
+                    <th class="checkbox"><input type="checkbox" id="checkAll" onclick="toggleCheckAll()"></th>
+                    <th>No</th>
+                    <th>개설연도</th>
+                    <th>프로그램명</th>
+                    <th>신청기간</th>
+                    <th>신청 목록</th>
+                    <th>신청인원/모집정원</th>
+                    <th>조회수</th>
+                    <th>노출여부</th>
+                    <th>등록일시</th>
+                </tr>
+            `;
+            renderYouthClassTable();
+        }
+        
+        function renderYouthClassTable() {
+            const tbody = document.getElementById('tableBody');
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = filteredYouthClasses.slice(start, end);
+            
+            tbody.innerHTML = pageData.map((item, idx) => `
+                <tr>
+                    <td class="checkbox"><input type="checkbox" class="row-check" value="${item.id}"></td>
+                    <td>${filteredYouthClasses.length - start - idx}</td>
+                    <td>${item.year}</td>
+                    <td><a href="#" onclick="openYouthClassModal('edit', ${item.id})">${item.title}</a></td>
+                    <td>${item.applyPeriod}</td>
+                    <td><button class="btn btn-outline btn-sm" onclick="showYouthClassApplicants(${item.id})">목록</button></td>
+                    <td>${item.applicants}/${item.capacity}</td>
+                    <td>${item.views}</td>
+                    <td><span class="badge ${item.exposure === 'Y' ? 'badge-success' : 'badge-secondary'}">${item.exposure === 'Y' ? '노출' : '미노출'}</span></td>
+                    <td>${item.regDate}</td>
+                </tr>
+            `).join('');
+            
+            renderPaginationFor(filteredYouthClasses.length, 'youth');
+        }
+        
+        function searchYouthClasses() {
+            const year = document.getElementById('searchYear')?.value;
+            const exposure = document.getElementById('searchExposure')?.value;
+            const keyword = document.getElementById('searchKeyword')?.value?.toLowerCase();
+            
+            filteredYouthClasses = youthClasses.filter(item => {
+                if (year && item.year != year) return false;
+                if (exposure && item.exposure !== exposure) return false;
+                if (keyword && !item.title.toLowerCase().includes(keyword)) return false;
+                return true;
+            });
+            currentPage = 1;
+            renderYouthClassTable();
+        }
+        
+        function openYouthClassModal(mode, id) {
+            const isEdit = mode === 'edit';
+            const item = isEdit ? youthClasses.find(y => y.id === id) : null;
+            
+            document.getElementById('modalTitle').textContent = isEdit ? '청소년 특별수업 수정' : '청소년 특별수업 등록';
+            document.getElementById('modalBody').innerHTML = `
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">1</span><span class="section-title">기본 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>개설연도 *</th><td><select class="form-select" id="ycYear"><option value="2024" ${item?.year===2024?'selected':''}>2024</option><option value="2023" ${item?.year===2023?'selected':''}>2023</option></select></td></tr>
+                            <tr><th>프로그램명 *</th><td><input type="text" class="form-input" id="ycTitle" value="${item?.title||''}"></td></tr>
+                            <tr><th>신청기간 *</th><td><input type="text" class="form-input" id="ycPeriod" value="${item?.applyPeriod||''}" placeholder="2024.01.01~2024.12.31"></td></tr>
+                            <tr><th>모집정원 *</th><td><input type="number" class="form-input" id="ycCapacity" value="${item?.capacity||''}"></td></tr>
+                            <tr><th>노출여부 *</th><td><select class="form-select" id="ycExposure"><option value="Y" ${item?.exposure==='Y'?'selected':''}>노출</option><option value="N" ${item?.exposure==='N'?'selected':''}>미노출</option></select></td></tr>
+                        </table>
+                    </div>
+                </div>
+            `;
+            document.getElementById('addModal').querySelector('.modal-footer').innerHTML = `
+                <button class="btn btn-primary" onclick="saveYouthClass(${isEdit ? item.id : 'null'})">${isEdit ? '수정' : '등록'}</button>
+                <button class="btn btn-dark" onclick="closeModal('addModal')">취소</button>
+            `;
+            document.getElementById('addModal').classList.add('show');
+        }
+        
+        function saveYouthClass(id) {
+            const data = {
+                year: parseInt(document.getElementById('ycYear').value),
+                title: document.getElementById('ycTitle').value,
+                applyPeriod: document.getElementById('ycPeriod').value,
+                capacity: parseInt(document.getElementById('ycCapacity').value),
+                exposure: document.getElementById('ycExposure').value
+            };
+            
+            if (!data.title || !data.applyPeriod || !data.capacity) {
+                showWarning('필수 항목을 모두 입력해주세요.');
+                return;
+            }
+            
+            if (id) {
+                const idx = youthClasses.findIndex(y => y.id === id);
+                if (idx > -1) youthClasses[idx] = { ...youthClasses[idx], ...data };
+                showSuccess('수정되었습니다.');
+            } else {
+                youthClasses.unshift({
+                    id: youthClasses.length + 1,
+                    ...data,
+                    applicants: 0,
+                    views: 0,
+                    regDate: new Date().toISOString().replace('T', ' ').substring(0, 19)
+                });
+                showSuccess('등록되었습니다.');
+            }
+            closeModal('addModal');
+            filteredYouthClasses = [...youthClasses];
+            renderYouthClassTable();
+        }
+        
+        function showYouthClassApplicants(id) {
+            showAlert('청소년 특별수업 신청자 목록 기능은 추후 업데이트 예정입니다.', 'info');
+        }
+        
+        // ========== 공모사업 페이지 ==========
+        function showContestPage() {
+            document.querySelector('.page-title').textContent = '공모사업';
+            document.querySelector('.breadcrumb').innerHTML = '참여신청관리 <span>></span> 공모사업';
+            filteredContests = [...contests];
+            
+            document.querySelector('.search-box').innerHTML = `
+                <div class="search-row">
+                    <div class="search-label">검색조건</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchYear" onchange="searchContests()">
+                            <option value="">개설연도</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <select class="form-select" id="searchExposure" onchange="searchContests()">
+                            <option value="">노출여부</option>
+                            <option value="Y">노출</option>
+                            <option value="N">미노출</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">키워드</div>
+                    <div class="search-input">
+                        <select class="form-select"><option value="all">전체</option></select>
+                        <input type="text" class="form-input" id="searchKeyword" placeholder="검색어입력">
+                        <button class="btn btn-dark" onclick="searchContests()">검색</button>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">등록일</div>
+                    <div class="search-input">
+                        <div class="date-range">
+                            <input type="date" class="date-input" id="startDate"><span>~</span><input type="date" class="date-input" id="endDate">
+                        </div>
+                        <div class="period-btns">
+                            <button class="btn btn-outline active" onclick="setPeriod('all')">전체</button>
+                            <button class="btn btn-outline" onclick="setPeriod(7)">7일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(15)">15일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(30)">1개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(90)">3개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(180)">6개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(365)">1년</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.querySelector('.table-actions').innerHTML = `<button class="btn btn-primary" onclick="openContestModal('add')">등록</button>`;
+            
+            document.getElementById('tableBody').closest('.data-table').querySelector('thead').innerHTML = `
+                <tr>
+                    <th class="checkbox"><input type="checkbox" id="checkAll" onclick="toggleCheckAll()"></th>
+                    <th>No</th>
+                    <th>개설연도</th>
+                    <th>공모명</th>
+                    <th>공모기간</th>
+                    <th>신청 목록</th>
+                    <th>신청인원/모집정원</th>
+                    <th>조회수</th>
+                    <th>노출여부</th>
+                    <th>등록일시</th>
+                </tr>
+            `;
+            renderContestTable();
+        }
+        
+        function renderContestTable() {
+            const tbody = document.getElementById('tableBody');
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = filteredContests.slice(start, end);
+            
+            tbody.innerHTML = pageData.map((item, idx) => `
+                <tr>
+                    <td class="checkbox"><input type="checkbox" class="row-check" value="${item.id}"></td>
+                    <td>${filteredContests.length - start - idx}</td>
+                    <td>${item.year}</td>
+                    <td><a href="#" onclick="openContestModal('edit', ${item.id})">${item.title}</a></td>
+                    <td>${item.applyPeriod}</td>
+                    <td><button class="btn btn-outline btn-sm" onclick="showContestApplicants(${item.id})">목록</button></td>
+                    <td>${item.applicants}/${item.capacity}</td>
+                    <td>${item.views}</td>
+                    <td><span class="badge ${item.exposure === 'Y' ? 'badge-success' : 'badge-secondary'}">${item.exposure === 'Y' ? '노출' : '미노출'}</span></td>
+                    <td>${item.regDate}</td>
+                </tr>
+            `).join('');
+            
+            renderPaginationFor(filteredContests.length, 'contest');
+        }
+        
+        function searchContests() {
+            const year = document.getElementById('searchYear')?.value;
+            const exposure = document.getElementById('searchExposure')?.value;
+            const keyword = document.getElementById('searchKeyword')?.value?.toLowerCase();
+            
+            filteredContests = contests.filter(item => {
+                if (year && item.year != year) return false;
+                if (exposure && item.exposure !== exposure) return false;
+                if (keyword && !item.title.toLowerCase().includes(keyword)) return false;
+                return true;
+            });
+            currentPage = 1;
+            renderContestTable();
+        }
+        
+        function openContestModal(mode, id) {
+            const isEdit = mode === 'edit';
+            const item = isEdit ? contests.find(c => c.id === id) : null;
+            
+            document.getElementById('modalTitle').textContent = isEdit ? '공모사업 수정' : '공모사업 등록';
+            document.getElementById('modalBody').innerHTML = `
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">1</span><span class="section-title">기본 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>개설연도 *</th><td><select class="form-select" id="ctYear"><option value="2024" ${item?.year===2024?'selected':''}>2024</option><option value="2023" ${item?.year===2023?'selected':''}>2023</option></select></td></tr>
+                            <tr><th>공모명 *</th><td><input type="text" class="form-input" id="ctTitle" value="${item?.title||''}"></td></tr>
+                            <tr><th>공모기간 *</th><td><input type="text" class="form-input" id="ctPeriod" value="${item?.applyPeriod||''}" placeholder="2024.01.01~2024.12.31"></td></tr>
+                            <tr><th>모집정원 *</th><td><input type="number" class="form-input" id="ctCapacity" value="${item?.capacity||''}"></td></tr>
+                            <tr><th>노출여부 *</th><td><select class="form-select" id="ctExposure"><option value="Y" ${item?.exposure==='Y'?'selected':''}>노출</option><option value="N" ${item?.exposure==='N'?'selected':''}>미노출</option></select></td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">2</span><span class="section-title">공모 상세</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>공모 내용</th><td><textarea class="form-input" style="width:100%;min-height:100px;" placeholder="공모 내용을 입력하세요."></textarea></td></tr>
+                            <tr><th>참가자격</th><td><input type="text" class="form-input" placeholder="예: 광명시 거주 시민"></td></tr>
+                            <tr><th>시상내역</th><td><input type="text" class="form-input" placeholder="예: 대상 1명(100만원), 최우수상 2명(50만원)"></td></tr>
+                        </table>
+                    </div>
+                </div>
+            `;
+            document.getElementById('addModal').querySelector('.modal-footer').innerHTML = `
+                <button class="btn btn-primary" onclick="saveContest(${isEdit ? item.id : 'null'})">${isEdit ? '수정' : '등록'}</button>
+                <button class="btn btn-dark" onclick="closeModal('addModal')">취소</button>
+            `;
+            document.getElementById('addModal').classList.add('show');
+        }
+        
+        function saveContest(id) {
+            const data = {
+                year: parseInt(document.getElementById('ctYear').value),
+                title: document.getElementById('ctTitle').value,
+                applyPeriod: document.getElementById('ctPeriod').value,
+                capacity: parseInt(document.getElementById('ctCapacity').value),
+                exposure: document.getElementById('ctExposure').value
+            };
+            
+            if (!data.title || !data.applyPeriod || !data.capacity) {
+                showWarning('필수 항목을 모두 입력해주세요.');
+                return;
+            }
+            
+            if (id) {
+                const idx = contests.findIndex(c => c.id === id);
+                if (idx > -1) contests[idx] = { ...contests[idx], ...data };
+                showSuccess('수정되었습니다.');
+            } else {
+                contests.unshift({
+                    id: contests.length + 1,
+                    ...data,
+                    applicants: 0,
+                    views: 0,
+                    regDate: new Date().toISOString().replace('T', ' ').substring(0, 19)
+                });
+                showSuccess('등록되었습니다.');
+            }
+            closeModal('addModal');
+            filteredContests = [...contests];
+            renderContestTable();
+        }
+        
+        function showContestApplicants(id) {
+            showAlert('공모사업 신청자 목록 기능은 추후 업데이트 예정입니다.', 'info');
+        }
+        
+        // ========== 탄소중립활동 페이지 ==========
+        function showCarbonActivityPage() {
+            document.querySelector('.page-title').textContent = '탄소중립활동';
+            document.querySelector('.breadcrumb').innerHTML = '참여신청관리 <span>></span> 탄소중립활동';
+            filteredCarbonActivities = [...carbonActivities];
+            
+            document.querySelector('.search-box').innerHTML = `
+                <div class="search-row">
+                    <div class="search-label">검색조건</div>
+                    <div class="search-input">
+                        <select class="form-select" id="searchYear" onchange="searchCarbonActivities()">
+                            <option value="">개설연도</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <select class="form-select" id="searchExposure" onchange="searchCarbonActivities()">
+                            <option value="">노출여부</option>
+                            <option value="Y">노출</option>
+                            <option value="N">미노출</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">키워드</div>
+                    <div class="search-input">
+                        <select class="form-select"><option value="all">전체</option></select>
+                        <input type="text" class="form-input" id="searchKeyword" placeholder="검색어입력">
+                        <button class="btn btn-dark" onclick="searchCarbonActivities()">검색</button>
+                    </div>
+                </div>
+                <div class="search-row">
+                    <div class="search-label">등록일</div>
+                    <div class="search-input">
+                        <div class="date-range">
+                            <input type="date" class="date-input" id="startDate"><span>~</span><input type="date" class="date-input" id="endDate">
+                        </div>
+                        <div class="period-btns">
+                            <button class="btn btn-outline active" onclick="setPeriod('all')">전체</button>
+                            <button class="btn btn-outline" onclick="setPeriod(7)">7일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(15)">15일</button>
+                            <button class="btn btn-outline" onclick="setPeriod(30)">1개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(90)">3개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(180)">6개월</button>
+                            <button class="btn btn-outline" onclick="setPeriod(365)">1년</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.querySelector('.table-actions').innerHTML = `<button class="btn btn-primary" onclick="openCarbonModal('add')">등록</button>`;
+            
+            document.getElementById('tableBody').closest('.data-table').querySelector('thead').innerHTML = `
+                <tr>
+                    <th class="checkbox"><input type="checkbox" id="checkAll" onclick="toggleCheckAll()"></th>
+                    <th>No</th>
+                    <th>개설연도</th>
+                    <th>활동명</th>
+                    <th>활동기간</th>
+                    <th>참여 목록</th>
+                    <th>참여인원/모집정원</th>
+                    <th>조회수</th>
+                    <th>노출여부</th>
+                    <th>등록일시</th>
+                </tr>
+            `;
+            renderCarbonActivityTable();
+        }
+        
+        function renderCarbonActivityTable() {
+            const tbody = document.getElementById('tableBody');
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = filteredCarbonActivities.slice(start, end);
+            
+            tbody.innerHTML = pageData.map((item, idx) => `
+                <tr>
+                    <td class="checkbox"><input type="checkbox" class="row-check" value="${item.id}"></td>
+                    <td>${filteredCarbonActivities.length - start - idx}</td>
+                    <td>${item.year}</td>
+                    <td><a href="#" onclick="openCarbonModal('edit', ${item.id})">${item.title}</a></td>
+                    <td>${item.applyPeriod}</td>
+                    <td><button class="btn btn-outline btn-sm" onclick="showCarbonParticipants(${item.id})">목록</button></td>
+                    <td>${item.applicants}/${item.capacity}</td>
+                    <td>${item.views}</td>
+                    <td><span class="badge ${item.exposure === 'Y' ? 'badge-success' : 'badge-secondary'}">${item.exposure === 'Y' ? '노출' : '미노출'}</span></td>
+                    <td>${item.regDate}</td>
+                </tr>
+            `).join('');
+            
+            renderPaginationFor(filteredCarbonActivities.length, 'carbon');
+        }
+        
+        function searchCarbonActivities() {
+            const year = document.getElementById('searchYear')?.value;
+            const exposure = document.getElementById('searchExposure')?.value;
+            const keyword = document.getElementById('searchKeyword')?.value?.toLowerCase();
+            
+            filteredCarbonActivities = carbonActivities.filter(item => {
+                if (year && item.year != year) return false;
+                if (exposure && item.exposure !== exposure) return false;
+                if (keyword && !item.title.toLowerCase().includes(keyword)) return false;
+                return true;
+            });
+            currentPage = 1;
+            renderCarbonActivityTable();
+        }
+        
+        function openCarbonModal(mode, id) {
+            const isEdit = mode === 'edit';
+            const item = isEdit ? carbonActivities.find(c => c.id === id) : null;
+            
+            document.getElementById('modalTitle').textContent = isEdit ? '탄소중립활동 수정' : '탄소중립활동 등록';
+            document.getElementById('modalBody').innerHTML = `
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">1</span><span class="section-title">기본 정보</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>개설연도 *</th><td><select class="form-select" id="cbYear"><option value="2024" ${item?.year===2024?'selected':''}>2024</option><option value="2023" ${item?.year===2023?'selected':''}>2023</option></select></td></tr>
+                            <tr><th>활동명 *</th><td><input type="text" class="form-input" id="cbTitle" value="${item?.title||''}"></td></tr>
+                            <tr><th>활동기간 *</th><td><input type="text" class="form-input" id="cbPeriod" value="${item?.applyPeriod||''}" placeholder="2024.01.01~2024.12.31"></td></tr>
+                            <tr><th>모집정원 *</th><td><input type="number" class="form-input" id="cbCapacity" value="${item?.capacity||''}"></td></tr>
+                            <tr><th>노출여부 *</th><td><select class="form-select" id="cbExposure"><option value="Y" ${item?.exposure==='Y'?'selected':''}>노출</option><option value="N" ${item?.exposure==='N'?'selected':''}>미노출</option></select></td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="section-header"><span class="section-number">2</span><span class="section-title">탄소중립 활동 상세</span></div>
+                    <div class="section-body">
+                        <table class="info-table">
+                            <tr><th>활동 내용</th><td><textarea class="form-input" style="width:100%;min-height:100px;" placeholder="탄소중립 활동 내용을 입력하세요."></textarea></td></tr>
+                            <tr><th>탄소포인트</th><td><input type="number" class="form-input" placeholder="예: 100"></td></tr>
+                            <tr><th>인증방법</th><td><input type="text" class="form-input" placeholder="예: 사진 인증, 영수증 제출"></td></tr>
+                        </table>
+                    </div>
+                </div>
+            `;
+            document.getElementById('addModal').querySelector('.modal-footer').innerHTML = `
+                <button class="btn btn-primary" onclick="saveCarbonActivity(${isEdit ? item.id : 'null'})">${isEdit ? '수정' : '등록'}</button>
+                <button class="btn btn-dark" onclick="closeModal('addModal')">취소</button>
+            `;
+            document.getElementById('addModal').classList.add('show');
+        }
+        
+        function saveCarbonActivity(id) {
+            const data = {
+                year: parseInt(document.getElementById('cbYear').value),
+                title: document.getElementById('cbTitle').value,
+                applyPeriod: document.getElementById('cbPeriod').value,
+                capacity: parseInt(document.getElementById('cbCapacity').value),
+                exposure: document.getElementById('cbExposure').value
+            };
+            
+            if (!data.title || !data.applyPeriod || !data.capacity) {
+                showWarning('필수 항목을 모두 입력해주세요.');
+                return;
+            }
+            
+            if (id) {
+                const idx = carbonActivities.findIndex(c => c.id === id);
+                if (idx > -1) carbonActivities[idx] = { ...carbonActivities[idx], ...data };
+                showSuccess('수정되었습니다.');
+            } else {
+                carbonActivities.unshift({
+                    id: carbonActivities.length + 1,
+                    ...data,
+                    applicants: 0,
+                    views: 0,
+                    regDate: new Date().toISOString().replace('T', ' ').substring(0, 19)
+                });
+                showSuccess('등록되었습니다.');
+            }
+            closeModal('addModal');
+            filteredCarbonActivities = [...carbonActivities];
+            renderCarbonActivityTable();
+        }
+        
+        function showCarbonParticipants(id) {
+            showAlert('탄소중립활동 참여자 목록 기능은 추후 업데이트 예정입니다.', 'info');
+        }
+        
+        // ========== 공용 페이지네이션 함수 ==========
+        function renderPaginationFor(totalItems, tabType) {
+            const totalPages = Math.ceil(totalItems / pageSize);
+            const pagination = document.querySelector('.pagination');
+            
+            let html = `<button class="page-btn" onclick="goToPageFor(1, '${tabType}')">&laquo;</button>`;
+            html += `<button class="page-btn" onclick="goToPageFor(${Math.max(1, currentPage - 1)}, '${tabType}')">&lsaquo;</button>`;
+            
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                    html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPageFor(${i}, '${tabType}')">${i}</button>`;
+                } else if (i === currentPage - 3 || i === currentPage + 3) {
+                    html += `<span>...</span>`;
+                }
+            }
+            
+            html += `<button class="page-btn" onclick="goToPageFor(${Math.min(totalPages, currentPage + 1)}, '${tabType}')">&rsaquo;</button>`;
+            html += `<button class="page-btn" onclick="goToPageFor(${totalPages}, '${tabType}')">&raquo;</button>`;
+            
+            pagination.innerHTML = html;
+        }
+        
+        function goToPageFor(page, tabType) {
+            currentPage = page;
+            if (tabType === 'group') renderGroupClassTable();
+            else if (tabType === 'youth') renderYouthClassTable();
+            else if (tabType === 'contest') renderContestTable();
+            else if (tabType === 'carbon') renderCarbonActivityTable();
+        }
+
+        function saveExhApplicantDetail(id) {
+            const item = exhibitionApplicants.find(a => a.id === id);
+            if (item) {
+                item.status = document.getElementById('exhDetailStatus').value;
+                if (item.status === '확정' && !item.approveDate) {
+                    item.approveDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                }
+            }
+            closeModal('detailModal');
+            renderExhibitionApplicantsTable();
+            showSuccess('저장되었습니다.');
+        }
+    </script>
+</body>
+</html>
