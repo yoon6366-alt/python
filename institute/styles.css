@@ -1,0 +1,240 @@
+/* ========================================== */
+/* S연구원 공통 스타일 */
+/* ========================================== */
+
+/* Mega Menu Styles */
+.gnb-link[aria-expanded="true"] {
+  color: #1a4b8c;
+}
+.gnb-link[aria-expanded="true"]::after {
+  width: 100%;
+}
+.gnb-link[aria-expanded="true"] .gnb-arrow {
+  transform: rotate(180deg);
+}
+.mega-panel.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.mega-backdrop.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 2depth menu with 3depth */
+.depth2-item.has-depth3 .depth3-list {
+  display: none;
+}
+.depth2-item.has-depth3.is-open .depth3-list {
+  display: block;
+}
+.depth2-item.has-depth3.is-open .depth2-arrow {
+  transform: rotate(180deg);
+}
+
+/* ========================================== */
+/* 메인페이지 스타일 */
+/* ========================================== */
+
+/* 배너 슬라이더 */
+.hero-banner .banner-track {
+  will-change: transform;
+}
+
+.hero-banner .banner-slide {
+  will-change: opacity;
+}
+
+/* 배너 텍스트 애니메이션 */
+.banner-slide h2,
+.banner-slide p,
+.banner-slide span {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.banner-slide p {
+  animation-delay: 0.15s;
+  animation-fill-mode: both;
+}
+
+/* 배너 인디케이터 */
+.banner-indicator {
+  transition: all 0.3s ease;
+}
+
+.banner-indicator[aria-selected="true"] {
+  background-color: white;
+}
+
+/* 연구카드 2줄 말줄임 */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 필터 버튼 기본 스타일 */
+.filter-btn {
+  border: 1px solid #e5e7eb;
+  background: white;
+  color: #4b5563;
+}
+
+.filter-btn:hover {
+  border-color: #1a4b8c;
+  color: #1a4b8c;
+}
+
+.filter-btn[aria-selected="true"] {
+  background: #1a4b8c;
+  color: white;
+  border-color: #1a4b8c;
+}
+
+/* 연구카드 호버 효과 */
+.research-card {
+  transition: all 0.3s ease;
+}
+
+.research-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ========================================== */
+/* 세컨더리 내비게이션 스타일 */
+/* ========================================== */
+
+/* 드롭다운 기본 스타일 */
+.nav-dropdown-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+/* 드롭다운 스크롤바 스타일링 */
+.nav-dropdown-list::-webkit-scrollbar {
+  width: 6px;
+}
+.nav-dropdown-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.nav-dropdown-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+.nav-dropdown-list::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* 드롭다운 열림 상태 */
+.nav-dropdown.is-open .nav-dropdown-btn {
+  border-color: #1a4b8c;
+  color: #1a4b8c;
+}
+
+/* 모바일 드로어 */
+.mobile-nav-drawer {
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 모바일 드로어 열림 상태 */
+.mobile-nav-drawer.is-open {
+  transform: translateY(0);
+}
+
+/* 페이지 히어로 섹션 애니메이션 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-hero h1,
+.page-hero p {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.page-hero p {
+  animation-delay: 0.1s;
+  animation-fill-mode: both;
+}
+
+/* ========================================== */
+/* 반응형 스타일 */
+/* ========================================== */
+
+/* 태블릿 이하 */
+@media (max-width: 767px) {
+  .secondary-nav {
+    position: sticky;
+    top: 72px;
+  }
+  
+  .mobile-nav-drawer {
+    max-height: calc(100vh - 128px);
+  }
+}
+
+/* 데스크톱 */
+@media (min-width: 768px) {
+  .nav-dropdown-list {
+    min-width: 180px;
+  }
+}
+
+/* 대형 화면 */
+@media (min-width: 1280px) {
+  .page-hero {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+/* ========================================== */
+/* 포커스 스타일 (접근성) */
+/* ========================================== */
+
+.nav-dropdown-btn:focus-visible,
+.nav-dropdown-list a:focus-visible,
+.mobile-nav-toggle:focus-visible,
+.mobile-depth1-item:focus-visible,
+.mobile-depth2-list a:focus-visible {
+  outline: 2px solid #2a6bc4;
+  outline-offset: 2px;
+}
+
+/* 리스트 아이템 포커스 */
+.nav-dropdown-list a:focus {
+  background-color: rgba(26, 75, 140, 0.05);
+}
+
+/* ========================================== */
+/* 프린트 스타일 */
+/* ========================================== */
+
+@media print {
+  .secondary-nav,
+  .mega-backdrop,
+  .mobile-nav-drawer,
+  .mobile-nav-backdrop {
+    display: none !important;
+  }
+  
+  .page-hero {
+    background: #f5f7fa !important;
+    color: #1a1a1a !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .page-hero p {
+    color: #666 !important;
+  }
+}
