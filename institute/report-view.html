@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>연구보고서 - S연구원</title>
+  <title>교통사업의 파급효과 분석체계 구축방안 - S연구원</title>
   <!-- Pretendard Font -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
   <!-- Tailwind CSS CDN -->
@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <!-- Mega Menu Panels (간소화 - 공통 모듈로 분리 가능) -->
+    <!-- Mega Menu Panels -->
     <div class="absolute top-[72px] left-0 right-0">
       <!-- 연구 메가메뉴 -->
       <div 
@@ -526,10 +526,10 @@
             </ul>
           </div>
 
-          <!-- 브레드크럼 텍스트 (선택적 - 현재 페이지 표시) -->
+          <!-- 브레드크럼 텍스트 (현재 페이지 표시) -->
           <div class="ml-auto flex items-center text-sm text-gray-500">
             <span class="sr-only">현재 페이지:</span>
-            <span class="breadcrumb-current font-medium text-gray-900">연구보고서</span>
+            <span class="breadcrumb-current font-medium text-gray-900">상세보기</span>
           </div>
         </div>
 
@@ -546,524 +546,442 @@
             </svg>
           </a>
 
-          <!-- 현재 위치 표시 + 드로어 토글 -->
-          <button 
-            type="button"
-            class="mobile-nav-toggle flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary transition-all"
-            aria-expanded="false"
-            aria-controls="mobile-nav-drawer"
-          >
-            <span class="mobile-breadcrumb">연구 &gt; 연구보고서</span>
-            <svg class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
+          <!-- 현재 위치 표시 -->
+          <span class="text-sm font-medium text-gray-700">연구 &gt; 연구보고서 &gt; 상세보기</span>
+          
+          <!-- 빈 공간 확보 -->
+          <div class="w-9"></div>
         </div>
       </div>
-
-      <!-- 모바일 내비게이션 드로어 -->
-      <div 
-        id="mobile-nav-drawer"
-        class="mobile-nav-drawer fixed inset-x-0 top-[128px] bottom-0 bg-white z-[200] transform translate-y-full transition-transform duration-300 overflow-auto md:hidden"
-        aria-hidden="true"
-      >
-        <div class="p-4">
-          <!-- 1뎁스 선택 -->
-          <div class="mb-4">
-            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">카테고리</h3>
-            <ul class="space-y-1" role="listbox" aria-label="1뎁스 카테고리 선택">
-              <li role="option" aria-selected="true">
-                <a href="#" class="mobile-depth1-item block px-3 py-3 text-primary bg-primary/5 font-medium border-l-4 border-primary" data-category="research">연구</a>
-              </li>
-              <li role="option" aria-selected="false">
-                <a href="#" class="mobile-depth1-item block px-3 py-3 text-gray-700 hover:text-primary hover:bg-gray-50 border-l-4 border-transparent" data-category="trends">동향</a>
-              </li>
-              <li role="option" aria-selected="false">
-                <a href="#" class="mobile-depth1-item block px-3 py-3 text-gray-700 hover:text-primary hover:bg-gray-50 border-l-4 border-transparent" data-category="media">미디어</a>
-              </li>
-              <li role="option" aria-selected="false">
-                <a href="#" class="mobile-depth1-item block px-3 py-3 text-gray-700 hover:text-primary hover:bg-gray-50 border-l-4 border-transparent" data-category="community">소통</a>
-              </li>
-              <li role="option" aria-selected="false">
-                <a href="#" class="mobile-depth1-item block px-3 py-3 text-gray-700 hover:text-primary hover:bg-gray-50 border-l-4 border-transparent" data-category="about">소개</a>
-              </li>
-            </ul>
-          </div>
-
-          <!-- 2뎁스 선택 -->
-          <div class="border-t border-gray-200 pt-4">
-            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">페이지</h3>
-            <ul class="mobile-depth2-list space-y-1" role="listbox" aria-label="2뎁스 페이지 선택">
-              <!-- JavaScript로 동적 생성 -->
-              <li role="option" aria-selected="true">
-                <a href="subpage.html?cat=research&page=reports" class="block px-3 py-3 text-primary bg-primary/5 font-medium">연구보고서</a>
-              </li>
-              <li role="option" aria-selected="false">
-                <a href="subpage.html?cat=research&page=books" class="block px-3 py-3 text-gray-700 hover:text-primary hover:bg-gray-50">단행본</a>
-              </li>
-              <li role="option" aria-selected="false">
-                <a href="subpage.html?cat=research&page=policy" class="block px-3 py-3 text-gray-700 hover:text-primary hover:bg-gray-50">정책리포트</a>
-              </li>
-              <li role="option" aria-selected="false">
-                <a href="subpage.html?cat=research&page=urban" class="block px-3 py-3 text-gray-700 hover:text-primary hover:bg-gray-50">도시연구</a>
-              </li>
-              <li role="option" aria-selected="false">
-                <a href="subpage.html?cat=research&page=academic" class="block px-3 py-3 text-gray-700 hover:text-primary hover:bg-gray-50">학술행사자료</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- 모바일 드로어 백드롭 -->
-      <div 
-        class="mobile-nav-backdrop fixed inset-0 bg-black/50 z-[150] opacity-0 invisible transition-all duration-300 md:hidden"
-        aria-hidden="true"
-      ></div>
     </nav>
 
     <!-- ========================================== -->
     <!-- 페이지 콘텐츠 영역 -->
     <!-- ========================================== -->
-    <section class="py-8 md:py-12 lg:py-16">
+
+    <!-- 보고서 상세 정보 -->
+    <section class="py-8 md:py-12 bg-white">
       <div class="max-w-container mx-auto px-4 lg:px-6">
-        
-        <!-- 카테고리 필터 버튼 -->
-        <div class="mb-8">
-          <div class="space-y-3">
-            <!-- 첫 번째 줄: 5개 버튼 -->
-            <div class="flex justify-center gap-2 md:gap-3">
-              <button type="button" class="category-filter-btn px-4 md:px-6 py-2.5 text-sm md:text-base font-medium bg-primary text-white transition-all" data-category="all">
-                전체
-              </button>
-              <button type="button" class="category-filter-btn px-4 md:px-6 py-2.5 text-sm md:text-base font-medium bg-white text-gray-700 border border-gray-200 hover:border-primary hover:text-primary transition-all" data-category="social">
-                사회/복지
-              </button>
-              <button type="button" class="category-filter-btn px-4 md:px-6 py-2.5 text-sm md:text-base font-medium bg-white text-gray-700 border border-gray-200 hover:border-primary hover:text-primary transition-all" data-category="economy">
-                경제/행재정
-              </button>
-              <button type="button" class="category-filter-btn px-4 md:px-6 py-2.5 text-sm md:text-base font-medium bg-white text-gray-700 border border-gray-200 hover:border-primary hover:text-primary transition-all" data-category="urban">
-                도시계획/주택
-              </button>
-              <button type="button" class="category-filter-btn px-4 md:px-6 py-2.5 text-sm md:text-base font-medium bg-white text-gray-700 border border-gray-200 hover:border-primary hover:text-primary transition-all" data-category="traffic">
-                교통
-              </button>
-            </div>
-            
-            <!-- 두 번째 줄: 4개 버튼 -->
-            <div class="flex justify-center gap-2 md:gap-3">
-              <button type="button" class="category-filter-btn px-4 md:px-6 py-2.5 text-sm md:text-base font-medium bg-white text-gray-700 border border-gray-200 hover:border-primary hover:text-primary transition-all" data-category="climate">
-                기후변화/환경
-              </button>
-              <button type="button" class="category-filter-btn px-4 md:px-6 py-2.5 text-sm md:text-base font-medium bg-white text-gray-700 border border-gray-200 hover:border-primary hover:text-primary transition-all" data-category="safety">
-                안전/인프라
-              </button>
-              <button type="button" class="category-filter-btn px-4 md:px-6 py-2.5 text-sm md:text-base font-medium bg-white text-gray-700 border border-gray-200 hover:border-primary hover:text-primary transition-all" data-category="digital">
-                디지털/기술
-              </button>
-              <button type="button" class="category-filter-btn px-4 md:px-6 py-2.5 text-sm md:text-base font-medium bg-white text-gray-700 border border-gray-200 hover:border-primary hover:text-primary transition-all" data-category="culture">
-                문화관광
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 검색 영역 -->
-        <div class="mb-8 md:mb-12">
-          <div class="flex flex-col md:flex-row gap-3">
-            <div class="flex-1">
-              <input 
-                type="text" 
-                id="search-input"
-                class="w-full px-4 py-3 border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                placeholder="검색어를 입력해주세요."
-                aria-label="검색어 입력"
-              >
-            </div>
-            <button 
-              type="button" 
-              id="advanced-search-toggle"
-              class="px-6 py-3 bg-white text-gray-700 font-medium border border-gray-300 hover:bg-gray-50 hover:border-primary hover:text-primary transition-all whitespace-nowrap"
-            >
-              상세검색 열기
-            </button>
-          </div>
-        </div>
-
-        <!-- 결과 카운트 -->
-        <div class="mb-6">
-          <p class="text-base md:text-lg text-gray-700">
-            <strong class="text-primary font-semibold" id="result-count">127</strong>개의 연구보고서가 있습니다.
-          </p>
-        </div>
-
-        <!-- 연구보고서 목록 -->
-        <div class="space-y-8 mb-8">
+        <div class="flex flex-col lg:flex-row gap-6 lg:gap-10">
           
-          <!-- 보고서 카드 1 -->
-          <article class="report-card bg-white border border-gray-200 hover:border-primary hover:shadow-lg transition-all duration-300">
-            <a href="report-view.html?id=1" class="flex flex-col md:flex-row gap-6 p-5 md:p-6">
-              <!-- 좌측: 표지 이미지 -->
-              <div class="flex-shrink-0 w-full md:w-[180px] lg:w-[200px]">
-                <div class="aspect-[3/4] bg-gradient-to-br from-primary/20 to-primary/5 border border-gray-200 flex items-center justify-center">
-                  <svg class="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                  </svg>
-                </div>
+          <!-- 좌측: 보고서 이미지 -->
+          <div class="flex-shrink-0 w-full lg:w-[220px]">
+            <div class="sticky top-[148px]">
+              <!-- 표지 이미지 -->
+              <div class="aspect-[3/4] bg-gradient-to-br from-primary/20 to-primary/5 border border-gray-200 flex items-center justify-center mb-4">
+                <svg class="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
               </div>
               
-              <!-- 우측: 메타정보 -->
-              <div class="flex-1 flex flex-col">
-                <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                  교통사업의 파급효과 분석체계 구축방안
-                </h3>
-                
-                <!-- 메타 정보 -->
-                <div class="text-sm text-gray-600 mb-3 space-y-1.5">
-                  <div class="flex items-center gap-4">
-                    <span class="flex items-center gap-1.5">
-                      <span class="font-medium text-gray-700">주제</span>
-                      <span class="text-primary">교통</span>
-                    </span>
-                    <span class="flex items-center gap-1.5">
-                      <span class="font-medium text-gray-700">저자</span>
-                      <span>홍길동</span>
-                    </span>
-                  </div>
-                  <div class="flex items-center gap-4">
-                    <span class="flex items-center gap-1.5">
-                      <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                      </svg>
-                      <span>2026-01-05</span>
-                    </span>
-                    <span class="flex items-center gap-1.5">
-                      <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                      </svg>
-                      <span>1,234</span>
-                    </span>
-                  </div>
-                </div>
-                
-                <!-- 설명 -->
-                <p class="text-sm md:text-base text-gray-600 leading-relaxed mb-4 line-clamp-2">
-                  서울시 교통사업의 경제적 파급효과를 체계적으로 분석하기 위한 방안을 제시하고, 주요 교통 인프라 사업이 지역경제에 미치는 영향을 정량적으로 평가할 수 있는 모델을 구축하였습니다.
-                </p>
-                
-                <!-- 액션 버튼 -->
-                <div class="flex flex-wrap gap-2 mt-auto">
-                  <span class="px-4 py-2 bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-all">
-                    <span class="flex items-center gap-2">
-                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                      </svg>
-                      다운로드
-                    </span>
+              <!-- 버튼 -->
+              <div class="flex gap-2">
+                <button type="button" class="flex-1 px-3 py-2.5 bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-all">
+                  <span class="flex items-center justify-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    다운로드
                   </span>
-                  <span class="px-4 py-2 bg-white text-gray-700 text-sm font-medium border border-gray-300 hover:bg-gray-50 hover:border-primary hover:text-primary transition-all">
-                    <span class="flex items-center gap-2">
-                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                      </svg>
-                      바로보기
-                    </span>
+                </button>
+                <button type="button" class="flex-1 px-3 py-2.5 bg-white text-gray-700 text-sm font-medium border border-gray-300 hover:bg-gray-50 hover:border-primary hover:text-primary transition-all">
+                  <span class="flex items-center justify-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                    바로보기
                   </span>
-                </div>
+                </button>
               </div>
-            </a>
-          </article>
+            </div>
+          </div>
 
-          <!-- 보고서 카드 2 -->
-          <article class="report-card bg-white border border-gray-200 hover:border-primary hover:shadow-lg transition-all duration-300">
-            <a href="report-view.html?id=2" class="flex flex-col md:flex-row gap-6 p-5 md:p-6">
-              <div class="flex-shrink-0 w-full md:w-[180px] lg:w-[200px]">
-                <div class="aspect-[3/4] bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 border border-gray-200 flex items-center justify-center">
-                  <svg class="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                  </svg>
-                </div>
-              </div>
-              <div class="flex-1 flex flex-col">
-                <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                  기후변화 대응을 위한 도시 녹지 확충 방안 연구
-                </h3>
-                <div class="text-sm text-gray-600 mb-3 space-y-1.5">
-                  <div class="flex items-center gap-4">
-                    <span class="flex items-center gap-1.5">
-                      <span class="font-medium text-gray-700">주제</span>
-                      <span class="text-primary">기후변화/환경</span>
-                    </span>
-                    <span class="flex items-center gap-1.5">
-                      <span class="font-medium text-gray-700">저자</span>
-                      <span>김연구</span>
-                    </span>
-                  </div>
-                  <div class="flex items-center gap-4">
-                    <span class="flex items-center gap-1.5">
-                      <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                      </svg>
-                      <span>2026-01-04</span>
-                    </span>
-                    <span class="flex items-center gap-1.5">
-                      <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                      </svg>
-                      <span>987</span>
-                    </span>
-                  </div>
-                </div>
-                <p class="text-sm md:text-base text-gray-600 leading-relaxed mb-4 line-clamp-2">
-                  도시 열섬 현상 완화와 탄소 흡수를 위한 녹지 공간 확충 전략을 제시하며, 주거지역과 상업지역의 녹화율 개선 방안을 제안합니다.
-                </p>
-                <div class="flex flex-wrap gap-2 mt-auto">
-                  <span class="px-4 py-2 bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-all">
-                    <span class="flex items-center gap-2">
-                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                      </svg>
-                      다운로드
-                    </span>
-                  </span>
-                  <span class="px-4 py-2 bg-white text-gray-700 text-sm font-medium border border-gray-300 hover:bg-gray-50 hover:border-primary hover:text-primary transition-all">
-                    <span class="flex items-center gap-2">
-                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                      </svg>
-                      바로보기
-                    </span>
-                  </span>
-                </div>
-              </div>
-            </a>
-          </article>
+          <!-- 우측: 메타 정보 -->
+          <div class="flex-1 flex flex-col">
+            <!-- 제목 -->
+            <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+              교통사업의 파급효과 분석체계 구축방안
+            </h1>
 
-          <!-- 보고서 카드 3-10 (간략 버전) -->
-          <article class="report-card bg-white border border-gray-200 hover:border-primary hover:shadow-lg transition-all duration-300">
-            <a href="report-view.html?id=3" class="flex flex-col md:flex-row gap-6 p-5 md:p-6">
-              <div class="flex-shrink-0 w-full md:w-[180px] lg:w-[200px]">
-                <div class="aspect-[3/4] bg-gradient-to-br from-violet-500/20 to-violet-500/5 border border-gray-200 flex items-center justify-center">
-                  <svg class="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                  </svg>
-                </div>
-              </div>
-              <div class="flex-1 flex flex-col">
-                <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                  디지털 플랫폼 경제와 서울시 산업 정책 방향
-                </h3>
-                <div class="text-sm text-gray-600 mb-3 space-y-1.5">
-                  <div class="flex items-center gap-4">
-                    <span class="flex items-center gap-1.5">
-                      <span class="font-medium text-gray-700">주제</span>
-                      <span class="text-primary">디지털/기술</span>
-                    </span>
-                    <span class="flex items-center gap-1.5">
-                      <span class="font-medium text-gray-700">저자</span>
-                      <span>이혁신</span>
-                    </span>
-                  </div>
-                  <div class="flex items-center gap-4">
-                    <span class="flex items-center gap-1.5">
-                      <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                      </svg>
-                      <span>2026-01-03</span>
-                    </span>
-                    <span class="flex items-center gap-1.5">
-                      <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                      </svg>
-                      <span>756</span>
-                    </span>
-                  </div>
-                </div>
-                <p class="text-sm md:text-base text-gray-600 leading-relaxed mb-4 line-clamp-2">
-                  플랫폼 기반 디지털 경제의 성장이 서울시 산업 구조에 미치는 영향을 분석하고, 스타트업 생태계 활성화를 위한 정책 방안을 제시합니다.
-                </p>
-                <div class="flex flex-wrap gap-2 mt-auto">
-                  <span class="px-4 py-2 bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-all">
-                    <span class="flex items-center gap-2">
-                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                      </svg>
-                      다운로드
-                    </span>
-                  </span>
-                  <span class="px-4 py-2 bg-white text-gray-700 text-sm font-medium border border-gray-300 hover:bg-gray-50 hover:border-primary hover:text-primary transition-all">
-                    <span class="flex items-center gap-2">
-                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                      </svg>
-                      바로보기
-                    </span>
-                  </span>
-                </div>
-              </div>
-            </a>
-          </article>
+            <!-- 메타 정보 테이블 -->
+            <div class="grid grid-cols-[auto_1fr_auto_1fr] gap-x-6 gap-y-3 text-base mb-6">
+              <!-- 첫 번째 줄 -->
+              <span class="text-gray-500">주제</span>
+              <span class="text-primary font-medium">교통</span>
+              <span class="text-gray-500">저자</span>
+              <span class="text-gray-900">홍길동</span>
 
+              <!-- 두 번째 줄 -->
+              <span class="text-gray-500">과제코드</span>
+              <span class="text-gray-900">2023-PR-55</span>
+              <span class="text-gray-500">분량/크기(page)</span>
+              <span class="text-gray-900">74</span>
+
+              <!-- 세 번째 줄 -->
+              <span class="text-gray-500">발간유형</span>
+              <span class="text-gray-900">정책</span>
+              <span class="text-gray-500">부서명</span>
+              <span class="text-gray-900">교통연구실</span>
+
+              <!-- 네 번째 줄 -->
+              <span class="text-gray-500">발행일</span>
+              <span class="text-gray-900 col-span-3">2026-01-05</span>
+            </div>
+
+            <!-- 해시태그 -->
+            <div class="flex flex-wrap gap-2 mt-auto pt-6 border-t border-gray-200">
+              <a href="#" class="px-3 py-1.5 bg-gray-100 text-gray-600 text-sm hover:bg-primary/10 hover:text-primary transition-all">
+                #교통사업
+              </a>
+              <a href="#" class="px-3 py-1.5 bg-gray-100 text-gray-600 text-sm hover:bg-primary/10 hover:text-primary transition-all">
+                #교통계획
+              </a>
+              <a href="#" class="px-3 py-1.5 bg-gray-100 text-gray-600 text-sm hover:bg-primary/10 hover:text-primary transition-all">
+                #교통인프라
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 본문 영역 -->
+    <section class="py-8 md:py-12">
+      <div class="max-w-container mx-auto px-4 lg:px-6">
+        
+        <!-- 핵심 카피라이터 문구 -->
+        <div class="relative bg-gray-100 px-8 py-10 mb-12">
+          <!-- 상단 따옴표 -->
+          <svg class="absolute top-4 left-4 w-8 h-8 text-gray-300" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+          </svg>
+          
+          <p class="text-center text-lg md:text-xl text-gray-700 leading-relaxed px-8">
+            서울시 교통사업의 경제적 파급효과를 체계적으로 분석하고,<br class="hidden md:block">
+            지역경제 활성화를 위한 정량적 평가 모델을 제시합니다.
+          </p>
+          
+          <!-- 하단 따옴표 -->
+          <svg class="absolute bottom-4 right-4 w-8 h-8 text-gray-300 rotate-180" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+          </svg>
         </div>
 
-        <!-- 페이지네이션 -->
-        <nav class="flex justify-center items-center gap-2" aria-label="페이지 네비게이션">
-          <button type="button" class="pagination-btn w-10 h-10 flex items-center justify-center border border-gray-300 text-gray-500 hover:border-primary hover:text-primary transition-all disabled:opacity-50 disabled:cursor-not-allowed" aria-label="이전 페이지" disabled>
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-            </svg>
-          </button>
+        <!-- 보고서 본문 내용 -->
+        <article class="prose prose-lg max-w-none bg-white p-8 md:p-12 border border-gray-200">
           
-          <button type="button" class="pagination-btn w-10 h-10 flex items-center justify-center bg-primary text-white font-medium" aria-current="page">1</button>
-          <button type="button" class="pagination-btn w-10 h-10 flex items-center justify-center border border-gray-300 text-gray-700 hover:border-primary hover:text-primary transition-all">2</button>
-          <button type="button" class="pagination-btn w-10 h-10 flex items-center justify-center border border-gray-300 text-gray-700 hover:border-primary hover:text-primary transition-all">3</button>
-          <button type="button" class="pagination-btn w-10 h-10 flex items-center justify-center border border-gray-300 text-gray-700 hover:border-primary hover:text-primary transition-all">4</button>
-          <button type="button" class="pagination-btn w-10 h-10 flex items-center justify-center border border-gray-300 text-gray-700 hover:border-primary hover:text-primary transition-all">5</button>
-          <span class="px-2 text-gray-400">...</span>
-          <button type="button" class="pagination-btn w-10 h-10 flex items-center justify-center border border-gray-300 text-gray-700 hover:border-primary hover:text-primary transition-all">13</button>
-          
-          <button type="button" class="pagination-btn w-10 h-10 flex items-center justify-center border border-gray-300 text-gray-500 hover:border-primary hover:text-primary transition-all" aria-label="다음 페이지">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </button>
-        </nav>
+          <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-primary">1. 연구 배경 및 목적</h2>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            서울시는 대한민국의 수도로서 국가 경제의 중심지 역할을 수행하고 있으며, 다양한 교통 인프라 사업이 지속적으로 추진되고 있습니다. 
+            이러한 교통사업은 단순히 이동 편의성 향상에 그치지 않고, 지역경제 활성화와 고용 창출 등 다양한 파급효과를 발생시킵니다. 
+            그러나 현재까지 이러한 파급효과를 체계적으로 분석하고 정량화하는 방법론이 부족한 실정입니다.
+          </p>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            본 연구는 서울시 교통사업의 경제적 파급효과를 종합적으로 분석할 수 있는 체계를 구축하고, 
+            향후 교통정책 수립 시 의사결정을 지원하기 위한 정량적 평가 모델을 개발하는 것을 목적으로 합니다.
+            특히 직접효과, 간접효과, 유발효과를 구분하여 분석함으로써 보다 정밀한 파급효과 추정이 가능하도록 하였습니다.
+          </p>
+
+          <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 mt-10 pb-2 border-b-2 border-primary">2. 연구 범위 및 방법론</h2>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            본 연구의 공간적 범위는 서울특별시 전역이며, 시간적 범위는 2020년부터 2025년까지의 주요 교통사업을 대상으로 합니다.
+            연구 방법론으로는 산업연관분석, 비용-편익분석, 다기준 의사결정분석 등을 활용하였으며,
+            국내외 선행연구 검토와 전문가 자문을 통해 분석 체계의 타당성을 검증하였습니다.
+          </p>
+
+          <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3 mt-8">2.1 산업연관분석 방법론</h3>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            산업연관분석은 산업 간 상호의존관계를 분석하여 특정 산업의 변화가 전체 경제에 미치는 영향을 파악하는 방법입니다.
+            본 연구에서는 한국은행의 산업연관표를 기반으로 서울시 지역산업연관표를 추정하여 활용하였습니다.
+            생산유발계수, 부가가치유발계수, 취업유발계수 등을 산출하여 교통사업의 경제적 파급효과를 분석하였습니다.
+          </p>
+
+          <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3 mt-8">2.2 비용-편익분석 방법론</h3>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            비용-편익분석은 사업 시행에 따른 비용과 편익을 화폐가치로 환산하여 사업의 경제적 타당성을 평가하는 방법입니다.
+            본 연구에서는 통행시간 절감편익, 차량운행비용 절감편익, 교통사고 감소편익, 환경비용 절감편익 등을 산정하였습니다.
+            할인율은 한국개발연구원(KDI)의 예비타당성조사 지침에 따라 4.5%를 적용하였습니다.
+          </p>
+
+          <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 mt-10 pb-2 border-b-2 border-primary">3. 주요 분석 결과</h2>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            분석 결과, 서울시 교통사업은 건설 단계에서 약 2.3조 원의 생산유발효과와 약 1.1조 원의 부가가치유발효과를 발생시키는 것으로 나타났습니다.
+            또한 약 18,500명의 취업유발효과가 있는 것으로 분석되었습니다.
+            운영 단계에서는 연간 약 5,800억 원의 통행시간 절감편익과 약 2,100억 원의 차량운행비용 절감편익이 발생하는 것으로 추정되었습니다.
+          </p>
+
+          <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3 mt-8">3.1 직접효과 분석</h3>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            직접효과는 교통사업 투자로 인해 해당 산업에서 직접적으로 발생하는 생산, 부가가치, 고용 효과를 의미합니다.
+            건설업 부문에서 가장 큰 직접효과가 발생하며, 이는 전체 직접효과의 약 65%를 차지합니다.
+            그 외 운수장비 제조업, 금속제품 제조업 등에서도 유의미한 직접효과가 발생하는 것으로 나타났습니다.
+          </p>
+
+          <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3 mt-8">3.2 간접효과 분석</h3>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            간접효과는 직접효과로 인해 연관 산업에서 파생적으로 발생하는 효과를 의미합니다.
+            교통사업의 간접효과는 주로 도소매업, 금융보험업, 사업서비스업 등에서 발생하는 것으로 분석되었습니다.
+            특히 사업서비스업 부문의 간접효과가 전체의 약 22%로 가장 높은 비중을 차지하였습니다.
+          </p>
+
+          <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-3 mt-8">3.3 유발효과 분석</h3>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            유발효과는 직접효과와 간접효과로 인해 발생한 소득 증가가 소비 지출 확대로 이어져 추가적으로 발생하는 효과입니다.
+            본 연구에서는 소비유발효과를 별도로 산출하여 총 파급효과를 보다 정밀하게 추정하였습니다.
+            분석 결과, 유발효과는 직접효과 및 간접효과의 약 15% 수준으로 나타났습니다.
+          </p>
+
+          <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 mt-10 pb-2 border-b-2 border-primary">4. 정책적 시사점</h2>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            본 연구 결과는 서울시 교통정책 수립 시 다양한 시사점을 제공합니다.
+            첫째, 교통사업의 경제적 파급효과가 상당히 크므로 적극적인 투자가 필요합니다.
+            둘째, 지역별 특성을 고려한 맞춤형 교통사업 추진이 필요합니다.
+            셋째, 교통사업과 연계한 지역경제 활성화 방안을 함께 마련해야 합니다.
+          </p>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            또한 본 연구에서 개발한 파급효과 분석 체계는 향후 서울시 교통사업 평가 시 유용하게 활용될 수 있을 것으로 기대됩니다.
+            다만, 분석 결과의 신뢰성 향상을 위해서는 지역산업연관표의 정기적인 갱신과 분석 방법론의 지속적인 개선이 필요합니다.
+          </p>
+
+          <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 mt-10 pb-2 border-b-2 border-primary">5. 결론 및 향후 과제</h2>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            본 연구는 서울시 교통사업의 파급효과를 체계적으로 분석하기 위한 방안을 제시하였습니다.
+            산업연관분석, 비용-편익분석 등 다양한 방법론을 활용하여 교통사업의 경제적 파급효과를 정량적으로 추정하였으며,
+            이를 통해 교통정책 의사결정을 지원할 수 있는 분석 체계를 구축하였습니다.
+          </p>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            향후에는 본 연구에서 개발한 분석 체계를 실제 교통사업에 적용하여 검증하고,
+            분석 모형의 정교화와 데이터 구축을 통해 분석 결과의 신뢰성을 높이는 연구가 필요합니다.
+            또한 환경, 사회적 측면의 파급효과까지 포함하는 종합적인 평가 체계로 확장하는 것을 검토해야 합니다.
+          </p>
+          <p class="text-gray-700 leading-relaxed">
+            본 연구 결과가 서울시 교통정책 수립과 교통사업 추진에 유용하게 활용되기를 기대합니다.
+            지속적인 연구와 정책적 노력을 통해 서울시 교통 인프라가 지역경제 활성화에 기여할 수 있기를 바랍니다.
+          </p>
+
+        </article>
 
       </div>
     </section>
 
+    <!-- 관련 자료 섹션 -->
+    <section class="py-8 md:py-12 bg-white">
+      <div class="max-w-container mx-auto px-4 lg:px-6">
+        
+        <!-- 같은 주제 연구자료 -->
+        <div class="mb-12">
+          <h3 class="text-xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-200">같은 주제 연구자료</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- 카드 1 -->
+            <a href="#" class="flex gap-4 p-4 border border-gray-200 hover:border-primary hover:shadow-md transition-all group">
+              <div class="flex-shrink-0 w-[80px] h-[107px] bg-gradient-to-br from-blue-500/20 to-blue-500/5 border border-gray-200 flex items-center justify-center">
+                <svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-medium text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                  서울시 대중교통 이용 활성화 방안 연구
+                </h4>
+                <p class="text-xs text-gray-500 mb-1">김교통</p>
+                <p class="text-xs text-gray-400">2025-12-20</p>
+              </div>
+            </a>
+
+            <!-- 카드 2 -->
+            <a href="#" class="flex gap-4 p-4 border border-gray-200 hover:border-primary hover:shadow-md transition-all group">
+              <div class="flex-shrink-0 w-[80px] h-[107px] bg-gradient-to-br from-green-500/20 to-green-500/5 border border-gray-200 flex items-center justify-center">
+                <svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-medium text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                  스마트 교통 시스템 도입 효과 분석
+                </h4>
+                <p class="text-xs text-gray-500 mb-1">박스마트</p>
+                <p class="text-xs text-gray-400">2025-11-15</p>
+              </div>
+            </a>
+
+            <!-- 카드 3 -->
+            <a href="#" class="flex gap-4 p-4 border border-gray-200 hover:border-primary hover:shadow-md transition-all group">
+              <div class="flex-shrink-0 w-[80px] h-[107px] bg-gradient-to-br from-purple-500/20 to-purple-500/5 border border-gray-200 flex items-center justify-center">
+                <svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-medium text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                  자율주행 버스 도입을 위한 법제도 개선 방안
+                </h4>
+                <p class="text-xs text-gray-500 mb-1">이자율</p>
+                <p class="text-xs text-gray-400">2025-10-28</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- 많이 본 연구보고서 -->
+        <div class="mb-12">
+          <h3 class="text-xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-200">많이 본 연구보고서</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- 카드 1 -->
+            <a href="#" class="flex gap-4 p-4 border border-gray-200 hover:border-primary hover:shadow-md transition-all group">
+              <div class="flex-shrink-0 w-[80px] h-[107px] bg-gradient-to-br from-red-500/20 to-red-500/5 border border-gray-200 flex items-center justify-center">
+                <svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-medium text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                  서울시 주택정책 현황 및 개선방안
+                </h4>
+                <p class="text-xs text-gray-500 mb-1">정주택</p>
+                <p class="text-xs text-gray-400">2025-12-10</p>
+              </div>
+            </a>
+
+            <!-- 카드 2 -->
+            <a href="#" class="flex gap-4 p-4 border border-gray-200 hover:border-primary hover:shadow-md transition-all group">
+              <div class="flex-shrink-0 w-[80px] h-[107px] bg-gradient-to-br from-yellow-500/20 to-yellow-500/5 border border-gray-200 flex items-center justify-center">
+                <svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-medium text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                  기후변화 대응 탄소중립 도시 구축 방안
+                </h4>
+                <p class="text-xs text-gray-500 mb-1">최환경</p>
+                <p class="text-xs text-gray-400">2025-11-25</p>
+              </div>
+            </a>
+
+            <!-- 카드 3 -->
+            <a href="#" class="flex gap-4 p-4 border border-gray-200 hover:border-primary hover:shadow-md transition-all group">
+              <div class="flex-shrink-0 w-[80px] h-[107px] bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 border border-gray-200 flex items-center justify-center">
+                <svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-medium text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                  디지털 전환 시대 공공서비스 혁신 전략
+                </h4>
+                <p class="text-xs text-gray-500 mb-1">강디지털</p>
+                <p class="text-xs text-gray-400">2025-10-30</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- 관련자료 -->
+        <div class="mb-12">
+          <h3 class="text-xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-200">관련자료</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- 카드 1 -->
+            <a href="#" class="flex gap-4 p-4 border border-gray-200 hover:border-primary hover:shadow-md transition-all group">
+              <div class="flex-shrink-0 w-[80px] h-[107px] bg-gradient-to-br from-orange-500/20 to-orange-500/5 border border-gray-200 flex items-center justify-center">
+                <svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-medium text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                  교통사업 경제성 분석 가이드라인
+                </h4>
+                <p class="text-xs text-gray-500 mb-1">S연구원</p>
+                <p class="text-xs text-gray-400">2025-09-15</p>
+              </div>
+            </a>
+
+            <!-- 카드 2 -->
+            <a href="#" class="flex gap-4 p-4 border border-gray-200 hover:border-primary hover:shadow-md transition-all group">
+              <div class="flex-shrink-0 w-[80px] h-[107px] bg-gradient-to-br from-pink-500/20 to-pink-500/5 border border-gray-200 flex items-center justify-center">
+                <svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-medium text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                  서울시 교통 통계 연보 2025
+                </h4>
+                <p class="text-xs text-gray-500 mb-1">S연구원</p>
+                <p class="text-xs text-gray-400">2025-08-20</p>
+              </div>
+            </a>
+
+            <!-- 카드 3 -->
+            <a href="#" class="flex gap-4 p-4 border border-gray-200 hover:border-primary hover:shadow-md transition-all group">
+              <div class="flex-shrink-0 w-[80px] h-[107px] bg-gradient-to-br from-indigo-500/20 to-indigo-500/5 border border-gray-200 flex items-center justify-center">
+                <svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-medium text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                  도시교통 혁신 포럼 발표자료
+                </h4>
+                <p class="text-xs text-gray-500 mb-1">S연구원</p>
+                <p class="text-xs text-gray-400">2025-07-10</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 이전글/다음글 네비게이션 -->
+    <section class="py-6 bg-gray-50 border-t border-gray-200">
+      <div class="max-w-container mx-auto px-4 lg:px-6">
+        <div class="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-gray-200">
+          <!-- 이전글 -->
+          <a href="#" class="flex-1 flex items-center gap-4 py-4 md:pr-6 group hover:bg-white transition-all">
+            <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-gray-200 group-hover:bg-primary transition-all">
+              <svg class="w-5 h-5 text-gray-600 group-hover:text-white transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <span class="block text-xs text-gray-500 mb-1">이전글</span>
+              <span class="block text-sm font-medium text-gray-900 group-hover:text-primary transition-colors truncate">
+                서울시 자전거 도로 네트워크 확충 방안 연구
+              </span>
+            </div>
+          </a>
+
+          <!-- 다음글 -->
+          <a href="#" class="flex-1 flex items-center gap-4 py-4 md:pl-6 group hover:bg-white transition-all">
+            <div class="flex-1 min-w-0 text-right md:text-left">
+              <span class="block text-xs text-gray-500 mb-1">다음글</span>
+              <span class="block text-sm font-medium text-gray-900 group-hover:text-primary transition-colors truncate">
+                도시철도 역세권 개발 활성화 방안 연구
+              </span>
+            </div>
+            <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-gray-200 group-hover:bg-primary transition-all">
+              <svg class="w-5 h-5 text-gray-600 group-hover:text-white transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+
+        <!-- 목록 버튼 -->
+        <div class="mt-6 text-center">
+          <a href="subpage.html?cat=research&page=reports" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-700 font-medium border border-gray-300 hover:bg-gray-50 hover:border-primary hover:text-primary transition-all">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+            </svg>
+            목록으로
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
-
-  <!-- 상세검색 모달 -->
-  <div id="advanced-search-modal" class="fixed inset-0 bg-black/50 z-[2000] hidden items-center justify-center p-4">
-    <div class="bg-white rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-      <!-- 모달 헤더 -->
-      <div class="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-        <h2 class="text-xl font-bold text-gray-900">상세검색</h2>
-        <button type="button" id="close-modal-btn" class="text-gray-400 hover:text-gray-600 transition-colors" aria-label="닫기">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-        </button>
-      </div>
-
-      <!-- 모달 바디 -->
-      <div class="p-6 space-y-6">
-        <!-- 키워드 -->
-        <div>
-          <label for="modal-keyword" class="block text-sm font-semibold text-gray-700 mb-2">키워드</label>
-          <input type="text" id="modal-keyword" class="w-full px-4 py-2.5 border border-gray-300 rounded focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="키워드 입력">
-        </div>
-
-        <!-- 저자 -->
-        <div>
-          <label for="modal-author" class="block text-sm font-semibold text-gray-700 mb-2">저자</label>
-          <input type="text" id="modal-author" class="w-full px-4 py-2.5 border border-gray-300 rounded focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="저자 이름 입력">
-        </div>
-
-        <!-- 발행일 -->
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">발행일</label>
-          <div class="flex items-center gap-3 mb-3">
-            <input type="date" id="modal-date-start" class="flex-1 px-4 py-2.5 border border-gray-300 rounded focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">
-            <span class="text-gray-500">~</span>
-            <input type="date" id="modal-date-end" class="flex-1 px-4 py-2.5 border border-gray-300 rounded focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <button type="button" class="date-quick-btn px-4 py-2 text-sm border border-gray-300 rounded hover:border-primary hover:bg-primary/5 hover:text-primary transition-all" data-days="all">전체</button>
-            <button type="button" class="date-quick-btn px-4 py-2 text-sm border border-gray-300 rounded hover:border-primary hover:bg-primary/5 hover:text-primary transition-all" data-days="7">7일</button>
-            <button type="button" class="date-quick-btn px-4 py-2 text-sm border border-gray-300 rounded hover:border-primary hover:bg-primary/5 hover:text-primary transition-all" data-days="15">15일</button>
-            <button type="button" class="date-quick-btn px-4 py-2 text-sm border border-gray-300 rounded hover:border-primary hover:bg-primary/5 hover:text-primary transition-all" data-days="30">1개월</button>
-            <button type="button" class="date-quick-btn px-4 py-2 text-sm border border-gray-300 rounded hover:border-primary hover:bg-primary/5 hover:text-primary transition-all" data-days="90">3개월</button>
-            <button type="button" class="date-quick-btn px-4 py-2 text-sm border border-gray-300 rounded hover:border-primary hover:bg-primary/5 hover:text-primary transition-all" data-days="180">6개월</button>
-          </div>
-        </div>
-
-        <!-- 구분 -->
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-3">구분</label>
-          <div class="flex flex-wrap items-center gap-4">
-            <label class="flex items-center gap-2 cursor-pointer group">
-              <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-2 focus:ring-primary/20" name="division" value="all" checked>
-              <span class="text-sm text-gray-700 group-hover:text-primary transition-colors">전체</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer group">
-              <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-2 focus:ring-primary/20" name="division" value="sri">
-              <span class="text-sm text-gray-700 group-hover:text-primary transition-colors">S연구원</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer group">
-              <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-2 focus:ring-primary/20" name="division" value="sti">
-              <span class="text-sm text-gray-700 group-hover:text-primary transition-colors">S기술연구원</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- 주제 -->
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-3">주제</label>
-          <div class="space-y-2">
-            <!-- 첫 번째 줄 -->
-            <div class="flex flex-wrap items-center gap-4">
-              <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-2 focus:ring-primary/20" name="topic" value="social">
-                <span class="text-sm text-gray-700 group-hover:text-primary transition-colors">사회/복지</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-2 focus:ring-primary/20" name="topic" value="economy">
-                <span class="text-sm text-gray-700 group-hover:text-primary transition-colors">경제/행재정</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-2 focus:ring-primary/20" name="topic" value="urban">
-                <span class="text-sm text-gray-700 group-hover:text-primary transition-colors">도시계획/주택</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-2 focus:ring-primary/20" name="topic" value="traffic">
-                <span class="text-sm text-gray-700 group-hover:text-primary transition-colors">교통</span>
-              </label>
-            </div>
-            <!-- 두 번째 줄 -->
-            <div class="flex flex-wrap items-center gap-4">
-              <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-2 focus:ring-primary/20" name="topic" value="climate">
-                <span class="text-sm text-gray-700 group-hover:text-primary transition-colors">기후변화/환경</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-2 focus:ring-primary/20" name="topic" value="safety">
-                <span class="text-sm text-gray-700 group-hover:text-primary transition-colors">안전/인프라</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-2 focus:ring-primary/20" name="topic" value="digital">
-                <span class="text-sm text-gray-700 group-hover:text-primary transition-colors">디지털/기술</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-2 focus:ring-primary/20" name="topic" value="culture">
-                <span class="text-sm text-gray-700 group-hover:text-primary transition-colors">문화관광</span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 모달 푸터 -->
-      <div class="sticky bottom-0 bg-gray-50 border-t border-gray-200 px-6 py-4 flex justify-center gap-3">
-        <button type="button" id="search-btn" class="px-6 py-2.5 bg-primary text-white font-medium rounded hover:bg-primary-dark transition-all">
-          검색
-        </button>
-        <button type="button" id="reset-btn" class="px-6 py-2.5 bg-white text-gray-700 font-medium border border-gray-300 rounded hover:bg-gray-50 transition-all">
-          초기화
-        </button>
-        <button type="button" id="cancel-btn" class="px-6 py-2.5 bg-white text-gray-700 font-medium border border-gray-300 rounded hover:bg-gray-50 transition-all">
-          닫기
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-gray-300" role="contentinfo">
@@ -1075,12 +993,12 @@
             <div class="w-[140px] h-[48px] bg-gray-800 border border-dashed border-gray-600 flex items-center justify-center mb-4">
               <span class="text-xs text-gray-500">LOGO</span>
             </div>
-            <p class="text-sm text-gray-400 leading-relaxed mb-4">
-              S연구원은 서울시의 정책 개발과<br>
-              도시 문제 해결을 위해 연구합니다.
+            <p class="text-sm text-gray-400 leading-relaxed">
+              서울 정책 연구의 중심,<br>더 나은 도시를 만듭니다.
             </p>
           </div>
 
+          <!-- 빠른 링크 -->
           <div>
             <h4 class="text-white font-semibold mb-4">연구</h4>
             <ul class="space-y-2">
@@ -1134,6 +1052,5 @@
 
   <script src="script.js"></script>
   <script src="secondary-nav.js"></script>
-  <script src="report-detail.js"></script>
 </body>
 </html>
